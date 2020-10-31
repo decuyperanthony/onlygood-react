@@ -1,5 +1,6 @@
-import { ENTER_LOGIN_PAGE, ENTER_HOME_PAGE, ENTER_ADMIN_PAGE } from '../actions';
+import { ENTER_LOGIN_PAGE, ENTER_HOME_PAGE, ENTER_ADMIN_PAGE } from '../action/actions';
 
+// eslint-disable-next-line no-unused-vars
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case ENTER_LOGIN_PAGE: {
