@@ -1,0 +1,35 @@
+.signup {
+    color: white;
+    background-color: teal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    justify-content: space-between;
+    padding-bottom: 10px;
+
+  }
+
+  .btn--signup {
+    border: 1px solid white;
+    color: teal;
+    border-radius: 10px;
+    margin: 5px 0;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+  }
+
+  .para-signup {
+    width: 70%;
+    text-align: center;
+  }
+
+
+  @media only screen and (min-width: 950px) {
+    .signup {
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 0;
+      }
+}
