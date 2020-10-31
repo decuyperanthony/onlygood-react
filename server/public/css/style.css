@@ -1,0 +1,574 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.3;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*------------- signup*/
+
+.createAccount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-newAccount {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.form-newAccount div {
+  margin-top: 5px;
+  display: flex;
+}
+
+/*-------------
+login
+---------------*/
+.blocpage-login {
+  border-radius: 10px;
+  background-color: white;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+
+.page-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.signup {
+  color: white;
+  background-color: teal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  justify-content: space-between;
+  padding-bottom: 10px;
+
+}
+
+.btn--signup {
+  border: 1px solid white;
+  color: teal;
+  border-radius: 10px;
+  margin: 5px 0;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+}
+
+.para-signup {
+  width: 70%;
+  text-align: center;
+}
+
+.page-login input {
+  height: 40px;
+  width: 300px;
+  margin: 5px 0;
+}
+
+.page-login .div-button {
+  display: flex;
+  justify-content: center;
+
+}
+
+.page-login .input-btn {
+  height: 40px;
+  color: white;
+  background-color: teal;
+  width: 150px;
+  border-radius: 15px;
+}
+
+.error {
+  color: red;
+}
+
+/*-------------
+topbar
+---------------*/
+
+.topbar {
+  background-color: teal;
+  color: #fff;
+}
+
+.topbar-logo {
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  line-height: 54px;
+  padding: 11px 0;
+}
+
+.topbar-nav {
+  text-align: center;
+  padding-bottom: 16px;
+  line-height: 2;
+}
+
+.topbar-nav a {
+  display: inline-block;
+  margin: 0 12px;
+  color: rgba(255, 255, 255, 0.67);
+  transition: color 0.3s;
+}
+
+.topbar-nav a:hover,
+.topbar-nav a.active {
+  color: #fff;
+}
+
+.container {
+  padding: 0 15px;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.main {
+  margin-bottom: 20px;
+}
+
+.profil {
+  display: none;
+}
+
+.sidebar a {
+  width: 50%;
+  display: block;
+  text-decoration: black;
+  padding: 0.6em 0;
+  transition: 0.3s;
+  border: solid 1px transparent;
+  padding-left: 10px;
+}
+
+.sidebar a::before {
+  content: "";
+  display: inline-block;
+  width: 11px;
+  height: 9px;
+  vertical-align: middle;
+  margin-top: -2px;
+  margin-right: 20px;
+  background: url(/img/home.svg) center center;
+  background-size: contain;
+  opacity: 0.67;
+  transition: opacity 0.3s;
+}
+
+.sidebar .sidebar-messages::before {
+  background-image: url(/img/messages.svg);
+}
+
+.sidebar .sidebar-events::before {
+  background-image: url(/img/calendar.svg);
+}
+
+.sidebar .sidebar-groupes::before {
+  background-image: url(/img/group.svg);
+}
+
+.sidebar .sidebar-amis::before {
+  background-image: url(/img/group.svg);
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: black;
+  border: solid 1px #d8d8d8;
+  background: white;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.sidebar a:hover::before,
+.sidebar a.active::before {
+  opacity: 1;
+}
+
+.card {
+  border: solid 1px #d8d8d8;
+  background: white;
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.card-header {
+  padding: 10px;
+  position: relative;
+}
+
+.card-header-avatar {
+  padding-left: 65px;
+}
+
+.card-avatar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  border-radius: 25px;
+}
+
+.padding-top-publication {
+  padding-top: 5px;
+}
+
+.card-title {
+  font-weight: bold;
+  color: black;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.card-date {
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 12px;
+}
+
+.card-body {
+  padding: 0 10px 20px 10px;
+}
+
+.card-body a {
+  color: #34aaff;
+}
+
+.card-body .fullwidth {
+  margin-left: -10px;
+  margin-right: -10px;
+  width: calc(100% + 20px);
+  display: block;
+}
+
+.card-body p:first-child {
+  margin-top: 0;
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.card-footer {
+  border-top: solid 1px #d8d8d8;
+  background-color: #fbfbfb;
+  display: flex;
+  padding: 10px;
+  font-size: 12px;
+  color: #dbdbdb;
+  justify-content: space-between;
+}
+
+.card-footer a:hover {
+  color: black;
+  transition: color 0.3s;
+}
+
+.card-like::before,
+.card-comments::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(/img/thumb-up.svg) center center;
+  background-size: 20px 18px;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.card-comments::before {
+  background: url(/img/comment.svg) center center;
+  background-size: 18px 17px;
+  background-repeat: no-repeat;
+}
+
+.sidebar-title {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 18px;
+}
+
+.sidebar-title::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin-top: 4px;
+  background: black;
+}
+
+.friends-list {
+  margin: 14px 0;
+  display: flex;
+}
+
+.friend {
+  margin: 14px 0;
+  display: flex;
+}
+
+.friend-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.friend-avatar {
+  width: 75px;
+  height: 73px;
+  flex: none;
+  margin-right: 10px;
+}
+
+.friend-name {
+  display: block;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.friend-connection {
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 12px;
+}
+
+.friend-add {
+  font-size: 12px;
+  color: black;
+  display: block;
+  margin-top: auto;
+  margin-bottom: 3px;
+}
+
+.friend-add:hover {
+  color: #34aaff;
+}
+
+.friend-add::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 13px;
+  background: center center / 18px 13px no-repeat url(/img/user-add.svg);
+  vertical-align: middle;
+  margin-right: 5px;
+  transform: translateY(-1px);
+}
+
+/*-----------
+     404
+------------*/
+
+.img-quatrecentquatre {
+  background-size: cover;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  width: auto;
+  background-image: url(/img/404-error-web-template-with-map-flat-style_23-2147781030.jpg);
+  background-position: center;
+}
+
+/*-----------
+Page User
+------------*/
+.container-profil-page {
+  display: flex;
+}
+
+.color {
+  height: 30px;
+  width: 30px;
+  /* background-color: ; */
+}
+
+.page_user {
+  display: flex;
+  flex-direction: column;
+}
+
+/*-----------
+Livre d'Or
+------------*/
+
+.container--livreor {
+  display: flex;
+  flex-direction: column;
+}
+
+.container--livreor h1 {
+  text-align: center;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 900;
+}
+
+.field textarea {
+  min-width: 100%;
+  margin-bottom: 5px;
+}
+
+.button {
+  background-color: teal;
+  height: 30px;
+  width: 90px;
+  color: #dbdbdb;
+  border-radius: 5px;
+}
+
+.bloc_message {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.container_message {
+  background-color: white;
+
+}
+
+.title-comment {
+  border-bottom: 1px solid grey;
+}
+
+.date-comment {
+  color: #d8d8d8;
+}
+
+.success {
+  color: green;
+}
+
+
+@media only screen and (min-width: 520px) {
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    padding: 0 25px;
+  }
+
+  .topbar-logo {
+    line-height: 30px;
+  }
+
+  .topbar-logo,
+  .topbar-nav {
+    padding: 0;
+  }
+
+  .topbar-nav {
+    margin: 0 20px;
+  }
+
+  /*-----------
+  Page User
+  ------------*/
+  .page_user {
+    margin-left: 20px;
+  }
+
+
+}
+
+@media only screen and (min-width: 950px) {
+  .site {
+    display: flex;
+  }
+
+  .sidebar {
+    display: block;
+    width: 180px;
+    flex: none;
+  }
+
+  .sidebar a {
+    width: 100%;
+  }
+
+  .main {
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 100%;
+  }
+
+  .profil {
+    display: block;
+  }
+
+  .aside {
+    width: 310px;
+    flex: none;
+  }
+
+  /*--LOGIN--*/
+  .blocpage-login {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .page-login {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .signup {
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0;
+  }
+
+  /*-- PAGE ADMIN--*/
+
+  .container-user {
+    display: flex;
+    background-color: white;
+  }
+
+}
