@@ -1,0 +1,52 @@
+.blocpage-login {
+    border-radius: 10px;
+    background-color: white;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+  }
+
+  .page-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+
+  .page-login input {
+    height: 40px;
+    width: 300px;
+    margin: 5px 0;
+  }
+
+  .page-login .div-button {
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .page-login .input-btn {
+    height: 40px;
+    color: white;
+    background-color: teal;
+    width: 150px;
+    border-radius: 15px;
+  }
+
+
+
+@media only screen and (min-width: 950px) {
+    .blocpage-login {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .page-login {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+
