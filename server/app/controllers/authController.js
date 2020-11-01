@@ -35,9 +35,8 @@ const authController = {
       res.status(401).send({
           message: 'cet email n\'existe pas'
       }).end();
-    }
-
-    let testPass = "";
+    } else {
+      let testPass = "";
         if (user) {
          testPass = bcrypt.compareSync(password, user.password);
         }
@@ -55,6 +54,9 @@ const authController = {
               message: 'mot de passe incorrect'
           }).end();
         }
+    }
+
+
       // // récupérer les infos du formulaire
       // const {
       //   email,
@@ -111,98 +113,84 @@ const authController = {
   // traiter le formulaire d'inscription => enregistrer un nouveau User
   signupAction: async (req, res) => {
     try {
-      // récupérer les données du formulaire
-      const data = req.body;
-
-      // NTUI => vérifier ques les infos sont "logiques"
-
-      // - vérifier que l'utilisateur n'existe pas déjà (via son email)
+      const {
+        email,
+        password,
+        firstname,
+        lastname,
+      } = req.body;
+      // on verif que l'user n'existe pas avec son mail
       const user = await User.findOne({
         where: {
-          email: data.email
+            email
         }
       });
+       // on se prépare une liste d'erreur
+       let errorsList = [];
+       // si on trouve un user => le mail existe
+       if (user) {
+           errorsList.push("Cet email existe déjà");
+       }
+       if (!firstname) {
+           errorsList.push("Le prénom ne peut pas être vide");
+       }
+       if (!lastname) {
+           errorsList.push("Le nom ne peut pas être vide");
+       }
+       if (!emailValidator.validate(email)) {
+           errorsList.push(
+               "Le format du mail est incorrect"
+           );
+       }
+       if (password.length < 8) {
 
-      // on se prépare une liste vide, destinée à recevoir les erreur
-      let errorsList = [];
+           errorsList.push(
+             "Le mot de passe doit contenir un minimum de 8 caractères"
+           );
+       }
+       if (errorsList.length === 0) {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
+        let newUser = new User(req.body);
+        let savedUser = await newUser.save();
+        // const userToken = jwtUtils.generateTokenForUser(savedUser);
+        savedUser.messagePositif = 'bien ouej poto';
 
-      if (user) {
-        errorsList.push("Cet email existe déjà");
-      }
 
-      // - nom et prénom non vide
-      if (!data.firstname) {
-        errorsList.push("Le prénom ne peut pas être vide");
-      }
-      if (!data.lastname) {
-        errorsList.push("Le nom ne peut pas être vide");
-      }
-      // - adresse email au bon format
-      if (!emailValidator.validate(data.email)) {
-        errorsList.push("L'email n'est pas un email correct");
-      }
-
-      // - longueur minimum du mot de passe (8 caractère minimum !)
-      if (data.password.length < 8) {
-        errorsList.push(
-          "Le mot de passe doit contenir un minimum de 8 caractères"
-        );
-      }
-
-      // - mot de passe = confirmation
-      if (data.password !== data.password_confirm) {
-        errorsList.push(
-          "Le mot de passe et la confirmation ne correspondent pas"
-        );
-      }
-
-      // Si on a au moins une erreur, on réaffiche le formulaire en affichant les erreurs
-
-      // SI TOUT VA BIEN : insérer les données dans la BDD (puis rediriger l'utilisateur )
-      // si tout va bien, errorsList est vide
-      if (errorsList.length === 0) {
-        // on peut créer le User !
-        let newUser = new User();
-        newUser.firstname = data.firstname;
-        newUser.lastname = data.lastname;
-        newUser.email = data.email;
-        // on HASH le mot de passe
-        newUser.password = bcrypt.hashSync(data.password, 10);
-
-        const savedUser = await newUser.save();
-        // on récupère un utilisateur => on le met directement en session => le nouveau est déjà loggé !
-        // req.session.user = savedUser;
-
-        res.send(savedUser);
-      } else {
-        res.send({
-          errorsList
+        res.status(200).send({
+            savedUser,
+            // userToken
         });
-      }
-      // Envoi du mail
-      var transporter = nodemailer.createTransport({
-        service: "hotmail",
-        auth: {
-          user: process.env.SENDER_EMAIL,
-          pass: process.env.SENDER_PASSWORD
-        }
-      });
-      var mailOptions = {
-        from: "decuyperanthony@hotmail.com",
-        to: newUser.email,
-        subject: "Thanks to signup on onlyGood",
-        text: `Hello ${newUser.firstname} ${newUser.lastname} `
-      };
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
+        // res.status(200).send(savedUser);
         } else {
-          console.log("Email sent: " + info.response);
+
+          res.status(401).send({errorsList});
+
         }
-      });
+      //! ------------- Envoi du mail
+      // var transporter = nodemailer.createTransport({
+      //   service: "hotmail",
+      //   auth: {
+      //     user: process.env.SENDER_EMAIL,
+      //     pass: process.env.SENDER_PASSWORD
+      //   }
+      // });
+      // var mailOptions = {
+      //   from: "decuyperanthony@hotmail.com",
+      //   to: newUser.email,
+      //   subject: "Thanks to signup on onlyGood",
+      //   text: `Hello ${newUser.firstname} ${newUser.lastname} `
+      // };
+      // transporter.sendMail(mailOptions, function (error, info) {
+      //   if (error) {
+      //     console.log(error);
+      //   } else {
+      //     console.log("Email sent: " + info.response);
+      //   }
+      // });
+      //! ------------- Envoi du mail
     } catch (error) {
       console.trace(error);
-      res.status(500).render("500", {
+      res.status(500).send({
         error
       });
     }
