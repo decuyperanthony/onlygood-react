@@ -17,7 +17,7 @@
 
   .page-login input {
     height: 40px;
-    width: 300px;
+    width: 250px;
     margin: 5px 0;
   }
 
@@ -38,6 +38,11 @@
 
 
 @media only screen and (min-width: 950px) {
+    .page-login input {
+     height: 40px;
+     width: 300px;
+     margin: 5px 0;
+    }
     .blocpage-login {
         flex-direction: row;
         justify-content: space-between;
