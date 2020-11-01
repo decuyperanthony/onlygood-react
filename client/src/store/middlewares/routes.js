@@ -4,6 +4,7 @@ import { ENTER_LOGIN_PAGE, ENTER_HOME_PAGE, ENTER_ADMIN_PAGE } from '../action/r
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case ENTER_LOGIN_PAGE: {
+      console.log('ENTER_LOGIN_PAGE');
       action.history.push('/login');
       return;
     }
