@@ -48,9 +48,11 @@ export default (store) => (next) => (action) => {
             store.dispatch(enterHomePage(action.payload.history));
           }
         })
+        // eslint-disable-next-line no-unused-vars
         .catch((error) => {
+          console.log('mauvais mail ou mot de passe');
           // store.dispatch(setLoaderClose());
-          console.trace(error);
+          // console.trace(error);
           console.log(`Can’t access ${API_URL} response. Blocked by browser?`);
           // const MessageError = () => {
           //   const { t } = useTranslation();
