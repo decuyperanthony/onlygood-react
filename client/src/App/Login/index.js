@@ -1,8 +1,25 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { useForm } from 'react-hook-form';
+
+import { login } from '../../store/action/auth';
+
 import './styles.css';
 
 const Login = () => {
-  console.log('login');
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => {
+    console.log('data', data);
+    dispatch(login({
+      history,
+      data,
+    }));
+  };
+  console.log(errors);
   return (
     <div className="blocpage-login">
       <main className="page-login">
@@ -10,13 +27,27 @@ const Login = () => {
         <h2>Login</h2>
         <div className="input-login">
 
-          <form method="POST" action="/login">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <input type="text" name="email" id="input-email" placeholder="email" />
+              <input
+                type="text"
+                placeholder="Email"
+                id="input-email"
+                name="email"
+                ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+              />
             </div>
 
             <div>
-              <input type="password" name="password" id="input-password" placeholder="password" />
+              <input
+                type="password"
+                name="password"
+                id="input-password"
+                placeholder="password"
+                ref={register({
+                  required: 'le mot de passe est requis',
+                })}
+              />
             </div>
 
             <div className="div-button">

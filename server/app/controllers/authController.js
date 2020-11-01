@@ -1,4 +1,5 @@
-const User = require("../models/user");
+// const User = require("../models/user");
+const User = require('../models/user');
 
 // une libraire pour tester le format des email
 const emailValidator = require("email-validator");
@@ -11,53 +12,93 @@ const nodemailer = require("nodemailer");
 
 const authController = {
   // afficher le formulaire de connexion
-  loginPage: (req, res) => {
-    res.render("login");
-  },
+  // loginPage: (req, res) => {
+  //   res.render("login");
+  // },
 
   // traiter le formulaire de connexion
   loginAction: async (req, res) => {
     console.log('bjr')
     try {
-      // récupérer les infos du formulaire
       const {
         email,
         password
-      } = req.body;
-      // const email = req.body.email;
-      // const password = req.body.password;
-      console.log('email', email)
-      // tenter de récupérer un utilisateur via l'email fourni
-      const user = await User.findOne({
-        where: {
-          email: email
-          // ici, {email} aurait été sufiisant, et équivalent
+    } = req.body;
+
+    const user = await User.findOne({
+      where: {
+       email
+      }
+    });
+
+    if (!user) {
+      res.status(401).send({
+          message: 'cet email n\'existe pas'
+      }).end();
+    }
+
+    let testPass = "";
+        if (user) {
+         testPass = bcrypt.compareSync(password, user.password);
         }
-      });
 
-      // si il n'existe pas => error
-      if (!user) {
-        return res.send({
-          error: "Cet email n'existe pas"
+        if (user && testPass) {
+          res.send({
+            user,
+            // userToken,
+            // userList
         });
-      }
+        } else {
+          console.log('<< 401 UNAUTHORIZED');
+          console.log('<< mot de passe incorrect');
+          res.status(401).send({
+              message: 'mot de passe incorrect'
+          }).end();
+        }
+      // // récupérer les infos du formulaire
+      // const {
+      //   email,
+      //   password
+      // } = req.body;
+      // // const email = req.body.email;
+      // // const password = req.body.password;
+      // console.log('email', email);
+      // // //! ici
+      // // // tenter de récupérer un utilisateur via l'email fourni
+      // const user = await User.findOne({
+      //   where: {
+      //     email: email
+      //     // ici, {email} aurait été sufiisant, et équivalent
+      //   }
+      // });
 
-      // si il existe, on vérifie le mot de passe
-      if (!bcrypt.compareSync(password, user.password)) {
-        // si le mdp n'est pas bon => error
-        return res.send({
-          error: "Mauvais mot de passe"
-        });
-      }
+      // console.log('user', user)
 
-      // sinon, on est tout bon => on ajoute l'utilisateur dans la session
-      // req.session.user = user; // et c'est tout !
-      // et on redirige vers "/"
-      res.send(user);
+      // // // si il n'existe pas => error
+      // // if (!user) {
+      // //    res.send({
+      // //     error: "Cet email n'existe pas"
+      // //   });
+      // // }
+
+      // // // si il existe, on vérifie le mot de passe
+      // // if (!bcrypt.compareSync(password, user.password)) {
+      // //   // si le mdp n'est pas bon => error
+      // //    res.send({
+      // //     error: "Mauvais mot de passe"
+      // //   });
+      // // }
+
+      // // // sinon, on est tout bon => on ajoute l'utilisateur dans la session
+      // // // req.session.user = user; // et c'est tout !
+      // // // et on redirige vers "/"
+      // // res.send(user);
+      // res.send('ok')
+
     } catch (error) {
-      console.trace(err);
-      res.status(500).send({
-        err
+      console.trace(error);
+      res.status(500).render({
+          error
       });
     }
   },

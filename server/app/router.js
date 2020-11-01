@@ -21,9 +21,11 @@ const router = express.Router();
 // router.get('/', isLoggin, mainController.homePage);
 router.post("/", isLoggin, mainController.addPost);
 router.get('/addlike/message/:id', isLoggin, mainController.addLike);
-
+router.get('', () => {
+    console.log('bienvenue')
+})
 // page login
-router.get("/login", authController.loginPage);
+// router.get("/login", authController.loginPage);
 router.post("/login", authController.loginAction);
 
 // page signup

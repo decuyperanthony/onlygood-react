@@ -1,0 +1,4 @@
+%syntax-version=1.0.0
+%project=onlygood
+
+firstmigration 2020-11-01T00:38:40Z Anthony <anthony@tanke.fr> # premiere migration

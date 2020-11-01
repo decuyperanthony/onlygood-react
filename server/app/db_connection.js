@@ -3,6 +3,7 @@
 const Sequelize = require('sequelize');
 
 // On instancie la connection
-const dbConnection = new Sequelize(process.env.PG_URL);
-
+const dbConnection = new Sequelize(process.env.PG_URL, {
+    logging: false
+});
 module.exports = dbConnection;

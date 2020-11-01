@@ -1,4 +1,4 @@
-import { ENTER_LOGIN_PAGE, ENTER_HOME_PAGE, ENTER_ADMIN_PAGE } from '../action/actions';
+import { ENTER_LOGIN_PAGE, ENTER_HOME_PAGE, ENTER_ADMIN_PAGE } from '../action/route';
 
 // eslint-disable-next-line no-unused-vars
 export default (store) => (next) => (action) => {

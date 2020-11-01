@@ -1,12 +1,14 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import './index.css';
 
 // == redux
 import { Provider } from 'react-redux';
+
 // eslint-disable-next-line import/extensions
 import store from './store/index.js';
-
+// == compnent App && Loading
 import App from './App/App';
 import Loading from './App/Loading';
 
