@@ -1,5 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  useDispatch,
+  //  useSelector
+} from 'react-redux';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 
@@ -14,10 +18,10 @@ const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log('data', data);
-    dispatch(login({
-      history,
-      data,
-    }));
+    // dispatch(login({
+    //   history,
+    //   data,
+    // }));
   };
   console.log(errors);
   return (
