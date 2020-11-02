@@ -7,6 +7,7 @@ const NavBar = () => {
     <header className="topbar">
       <a href="/" className="topbar-logo">Only Good</a>
       <nav className="topbar-nav">
+
         <a href="/login">Se connecter</a>
         <a href="/signup">S&apos;inscrire</a>
         {/* <a href="/" class="active">Accueil</a>
