@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
+import theme from './theme';
 // import signup from './signup';
 // import error from './error';
 // import nav from './nav';
@@ -20,6 +21,7 @@ import auth from './auth';
 
 export default combineReducers({
   auth,
+  theme,
   // signup,
   // error,
   // nav,
