@@ -96,9 +96,6 @@ const Signup = () => {
             />
           </div>
 
-          <div className="div-button">
-            <input type="submit" value="S'inscrire" className="input-btn" />
-          </div>
         </form>
       </main>
       <main className="signup">
