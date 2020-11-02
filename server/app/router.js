@@ -56,7 +56,7 @@ router.post('/removeMessage', adminController.removeMessage);
 router.get("/logout", isLoggin, authController.logout);
 
 // on definit le middleware 404 en dernier
-router.use(mainController.notFound);
+// router.use(mainController.notFound);
 
 
 module.exports = router;
