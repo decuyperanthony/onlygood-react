@@ -5,8 +5,8 @@ const session = require("express-session");
 const bodyParser = require('body-parser');
 // const morgan = require("morgan");
 // const cors = require("cors");
-// const PORT = process.env.PORT || 3000;
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+// const PORT = 3000;
 
 // pour la sécurité
 const sanitiser = require("./app/middleware/sanitise");
@@ -89,7 +89,7 @@ app.use(
 // on veut donc l 'assainir avant de passer au router
 app.use(sanitiser);
 
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 
 // const flash = require("./app/middleware/flash");
 // app.use(flash);
