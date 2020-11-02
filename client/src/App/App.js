@@ -1,4 +1,5 @@
 import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
 
 import {
   Route,
@@ -12,13 +13,14 @@ import {
 import './App.css';
 
 // == component
-import NavBar from './NavBar';
+import AppBar from './NavBar1/AppBar';
+// import NavBar from './NavBar';
 import Login from './Login';
 import Signup from './Signup';
 
 const App = () => (
   <div className="App">
-    <NavBar />
+    <AppBar />
     <Switch>
       <Route exact path="/login">
         <Login />
