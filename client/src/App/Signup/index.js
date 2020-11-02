@@ -6,7 +6,7 @@ import {
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
-import './styles.css';
+// import './styles.css';
 
 const Signup = () => {
   const history = useHistory();
