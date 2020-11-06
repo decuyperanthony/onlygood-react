@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 3000;
 
 // pour la sécurité
 const sanitiser = require("./app/middleware/sanitise");
-const router = require("./app/router");
+const userRouter = require('./app/router/userRouter');
+const authRouter = require('./app/router/authRouter');
+
+const router = require("./app/router/router");
 
 const app = express();
 
@@ -30,6 +33,7 @@ app.use(bodyParser.json());
 
 // on rajoute multer pour les formulaires au format "multipart"
 const multer = require("multer");
+const userController = require("./app/controllers/userController");
 // const bodyParser = multer();
 
 // on utlise .none() pour dire qu'on attends pas de fichier, uniquement des inputs "classiques" !
@@ -101,7 +105,9 @@ app.set("views", "./views");
 // const userMiddleware = require("./app/middleware/user");
 // app.use(userMiddleware);
 
-// j'utilise mon fichier router
+// j'utilise mon fichier router en dernier
+app.use(authRouter);
+app.use(userRouter);
 app.use(router);
 
 app.listen(PORT, () => {
