@@ -46,7 +46,7 @@ const useStyles = makeStyles({
     // height: '40px',
   },
   buttonLogin: {
-    backgroundColor: '#008080',
+    backgroundColor: '#2F80ED',
     color: 'white',
     // marginTop: '2em',
     // marginBottom: '2em',
@@ -109,7 +109,7 @@ const Signup = () => {
   console.log(errors);
   return (
     <div className={classes.blocPageLogin}>
-      <h2 style={{ color: '#008080', textAlign: 'center' }}>Create your account</h2>
+      <h2 style={{ color: '#2F80ED', textAlign: 'center' }}>Create your account</h2>
       <Card className={classes.cardStyle}>
         <main className="page-login">
           {errorRespBackendJSX}
@@ -271,7 +271,7 @@ const Signup = () => {
       <Card className={classes.cardStyle} style={{ textAlign: 'center' }}>
         Already sign up ?
         {' '}
-        <Link href="#" onClick={() => history.push('/login')}>Log-in</Link>
+        <Link href="#" style={{ color: '#2F80ED' }} onClick={() => history.push('/login')}>Log-in</Link>
       </Card>
     </div>
   );
