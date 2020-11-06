@@ -1,16 +1,18 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import {
   useDispatch,
-  //  useSelector
+  useSelector,
 } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Mail } from '@material-ui/icons/';
+import { Alert } from '@material-ui/lab';
 
 import {
   TextField,
-  // InputAdornment,
+  Link,
   Button,
   Card,
   InputAdornment,
@@ -24,10 +26,16 @@ import { login } from '../../store/action/auth';
 const useStyles = makeStyles({
   blocPageLogin: {
     minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    maxWidth: '500px',
+    margin: 'auto',
+    // alignItems: 'center',
   },
   cardStyle: {
     margin: '0.5em',
-    padding: '0.5em',
+    padding: '1em',
     width: 'auto',
     backgroundColor: 'white',
     // margin: '0.5em 1em',
@@ -37,21 +45,15 @@ const useStyles = makeStyles({
     boxShadow: '0 3px 5px 2px rgba(75, 84, 111, .3)',
   },
   textField: {
-    paddingBottom: '3em',
-  },
-  buttonValidate: {
-    backgroundColor: '#008080',
-    color: 'white',
-    marginTop: '2em',
-    marginBottom: '2em',
+    paddingBottom: '1em',
     // height: '40px',
   },
-  buttonSignup: {
-    backgroundColor: 'white',
-    color: '#008080',
-    marginTop: '2em',
-    marginBottom: '2em',
-    height: '40px',
+  buttonLogin: {
+    backgroundColor: '#008080',
+    color: 'white',
+    // marginTop: '2em',
+    // marginBottom: '2em',
+    // height: '40px',
   },
   // buttonForgetPwd: {
   //   marginTop: '-6em',
@@ -71,6 +73,20 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, errors } = useForm();
+  // == traitement erreur auth
+  let errorAuthJSX;
+  const { errorAuth } = useSelector((state) => state.auth);
+  if (errorAuth) {
+    errorAuthJSX = (
+      <Alert
+        style={{ marginBottom: '1em' }}
+        severity="error"
+      >
+        {' '}
+        {errorAuth}
+      </Alert>
+    );
+  }
   const onSubmit = (data) => {
     console.log('data', data);
     dispatch(login({
@@ -81,11 +97,11 @@ const Login = () => {
   console.log(errors);
   return (
     <div className={classes.blocPageLogin}>
-      <h2 style={{ color: '#008080' }}>Log-in to your account</h2>
+      <h2 style={{ color: '#008080', textAlign: 'center' }}>Log-in to your account</h2>
       <Card className={classes.cardStyle}>
         <main className="page-login">
-
           <div className="input-login">
+            {errorAuthJSX}
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 error={!!errors.email}
@@ -145,29 +161,22 @@ const Login = () => {
               </div>
 
               <Button
-                className={classes.buttonValidate}
+                className={classes.buttonLogin}
                 type="submit"
                 variant="contained"
                 fullWidth
               >
-                Valider
+                Login
               </Button>
             </form>
           </div>
         </main>
 
       </Card>
-      <Card className={classes.cardStyle}>
-        <h2>Hello, Friend!</h2>
-        <p className="para-signup">Enter your personal details and start journey with us</p>
-        <Button
-          variant="contained"
-          fullWidth
-          className={classes.buttonSignup}
-          onClick={() => history.push('/signup')}
-        >
-          Sign up
-        </Button>
+      <Card className={classes.cardStyle} style={{ textAlign: 'center' }}>
+        New to us?
+        {' '}
+        <Link href="#" onClick={() => history.push('/signup')}>Sign Up</Link>
       </Card>
     </div>
   );
