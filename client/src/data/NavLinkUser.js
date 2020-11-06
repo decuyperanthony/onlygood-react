@@ -4,11 +4,11 @@ export default [
     label: 'Home',
   },
   {
-    route: '/explore',
+    route: '/dashboard/explore',
     label: 'Explore',
   },
   {
-    route: '/bookmarks',
+    route: '/dashboard/bookmarks',
     label: 'Bookmarks',
   },
   // {
