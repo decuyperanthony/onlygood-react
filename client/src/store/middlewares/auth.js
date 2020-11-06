@@ -3,7 +3,7 @@
 import axios from 'axios';
 // import { useTranslation } from 'react-i18next';
 
-import { LOGIN } from '../action/auth';
+import { LOGIN, errorAuth } from '../action/auth';
 import { enterHomePage } from '../action/route';
 
 // import { setLoaderOpen, setLoaderClose } from '../../actions/loader';
@@ -53,6 +53,7 @@ export default (store) => (next) => (action) => {
           console.log('mauvais mail ou mot de passe');
           // store.dispatch(setLoaderClose());
           // console.trace(error);
+          store.dispatch(errorAuth('le mail ou le mot de passe est incorrect'));
           console.log(`Can’t access ${API_URL} response. Blocked by browser?`);
           // const MessageError = () => {
           //   const { t } = useTranslation();
