@@ -6,3 +6,11 @@ export const login = (payload, history) => ({
   payload,
   history,
 });
+
+// === error AUTH
+export const ERROR_AUTH = 'ERROR_AUTH';
+
+export const errorAuth = (payload) => ({
+  type: ERROR_AUTH,
+  payload,
+});
