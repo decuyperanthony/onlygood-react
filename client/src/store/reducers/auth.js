@@ -1,10 +1,11 @@
 import {
   ERROR_AUTH,
+  SET_USER,
 } from '../action/auth';
 
 const initialState = {
   errorAuth: '',
-  // userData: {},
+  userData: {},
   // userInstagramData: {},
   // userToken: '',
   // valueSuccessMessageRegister: false,
@@ -18,6 +19,13 @@ const authentification = (state = initialState, action = {}) => {
       return {
         ...state,
         errorAuth: action.payload,
+      };
+    }
+
+    case SET_USER: {
+      return {
+        ...state,
+        userData: action.user,
       };
     }
 
