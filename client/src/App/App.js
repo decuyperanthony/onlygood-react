@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   // useDispatch,
   useSelector,
@@ -34,7 +34,6 @@ const App = () => {
         main: '#116466',
       },
       type: darkmodeBoolean ? 'dark' : 'light',
-
     },
   });
 
@@ -42,7 +41,6 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Paper style={{ height: '100vh' }}>
         <div className="App">
-          <AppBar />
           <Switch>
             <Route exact path="/login">
               <Login />
@@ -50,6 +48,7 @@ const App = () => {
             <Route exact path="/signup">
               <Signup />
             </Route>
+            <AppBar />
           </Switch>
         </div>
       </Paper>
