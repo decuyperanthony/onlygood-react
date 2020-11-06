@@ -3,6 +3,7 @@ const User = require('../models/user');
 
 // une libraire pour tester le format des email
 const emailValidator = require("email-validator");
+const jwtUtils = require('../utils/jwt.utils');
 
 // bcrypt, pour HASHER les mots de passer
 const bcrypt = require("bcrypt");
@@ -42,9 +43,12 @@ const authController = {
         }
 
         if (user && testPass) {
+          //! token ----------------------
+          const userToken = jwtUtils.generateTokenForUser(user);
+          //! fin token ----------------
           res.send({
             user,
-            // userToken,
+            userToken,
             // userList
         });
         } else {
@@ -145,7 +149,6 @@ const authController = {
            );
        }
        if (password.length < 8) {
-
            errorsList.push(
              "Le mot de passe doit contenir un minimum de 8 caractères"
            );
@@ -154,16 +157,15 @@ const authController = {
         req.body.password = bcrypt.hashSync(req.body.password, 10);
         let newUser = new User(req.body);
         let savedUser = await newUser.save();
-        // const userToken = jwtUtils.generateTokenForUser(savedUser);
+        const userToken = jwtUtils.generateTokenForUser(savedUser);
         savedUser.messagePositif = 'bien ouej poto';
-
 
         res.status(200).send({
             savedUser,
-            // userToken
+            userToken
         });
         // res.status(200).send(savedUser);
-        } else {
+       } else {
 
           res.send({errorsList});
           // res.status(401).send({errorsList});
