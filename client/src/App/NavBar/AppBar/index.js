@@ -24,6 +24,27 @@ const useStyles = makeStyles((theme) => ({
   // root: {
   //   flexGrow: 1,
   // },
+  blocPageAppBar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  link: {
+    fontFamily: 'popins',
+    fontWeight: '500',
+    fontSize: '14px',
+    color: '#828282',
+    margin: '0 2em',
+    '&:hover': {
+      color: '#2F80ED',
+      borderBottom: '1px #2F80ED solid',
+    },
+  },
+  activeClassLink: {
+    color: '#2F80ED',
+    borderBottom: '1px #2F80ED solid',
+  },
+
   // menuButton: {
   //   marginRight: theme.spacing(2),
   // },
@@ -49,16 +70,19 @@ export default function ButtonAppBar() {
     <NavLink
       exact
       key={r.label}
-      to={r.route}
-      activeClassName="menu-link--active"
+      to={`${r.route}`}
+      // to={r.route}
+      className={classes.link}
+      activeClassName={classes.activeClassLink}
     >
       {r.label}
     </NavLink>
   ));
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+
+    <AppBar position="static">
+      <div className={classes.blocPageAppBar}>
         {/* ---------- START ---------- */}
         <div>
           <Button color="inherit" aria-label="menu">
@@ -80,7 +104,9 @@ export default function ButtonAppBar() {
           </IconButton>
         </div>
         {/* ---------- MIDDLE ---------- */}
-        {navLinkJSX}
+        <div>
+          {navLinkJSX}
+        </div>
         {/* ---------- END ---------- */}
         <div>
           <Button
@@ -94,7 +120,8 @@ export default function ButtonAppBar() {
           </Button>
         </div>
         {/* </Toolbar> */}
-      </AppBar>
-    </div>
+      </div>
+    </AppBar>
+
   );
 }
