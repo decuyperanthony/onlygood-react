@@ -16,6 +16,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 //! == Drawer
 import Drawer from '../Drawer';
 import { toggleDarkmode } from '../../../store/action/theme';
+import { disconnect } from '../../../store/action/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,9 +60,13 @@ export default function ButtonAppBar() {
           </Typography>
           <Button
             color="inherit"
-            onClick={() => history.push('/login')}
+            onClick={() => {
+              dispatch(disconnect());
+              history.push('/login');
+            }}
+            // onClick={() => history.push('/login')}
           >
-            Login
+            Logout
           </Button>
         </Toolbar>
       </AppBar>
