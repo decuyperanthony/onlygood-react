@@ -29,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  containerNavlink: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
   link: {
     fontFamily: 'popins',
     fontWeight: '500',
@@ -104,7 +109,7 @@ export default function ButtonAppBar() {
           </IconButton>
         </div>
         {/* ---------- MIDDLE ---------- */}
-        <div>
+        <div className={classes.containerNavlink}>
           {navLinkJSX}
         </div>
         {/* ---------- END ---------- */}
