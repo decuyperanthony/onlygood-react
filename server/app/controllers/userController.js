@@ -1,19 +1,22 @@
 const User = require("../models/user");
 
 const userController = {
-  userPage: async (req, res) => {
+  getAllUsers: async (req, res) => {
     try {
-      let user = await User.findByPk(req.session.user.id);
-      res.render("userPage", {
-        user
-      });
+         const users = await User.findAll({
+            // order: [lastname, 'ASC'],
+            order: [
+                ['id', 'DESC'],
+             ]
+         });
+         res.send(users);
     } catch (error) {
-      console.trace(error);
+        console.trace(error);
+        res.status(500).send(error);
     }
   },
   getOneUser: async (req, res) => {
     let userId = req.params.id;
-
     try {
         const user = await User.findByPk(userId);
         if (!user) {
@@ -24,7 +27,7 @@ const userController = {
         console.trace(error);
         res.status(500).send(error);
     }
-},
+  },
   // updateUser: async (req, res, next) => {
   //     try {
   //         // const userId = req.params.id;
