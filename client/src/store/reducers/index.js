@@ -5,7 +5,7 @@ import theme from './theme';
 // import signup from './signup';
 // import error from './error';
 // import nav from './nav';
-// import loader from './loader';
+import loader from './loader';
 // import shop from './shop';
 // import tab from './tab';
 // import success from './successMessage';
@@ -25,7 +25,7 @@ export default combineReducers({
   // signup,
   // error,
   // nav,
-  // loader,
+  loader,
   // shop,
   // tab,
   // success,
