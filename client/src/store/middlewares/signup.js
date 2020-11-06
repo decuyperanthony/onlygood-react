@@ -8,7 +8,7 @@ import { SIGNUP } from '../action/signup';
 import { errorAuth } from '../action/auth';
 import { enterHomePage } from '../action/route';
 // import { enterDashboardPage } from '../../actions/auth';
-// import { setLoaderOpen, setLoaderClose } from '../../actions/loader';
+import { setLoaderOpen, setLoaderClose } from '../action/loader';
 
 // import {
 //   SET_ERROR_SIGNUP,
@@ -20,8 +20,8 @@ export default (store) => (next) => (action) => {
   switch (action.type) {
     case SIGNUP: {
     //   let errorMessage = '';
-    //   store.dispatch(setLoaderOpen());
-    //   store.dispatch({ type: SET_ERROR_SIGNUP, errorMessage });
+      store.dispatch(setLoaderOpen());
+      //   store.dispatch({ type: SET_ERROR_SIGNUP, errorMessage });
       const {
         email, password, firstname, lastname,
       } = action.payload.data;
@@ -39,8 +39,10 @@ export default (store) => (next) => (action) => {
         .then((res) => {
           console.log('res', res);
           if (res.data.errorsList) {
+            store.dispatch(setLoaderClose());
             store.dispatch(errorAuth(res.data.errorsList[0]));
           } else {
+            store.dispatch(setLoaderClose());
             localStorage.user = JSON.stringify(res.data.savedUser);
             store.dispatch(enterHomePage(action.payload.history));
           }
