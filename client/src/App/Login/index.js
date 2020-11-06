@@ -49,7 +49,7 @@ const useStyles = makeStyles({
     // height: '40px',
   },
   buttonLogin: {
-    backgroundColor: '#008080',
+    backgroundColor: '#2F80ED',
     color: 'white',
     // marginTop: '2em',
     // marginBottom: '2em',
@@ -97,7 +97,7 @@ const Login = () => {
   console.log(errors);
   return (
     <div className={classes.blocPageLogin}>
-      <h2 style={{ color: '#008080', textAlign: 'center' }}>Log-in to your account</h2>
+      <h2 style={{ color: '#2F80ED', textAlign: 'center' }}>Log-in to your account</h2>
       <Card className={classes.cardStyle}>
         <main className="page-login">
           <div className="input-login">
@@ -176,7 +176,7 @@ const Login = () => {
       <Card className={classes.cardStyle} style={{ textAlign: 'center' }}>
         New to us?
         {' '}
-        <Link href="#" onClick={() => history.push('/signup')}>Sign Up</Link>
+        <Link href="#" style={{ color: '#2F80ED' }} onClick={() => history.push('/signup')}>Sign Up</Link>
       </Card>
     </div>
   );
