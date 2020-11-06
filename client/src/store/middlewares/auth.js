@@ -53,7 +53,7 @@ export default (store) => (next) => (action) => {
           console.log('mauvais mail ou mot de passe');
           // store.dispatch(setLoaderClose());
           // console.trace(error);
-          store.dispatch(errorAuth('le mail ou le mot de passe est incorrect'));
+          store.dispatch(errorAuth('Wrong email or password'));
           console.log(`Can’t access ${API_URL} response. Blocked by browser?`);
           // const MessageError = () => {
           //   const { t } = useTranslation();
