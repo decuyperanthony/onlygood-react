@@ -6,17 +6,14 @@ import {
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
-// import { Mail } from '@material-ui/icons/';
+import { Mail } from '@material-ui/icons/';
 
 import {
   TextField,
   // InputAdornment,
   Button,
-  Input,
-  FormControl,
-  InputLabel,
-  FormHelperText,
   Card,
+  InputAdornment,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { login } from '../../store/action/auth';
@@ -25,45 +22,20 @@ import { login } from '../../store/action/auth';
 
 // == style
 const useStyles = makeStyles({
-  // containerLogin: {
-  //   height: '100vh',
-  //   maxWidth: '450px',
-  //   margin: 'auto',
-  // },
-  // alertErrorAuthStyle: {
-  //   marginBottom: '2em',
-  //   marginTop: '-2em',
-  // },
-  // logo: {
-  //   height: '5em',
-  //   width: 'auto',
-  //   borderRadius: '50%',
-  //   boxShadow: '0 3px 5px 2px rgba(75, 84, 111, .3)',
-  //   paddingTop: '1em',
-  // },
-  // gridLogin: {
-  //   width: '100%',
-  // },
-  // cardStyles: {
-  //   margin: '-6em 1em 1em 1em',
-  //   padding: '0 0.5em',
-  // },
-  // cardHeaderStyles: {
-  //   backgroundColor: '#263153',
-  //   border: 0,
-  //   borderRadius: 3,
-  //   boxShadow: '0 3px 5px 2px rgba(75, 84, 111, .3)',
-  //   color: 'white',
-  //   height: 130,
-  //   padding: '15px 10px 10px 10px',
-  //   margin: '0px 30px 0 30px',
-  //   position: 'relative',
-  //   top: '36px',
-  //   textAlign: 'center',
-  // },
-  // cardContent: {
-  //   paddingTop: '12em',
-  // },
+  blocPageLogin: {
+    minHeight: '100vh',
+  },
+  cardStyle: {
+    margin: '0.5em',
+    padding: '0.5em',
+    width: 'auto',
+    backgroundColor: 'white',
+    // margin: '0.5em 1em',
+    // // padding: '0 .5em !important',
+    // padding: '1em',
+    borderRadius: '4px',
+    boxShadow: '0 3px 5px 2px rgba(75, 84, 111, .3)',
+  },
   textField: {
     paddingBottom: '3em',
   },
@@ -72,7 +44,7 @@ const useStyles = makeStyles({
     color: 'white',
     marginTop: '2em',
     marginBottom: '2em',
-    height: '40px',
+    // height: '40px',
   },
   buttonSignup: {
     backgroundColor: 'white',
@@ -108,126 +80,86 @@ const Login = () => {
   };
   console.log(errors);
   return (
-    <Card className="blocpage-login">
-      <main className="page-login">
+    <div className={classes.blocPageLogin}>
+      <h2 style={{ color: '#008080' }}>Log-in to your account</h2>
+      <Card className={classes.cardStyle}>
+        <main className="page-login">
 
-        <h2 style={{ color: '#008080' }}>Login</h2>
-        <div className="input-login">
-
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {/* <div>
-              <input
-                type="text"
-                placeholder="Email"
-                id="input-email"
-                name="email"
-                ref={register({ required: true, pattern: /^\S+@\S+$/i })}
-              />
-            </div> */}
-
-            <TextField
-              error={!!errors.email}
-              required
-              className={classes.textField}
-              inputRef={
+          <div className="input-login">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <TextField
+                error={!!errors.email}
+                fullWidth
+                variant="outlined"
+              // required
+                className={classes.textField}
+                inputRef={
                     register({
-                      required: 'votre email est requis',
+                      required: 'Email is required',
                       pattern: {
                         value: /^\S+@\S+$/i,
-                        message: 'Mauvais format',
+                        message: 'Wrong format',
                       },
                     })
                   }
-              helperText={errors.email ? errors.email.message : null}
-              type="text"
-              fullWidth
-              id="standard-ok"
-                  // id="input-with-icon-textfield"
-              label="email"
-              name="email"
-              // InputProps={{
-              //   endAdornment: (
-              //     <InputAdornment position="end">
-              //       <Mail color="action" />
-              //     </InputAdornment>
-              //   ),
-              // }}
-            />
-
-            <FormControl
-              className={classes.textField}
-              required
-              fullWidth
-              error={!!errors.password}
-            >
-              <InputLabel
-                htmlFor="standard-adornment-password"
-              >
-                mot de passe
-              </InputLabel>
-              <Input
+                helperText={errors.email ? errors.email.message : null}
+                type="text"
                 id="standard-adornment-password"
-                name="password"
-                type="password"
-                // type={values.showPassword ? 'text' : 'password'}
-                // onChange={handleChange('password')}
-                inputRef={
-                      register({
-                        required: 'le mot de passe est requis',
-                      })
-                    }
-                // endAdornment={(
-                //   <InputAdornment
-                //     className={classes.inputAdornment}
-                //     position="end"
-                //     aria-label="toggle password visibility"
-                //     onClick={handleClickShowPassword}
-                //     onMouseDown={handleMouseDownPassword}
-                //   >
-                //     {values.showPassword ?
-                // <Visibility color="action" /> : <VisibilityOff color="action" />}
-                //   </InputAdornment>
-                //     )}
+                  // id="input-with-icon-textfield"
+                label="email"
+                name="email"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Mail color="action" />
+                    </InputAdornment>
+                  ),
+                }}
               />
-              <FormHelperText
-                id="component-error-text"
+              <div>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  className={classes.textField}
+              // required
+                  error={!!errors.password}
+                  inputRef={
+                  register({
+                    required: 'Password is required',
+                  })
+                  }
+                  helperText={errors.password ? errors.password.message : null}
+                  id="standard-adornment-password"
+                  name="password"
+                  type="password"
+                  // id="input-with-icon-textfield"
+                  label="password"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Mail color="action" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+
+              <Button
+                className={classes.buttonValidate}
+                type="submit"
+                variant="contained"
+                fullWidth
               >
-                {errors.password ? errors.password.message : null}
-              </FormHelperText>
-            </FormControl>
+                Valider
+              </Button>
+            </form>
+          </div>
+        </main>
 
-            {/* <div>
-              <input
-                type="password"
-                name="password"
-                id="input-password"
-                placeholder="password"
-                ref={register({
-                  required: 'le mot de passe est requis',
-                })}
-              />
-            </div> */}
-
-            <Button
-              className={classes.buttonValidate}
-              type="submit"
-              variant="contained"
-              fullWidth
-            >
-              Valider
-            </Button>
-
-            {/* <div className="div-button">
-              <input type="submit" value="Se Connecter" className="input-btn" />
-            </div> */}
-          </form>
-        </div>
-
-      </main>
-      <main className="signup">
+      </Card>
+      <Card className={classes.cardStyle}>
         <h2>Hello, Friend!</h2>
         <p className="para-signup">Enter your personal details and start journey with us</p>
-
         <Button
           variant="contained"
           fullWidth
@@ -235,11 +167,9 @@ const Login = () => {
           onClick={() => history.push('/signup')}
         >
           Sign up
-
         </Button>
-
-      </main>
-    </Card>
+      </Card>
+    </div>
   );
 };
 
