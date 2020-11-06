@@ -1,16 +1,9 @@
-// import {
-//   SET_USER,
-//   SET_USER_INSTAGRAM_DATA,
-//   SET_USER_TOKEN,
-//   RESET,
-//   OPEN_SUCCESS_MESSAGE_REGISTER,
-//   SHOW_NOTIF_MAIL_ACTIVED,
-//   CLOSE_NOTIF_MAIL_ACTIVED,
-//   SET_STEP,
-//   // SET_PASSWORD,
-// } from '../actions/auth';
+import {
+  ERROR_AUTH,
+} from '../action/auth';
 
 const initialState = {
+  errorAuth: '',
   // userData: {},
   // userInstagramData: {},
   // userToken: '',
@@ -21,12 +14,12 @@ const initialState = {
 
 const authentification = (state = initialState, action = {}) => {
   switch (action.type) {
-    // case SET_USER: {
-    //   return {
-    //     ...state,
-    //     userData: action.user,
-    //   };
-    // }
+    case ERROR_AUTH: {
+      return {
+        ...state,
+        errorAuth: action.payload,
+      };
+    }
 
     // case SET_USER_INSTAGRAM_DATA: {
     //   console.log('action ==> ', action);
