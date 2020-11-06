@@ -4,6 +4,9 @@ import {
   useSelector,
 } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useHistory } from 'react-router';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -27,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonAppBar() {
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { darkmodeBoolean } = useSelector((state) => state.theme);
@@ -53,7 +57,12 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button
+            color="inherit"
+            onClick={() => history.push('/login')}
+          >
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
