@@ -6,7 +6,7 @@ import axios from 'axios';
 import { LOGIN, errorAuth } from '../action/auth';
 import { enterHomePage } from '../action/route';
 
-// import { setLoaderOpen, setLoaderClose } from '../../actions/loader';
+import { setLoaderOpen, setLoaderClose } from '../action/loader';
 
 // import {
 //   SET_ERROR_AUTH,
@@ -19,7 +19,7 @@ export default (store) => (next) => (action) => {
     case LOGIN: {
       console.log('login');
       // // console.log('login');
-      // store.dispatch(setLoaderOpen());
+      store.dispatch(setLoaderOpen());
       // let errorMessage = '';
       // store.dispatch({ type: SET_ERROR_AUTH, errorMessage });
       axios
@@ -39,19 +39,19 @@ export default (store) => (next) => (action) => {
             //   store.dispatch(setStep(1));
             // }
             localStorage.user = JSON.stringify(res.data.user);
-            // localStorage.userToken = JSON.stringify(res.data.userToken);
+            localStorage.userToken = JSON.stringify(res.data.userToken);
 
             // localStorage.userDetails = JSON.stringify(res.data.userDetails);
             // const user = JSON.parse(localStorage.getItem('user'));
             // store.dispatch(setUser(user));
-            // store.dispatch(setLoaderClose());
+            store.dispatch(setLoaderClose());
             store.dispatch(enterHomePage(action.payload.history));
           }
         })
         // eslint-disable-next-line no-unused-vars
         .catch((error) => {
           console.log('mauvais mail ou mot de passe');
-          // store.dispatch(setLoaderClose());
+          store.dispatch(setLoaderClose());
           // console.trace(error);
           store.dispatch(errorAuth('Wrong email or password'));
           console.log(`Can’t access ${API_URL} response. Blocked by browser?`);
