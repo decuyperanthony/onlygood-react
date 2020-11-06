@@ -112,6 +112,7 @@ const authController = {
 
   // traiter le formulaire d'inscription => enregistrer un nouveau User
   signupAction: async (req, res) => {
+
     try {
       const {
         email,
@@ -119,6 +120,7 @@ const authController = {
         firstname,
         lastname,
       } = req.body;
+      console.log('email', email)
       // on verif que l'user n'existe pas avec son mail
       const user = await User.findOne({
         where: {
@@ -163,7 +165,8 @@ const authController = {
         // res.status(200).send(savedUser);
         } else {
 
-          res.status(401).send({errorsList});
+          res.send({errorsList});
+          // res.status(401).send({errorsList});
 
         }
       //! ------------- Envoi du mail
