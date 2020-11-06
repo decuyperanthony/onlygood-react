@@ -25,7 +25,11 @@ import AppBar from './NavBar/AppBar';
 // import NavBar from './NavBar';
 import Login from './Login';
 import Signup from './Signup';
+// == component
 import Home from './Home';
+import Explore from './Explore';
+import Bookmarks from './Bookmarks';
+
 import Loader from './LoaderBackDrop';
 
 //* === === === === === === DASHBOARD === === === === === === === === === ===
@@ -60,6 +64,28 @@ const Dashboard = () => {
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
             return <Home {...props} />;
+          }}
+        />
+        <Route
+          exact
+          path={`${path}/explore`}
+          render={(props) => {
+            if (!userToken) {
+              return <Redirect to="/login" />;
+            }
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            return <Explore {...props} />;
+          }}
+        />
+        <Route
+          exact
+          path={`${path}/bookmarks`}
+          render={(props) => {
+            if (!userToken) {
+              return <Redirect to="/login" />;
+            }
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            return <Bookmarks {...props} />;
           }}
         />
         {/* {ArticleRouterJSX} */}
