@@ -79,7 +79,7 @@ const Login = () => {
   if (errorAuth) {
     errorAuthJSX = (
       <Alert
-        style={{ marginBottom: '1em' }}
+        style={{ marginBottom: '2em' }}
         severity="error"
       >
         {' '}
