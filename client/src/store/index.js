@@ -17,6 +17,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 // import signupMiddleware from '../middlewares/user/signup';
 import authMiddleware from './middlewares/auth';
+import signUpMiddleware from './middlewares/signup';
 import routesMiddleware from './middlewares/routes';
 // import authAdminMiddleware from '../middlewares/admin/auth';
 
@@ -40,6 +41,7 @@ const enhancers = composeEnhancers(
     // signupMiddleware,
     authMiddleware,
     routesMiddleware,
+    signUpMiddleware,
     // routesMiddleware,
     // authAdminMiddleware,
   ),
