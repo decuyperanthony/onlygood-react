@@ -3,7 +3,12 @@
 import axios from 'axios';
 // import { useTranslation } from 'react-i18next';
 
-import { LOGIN, errorAuth } from '../action/auth';
+import {
+  LOGIN,
+  errorAuth,
+  setUser,
+  DISCONNECT,
+} from '../action/auth';
 import { enterHomePage } from '../action/route';
 
 import { setLoaderOpen, setLoaderClose } from '../action/loader';
@@ -33,17 +38,12 @@ export default (store) => (next) => (action) => {
           console.log('>>>>>>> >>>>>> res.data', res.data);
           if (res.status === 200) {
             console.log('res', res.data);
-            // console.log('fneled');
             // console.log('res', res.data.user.mail_actived);
-            // if (res.data.user.mail_actived) {
-            //   store.dispatch(setStep(1));
-            // }
             localStorage.user = JSON.stringify(res.data.user);
             localStorage.userToken = JSON.stringify(res.data.userToken);
-
             // localStorage.userDetails = JSON.stringify(res.data.userDetails);
-            // const user = JSON.parse(localStorage.getItem('user'));
-            // store.dispatch(setUser(user));
+            const user = JSON.parse(localStorage.getItem('user'));
+            store.dispatch(setUser(user));
             store.dispatch(setLoaderClose());
             store.dispatch(enterHomePage(action.payload.history));
           }
@@ -55,24 +55,14 @@ export default (store) => (next) => (action) => {
           // console.trace(error);
           store.dispatch(errorAuth('Wrong email or password'));
           console.log(`Can’t access ${API_URL} response. Blocked by browser?`);
-          // const MessageError = () => {
-          //   const { t } = useTranslation();
-          //   return (
-          //     <>
-          //       {t('middleware-signin-signin-message-error')}
-          //     </>
-          //   );
-          // };
-          // errorMessage = <MessageError />;
-          // store.dispatch({ type: SET_ERROR_AUTH, errorMessage });
         });
       break;
     }
 
-    // case DISCONNECT: {
-    //   localStorage.clear();
-    //   break;
-    // }
+    case DISCONNECT: {
+      localStorage.clear();
+      break;
+    }
 
     // case UPDATE_PASSWORD: {
     //   const state = store.getState();
