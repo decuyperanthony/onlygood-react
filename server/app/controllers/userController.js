@@ -11,6 +11,20 @@ const userController = {
       console.trace(error);
     }
   },
+  getOneUser: async (req, res) => {
+    let userId = req.params.id;
+
+    try {
+        const user = await User.findByPk(userId);
+        if (!user) {
+            return res.status(401).send('cet utilisateur n\' existe pas')
+        }
+        res.send(user);
+    } catch (error) {
+        console.trace(error);
+        res.status(500).send(error);
+    }
+},
   // updateUser: async (req, res, next) => {
   //     try {
   //         // const userId = req.params.id;
