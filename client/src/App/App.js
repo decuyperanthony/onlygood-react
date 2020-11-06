@@ -110,7 +110,8 @@ const App = () => {
     palette: {
       primary: {
         // main: '#D9B08C',
-        main: '#116466',
+        main: '#FFFFFF',
+        // main: '#116466',
       },
       type: darkmodeBoolean ? 'dark' : 'light',
     },
