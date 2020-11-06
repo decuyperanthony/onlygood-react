@@ -32,6 +32,12 @@ router.post("/login", authController.loginAction);
 router.get('/signup', authController.signupPage);
 router.post("/signup", authController.signupAction);
 
+
+// user router
+router.get(`/user/:id`, userController.getOneUser);
+
+
+
 //page profil
 router.get('/userPage', isLoggin, userController.userPage);
 router.post('/updateuser',
