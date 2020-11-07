@@ -11,6 +11,8 @@ import {
 import Moment from 'react-moment';
 // === component
 import Avatar from './Avatar';
+// === fake picture
+import picture from '../../image/exemple.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '400',
     fontSize: '16px',
     color: '#4F4F4F',
+    marginLeft: '1em',
   },
 
 }));
@@ -69,6 +72,7 @@ const Posts = () => {
               </span>
             </div>
           </header>
+
           <p className={classes.textContent}>{p.content}</p>
         </Paper>
       </Grid>
