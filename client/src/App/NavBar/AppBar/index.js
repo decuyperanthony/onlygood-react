@@ -13,8 +13,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-//! == Drawer
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+//! == Component
 // import Drawer from '../Drawer';
+import MenuAvatar from './MenuAvatar';
+import Avatar from './Avatar';
 import { toggleDarkmode } from '../../../store/action/theme';
 import { disconnect } from '../../../store/action/auth';
 // == data
@@ -42,12 +46,18 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 2em',
     '&:hover': {
       color: '#2F80ED',
-      borderBottom: '1px #2F80ED solid',
+      borderBottom: '2px #2F80ED solid',
+      paddingBottom: '19px',
     },
   },
   activeClassLink: {
     color: '#2F80ED',
-    borderBottom: '1px #2F80ED solid',
+    borderBottom: '2px #2F80ED solid',
+    paddingBottom: '19px',
+  },
+
+  containerBadgeAvatar: {
+    display: 'flex',
   },
 
   // menuButton: {
@@ -113,16 +123,27 @@ export default function ButtonAppBar() {
           {navLinkJSX}
         </div>
         {/* ---------- END ---------- */}
-        <div>
-          <Button
+        <div className={classes.containerBadgeAvatar}>
+          <Avatar />
+          {/* <IconButton
+            onClick={handleToggleDarkmode}
+            edge="end"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <ExpandMoreIcon />
+          </IconButton> */}
+          <MenuAvatar />
+          {/* <Button
             color="inherit"
             onClick={() => {
               dispatch(disconnect());
               history.push('/login');
             }}
           >
-            Logout
-          </Button>
+            <ExpandMoreIcon />
+          </Button> */}
         </div>
         {/* </Toolbar> */}
       </div>
