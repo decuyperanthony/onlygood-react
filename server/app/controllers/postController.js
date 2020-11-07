@@ -14,7 +14,7 @@ const postController = {
                     // "user_social_network"
                 ],
                  // order: [[title, 'ASC'], [name, 'ASC']],
-                 // order: [title, 'ASC'],
+                //  order: [id, 'DESC'],
                  // order: [name, 'ASC'],
              });
              res.send(posts);
