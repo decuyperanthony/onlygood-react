@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import {
   useDispatch,
   // useSelector,
@@ -20,8 +21,11 @@ import {
 // == icon
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';
 import PublicIcon from '@material-ui/icons/Public';
+import { API_URL } from '../../utils/constante';
 // == component
 import ImageAvatars from './Avatar';
+
+import getAllPosts from '../../utils/getAllPosts';
 
 // == style
 const useStyles = makeStyles((theme) => ({
@@ -59,42 +63,41 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     },
   },
-  //   root: {
-  //     flexGrow: 1,
-  //     padding: '1em',
-  //   },
-  //   paper: {
-  //     padding: theme.spacing(2),
-  //     textAlign: 'center',
-  //     color: theme.palette.text.secondary,
-  //   },
-  //   blocHomepage: {
-
-//   },
-//   cardStyle: {
-//     margin: '0.5em',
-//     padding: '1em',
-//     width: 'auto',
-//     backgroundColor: 'white',
-//     // margin: '0.5em 1em',
-//     // // padding: '0 .5em !important',
-//     // padding: '1em',
-//     borderRadius: '4px',
-//     boxShadow: '0 3px 5px 2px rgba(75, 84, 111, .3)',
-//   },
 }));
 
 const BlocPost = () => {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
+  const userId = JSON.parse(localStorage.getItem('userId'));
   // const history = useHistory();
   const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState('');
   const onSubmit = (data) => {
     console.log('data', data);
+    axios
+      .post(`${API_URL}/post`, {
+        content: data.post,
+        app_users_id: userId,
+      }, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setInputValue('');
+        console.log('res', res);
+        getAllPosts();
+        // setValue('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // dispatch(login({
     //   history,
     //   data,
     // }));
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -113,7 +116,10 @@ const BlocPost = () => {
                 //   message: 'Wrong format',
                 // },
               })
+
             }
+            value={inputValue}
+            onChange={handleInputChange}
             helperText={errors.post ? errors.post.message : null}
             name="post"
             placeholder="What's happening ?"
