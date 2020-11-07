@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import avatarAntho from '../../image/avatar.jpg';
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ImageAvatars() {
+export default function ImageAvatars({ pictureSrc }) {
   const classes = useStyles();
 
   return (
@@ -21,3 +22,8 @@ export default function ImageAvatars() {
     </div>
   );
 }
+
+ImageAvatars.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  pictureSrc: PropTypes.string,
+};
