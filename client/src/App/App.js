@@ -15,6 +15,7 @@ import {
 
 // === method
 import getUserData from '../utils/getUserData';
+import getAllPosts from '../utils/getAllPosts';
 
 // == styles
 // import './reset.css';
@@ -47,6 +48,7 @@ const Dashboard = () => {
   if (userToken) {
     const myId = user.id;
     getUserData(myId);
+    getAllPosts();
   }
 
   // == stepper
@@ -157,7 +159,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: '100vh' }}>
+      <Paper style={{ minHeight: '100vh' }}>
         <div className="App">
           <Loader />
           {/* <AppBar /> */}
