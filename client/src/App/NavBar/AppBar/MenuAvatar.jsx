@@ -10,14 +10,15 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import BuildIcon from '@material-ui/icons/Build';
-
+// import BuildIcon from '@material-ui/icons/Build';
+import SettingsIcon from '@material-ui/icons/Settings';
 import { useHistory } from 'react-router-dom';
 
 import PopConfirm from './PopConfirm';
 
 const firstPath = 'dashboard';
 
+// eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -30,9 +31,11 @@ const useStyles = makeStyles((theme) => ({
     // [theme.breakpoints.up('xs')]: {
     //   marginRight: '2em',
     // },
+    fontFamily: 'noto-sans',
   },
   blocMenuAvatar: {
-    marginRight: '7em',
+    // padding: '1em',
+    marginRight: '6em',
   },
 }));
 
@@ -127,9 +130,9 @@ export default function MenuAvatar() {
                         aria-haspopup="true"
                         color="inherit"
                       >
-                        <AccountCircle style={{ color: 'black' }} />
+                        <AccountCircle style={{ color: '#4F4F4F' }} />
                       </IconButton>
-                      Profile
+                      <span style={{ color: '#4F4F4F' }}> My Profile</span>
                     </MenuItem>
                     {/* <MenuItem onClick={handleAccountClose}>
                       <IconButton
@@ -149,10 +152,11 @@ export default function MenuAvatar() {
                         aria-haspopup="true"
                         color="inherit"
                       >
-                        <BuildIcon style={{ color: 'black' }} />
+                        <SettingsIcon style={{ color: '#4F4F4F' }} />
                       </IconButton>
-                      Parameters
+                      <span style={{ color: '#4F4F4F' }}> Settings</span>
                     </MenuItem>
+                    {/* ----- DISCONNECT ----- */}
                     <PopConfirm />
                   </MenuList>
                 </ClickAwayListener>
