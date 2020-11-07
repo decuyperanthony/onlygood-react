@@ -39,6 +39,7 @@ export default (store) => (next) => (action) => {
             // console.log('res', res.data.user.mail_actived);
             localStorage.user = JSON.stringify(res.data.user);
             localStorage.userToken = JSON.stringify(res.data.userToken);
+            localStorage.userId = JSON.stringify(res.data.user.id);
             // localStorage.userDetails = JSON.stringify(res.data.userDetails);
             const user = JSON.parse(localStorage.getItem('user'));
             store.dispatch(setUser(user));
