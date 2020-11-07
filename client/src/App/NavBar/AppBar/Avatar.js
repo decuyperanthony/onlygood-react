@@ -44,6 +44,7 @@ const StyledBadge = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginRight: '-1.5em',
     display: 'flex',
     // height: '20px',
     // width: '20px',

@@ -5,7 +5,7 @@ import {
 } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 // import Toolbar from '@material-ui/core/Toolbar';
@@ -13,14 +13,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 //! == Component
 // import Drawer from '../Drawer';
 import MenuAvatar from './MenuAvatar';
 import Avatar from './Avatar';
 import { toggleDarkmode } from '../../../store/action/theme';
-import { disconnect } from '../../../store/action/auth';
+// import { disconnect } from '../../../store/action/auth';
 // == data
 import linkUser from '../../../data/NavLinkUser';
 
@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 2em',
     '&:hover': {
       color: '#2F80ED',
-      borderBottom: '2px #2F80ED solid',
-      paddingBottom: '19px',
+      // borderBottom: '2px #2F80ED solid',
+      // paddingBottom: '19px',
     },
   },
   activeClassLink: {
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonAppBar() {
-  const history = useHistory();
+  // const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { darkmodeBoolean } = useSelector((state) => state.theme);
@@ -125,25 +125,7 @@ export default function ButtonAppBar() {
         {/* ---------- END ---------- */}
         <div className={classes.containerBadgeAvatar}>
           <Avatar />
-          {/* <IconButton
-            onClick={handleToggleDarkmode}
-            edge="end"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <ExpandMoreIcon />
-          </IconButton> */}
           <MenuAvatar />
-          {/* <Button
-            color="inherit"
-            onClick={() => {
-              dispatch(disconnect());
-              history.push('/login');
-            }}
-          >
-            <ExpandMoreIcon />
-          </Button> */}
         </div>
         {/* </Toolbar> */}
       </div>

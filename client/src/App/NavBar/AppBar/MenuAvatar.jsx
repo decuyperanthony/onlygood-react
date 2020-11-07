@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     //   marginRight: '2em',
     // },
   },
+  blocMenuAvatar: {
+    marginRight: '7em',
+  },
 }));
 
 export default function MenuAvatar() {
@@ -100,7 +103,14 @@ export default function MenuAvatar() {
         >
           <ExpandMoreIcon style={{ color: '#263153' }} />
         </Button>
-        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+        <Popper
+          className={classes.blocMenuAvatar}
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          transition
+          disablePortal
+        >
           {({ TransitionProps, placement }) => (
             <Grow
               // eslint-disable-next-line react/jsx-props-no-spreading
