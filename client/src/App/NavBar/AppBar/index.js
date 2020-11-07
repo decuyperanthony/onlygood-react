@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   link: {
-    fontFamily: 'popins',
+    fontFamily: 'popins, sans-serif',
     fontWeight: '500',
     fontSize: '14px',
     color: '#828282',
