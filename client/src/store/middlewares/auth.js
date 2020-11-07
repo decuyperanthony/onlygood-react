@@ -35,9 +35,7 @@ export default (store) => (next) => (action) => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log('>>>>>>> >>>>>> res.data', res.data);
           if (res.status === 200) {
-            console.log('res', res.data);
             // console.log('res', res.data.user.mail_actived);
             localStorage.user = JSON.stringify(res.data.user);
             localStorage.userToken = JSON.stringify(res.data.userToken);
