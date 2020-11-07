@@ -4,8 +4,6 @@ import {
   useSelector,
 } from 'react-redux';
 
-// === component
-
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -15,7 +13,11 @@ import {
   // Card,
   // InputAdornment,
 } from '@material-ui/core';
+
+// === component
 import BlocPost from './BlocInputPost';
+import Posts from './Posts';
+
 // == style
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +61,7 @@ const Home = () => {
         <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>
         </Grid>
+        <Posts />
       </Grid>
     </div>
 
