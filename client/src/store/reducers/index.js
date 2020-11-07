@@ -6,10 +6,12 @@ import theme from './theme';
 // import error from './error';
 // import nav from './nav';
 import loader from './loader';
+
 // import shop from './shop';
 // import tab from './tab';
 // import success from './successMessage';
 // import interests from './interests';
+import post from './post';
 // // eslint-disable-next-line import/no-cycle
 // import orders from './orders';
 // import instagram from './instagram';
@@ -28,6 +30,7 @@ export default combineReducers({
   loader,
   // shop,
   // tab,
+  post,
   // success,
   // interests,
   // orders,
