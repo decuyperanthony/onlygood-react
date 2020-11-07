@@ -24,11 +24,6 @@ Post.init({
     type: Sequelize.TEXT,
     allowNull: true
   },
-  // likes: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   defaultValue: 0
-  // }
 }, {
   sequelize: dbConnection,
   tableName: "post",

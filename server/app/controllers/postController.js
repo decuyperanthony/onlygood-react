@@ -44,7 +44,9 @@ const postController = {
     },
 
     addPost: async (req, res) => {
+        console.log('add post')
         try {
+            console.log('req.body', req.body);
             // const { title } = req.body;
             // const findBrand = await Brand.findOne({
             //     where: {
