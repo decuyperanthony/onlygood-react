@@ -9,10 +9,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 
-import CancelIcon from '@material-ui/icons/Cancel';
-
+// import CancelIcon from '@material-ui/icons/Cancel';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useDispatch } from 'react-redux';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { useHistory } from 'react-router';
 // import { RESET, DISCONNECT } from '../../../../../actions/auth.js';
 import { disconnect } from '../../../store/action/auth';
@@ -41,16 +42,21 @@ export default function PopConfirm() {
 
   return (
     <div>
-      <MenuItem onClick={handleClickOpen}>
+      <MenuItem style={{ borderTop: '1px solid #E0E0E0' }} onClick={handleClickOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          <CancelIcon style={{ color: 'black' }} />
+          <ExitToAppIcon style={{ color: '#EB5757' }} />
         </IconButton>
-        Disconection
+        <span
+          style={{ color: '#EB5757' }}
+        >
+          Logout
+        </span>
+
       </MenuItem>
       <Dialog
         open={open}
@@ -60,7 +66,7 @@ export default function PopConfirm() {
       >
         <DialogTitle
           id="alert-dialog-title"
-          style={{ color: '#263153' }}
+          style={{ color: '#EB5757' }}
         >
           Are you sure ?
         </DialogTitle>
@@ -72,7 +78,7 @@ export default function PopConfirm() {
         <DialogActions>
           <Button
             onClick={handleClose}
-            style={{ color: '#263153', marginBottom: '.5em', border: '1px solid #263153' }}
+            style={{ color: '#EB5757', marginBottom: '.5em', border: '1px solid #EB5757' }}
             variant="outlined"
           >
             No
@@ -80,7 +86,7 @@ export default function PopConfirm() {
           <Button
             onClick={handleLogout}
             style={{
-              color: 'white', marginRight: '.5em', marginBottom: '.5em', backgroundColor: '#263153',
+              color: 'white', marginRight: '.5em', marginBottom: '.5em', backgroundColor: '#EB5757',
             }}
             autoFocus
             variant="contained"
