@@ -1,41 +1,41 @@
-const Message = require("./message");
+const Post = require("./post");
 const User = require("./user");
 
 /* Associations */
 
 //  Asso user <-> message
 
-Message.belongsTo(User, {
+Post.belongsTo(User, {
   foreignKey: "app_users_id",
   as: "user"
 });
 
-User.hasMany(Message, {
+User.hasMany(Post, {
   foreignKey: "app_users_id",
-  as: "message"
+  as: "posts"
 });
 
 // ASSO message <-> user
 // relation de type n:n
 // un message peut etre liké par plusieurs utilisateurs
-Message.belongsToMany(User, {
-  through: "likes",
-  foreignKey: "messages",
-  otherKey: "app_users",
-  timestamps: false,
-  as: "likeby" // un message est liké par des users
-});
+// Message.belongsToMany(User, {
+//   through: "likes",
+//   foreignKey: "messages",
+//   otherKey: "app_users",
+//   timestamps: false,
+//   as: "likeby" // un message est liké par des users
+// });
 
-User.belongsToMany(Message, {
-  through: "likes",
-  foreignKey: "app_users",
-  otherKey: "messages",
-  timestamps: false,
-  as: "like" // un user "like" des messages
-});
+// User.belongsToMany(Message, {
+//   through: "likes",
+//   foreignKey: "app_users",
+//   otherKey: "messages",
+//   timestamps: false,
+//   as: "like" // un user "like" des messages
+// });
 
 module.exports = {
-  Message,
+  Post,
   User
 };
 
