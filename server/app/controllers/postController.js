@@ -9,10 +9,10 @@ const postController = {
              const posts = await Post.findAll({
                 //  offset,
                 //  limit,
-                //  include: [
-                //     "articles",
-                //     // "user_social_network"
-                // ],
+                 include: [
+                    "user",
+                    // "user_social_network"
+                ],
                  // order: [[title, 'ASC'], [name, 'ASC']],
                  // order: [title, 'ASC'],
                  // order: [name, 'ASC'],
