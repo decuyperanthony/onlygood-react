@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3000;
 // pour la sécurité
 const sanitiser = require("./app/middleware/sanitise");
 const userRouter = require('./app/router/userRouter');
+const postRouter = require('./app/router/postRouter');
 const authRouter = require('./app/router/authRouter');
 
 const router = require("./app/router/router");
@@ -108,6 +109,7 @@ app.set("views", "./views");
 // j'utilise mon fichier router en dernier
 app.use(authRouter);
 app.use(userRouter);
+app.use(postRouter);
 app.use(router);
 
 app.listen(PORT, () => {
