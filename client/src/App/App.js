@@ -29,6 +29,7 @@ import Signup from './Signup';
 import Home from './Home';
 import Explore from './Explore';
 import Bookmarks from './Bookmarks';
+import Profile from './Profile';
 
 import Loader from './LoaderBackDrop';
 
@@ -86,6 +87,17 @@ const Dashboard = () => {
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
             return <Bookmarks {...props} />;
+          }}
+        />
+        <Route
+          exact
+          path={`${path}/profile`}
+          render={(props) => {
+            if (!userToken) {
+              return <Redirect to="/login" />;
+            }
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            return <Profile {...props} />;
           }}
         />
         {/* {ArticleRouterJSX} */}
