@@ -12,6 +12,7 @@ import loader from './loader';
 // import success from './successMessage';
 // import interests from './interests';
 import post from './post';
+import user from './user';
 // // eslint-disable-next-line import/no-cycle
 // import orders from './orders';
 // import instagram from './instagram';
@@ -31,6 +32,7 @@ export default combineReducers({
   // shop,
   // tab,
   post,
+  user,
   // success,
   // interests,
   // orders,
