@@ -17,6 +17,7 @@ import {
 // === component
 import BlocPost from './BlocInputPost';
 import Posts from './Posts';
+import WhoToFollow from './WhoToFollow';
 
 // == style
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const Explore = () => {
   const classes = useStyles();
   // const history = useHistory();
   // const dispatch = useDispatch();
@@ -59,7 +60,9 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
+          <Paper className={classes.paper}>
+            <WhoToFollow />
+          </Paper>
         </Grid>
         <Posts />
       </Grid>
@@ -68,4 +71,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Explore;
