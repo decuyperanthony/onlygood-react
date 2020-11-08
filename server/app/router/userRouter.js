@@ -12,7 +12,7 @@ router.get(`/user/:id`, userController.getOneUser);
 // router.get(`/${process.env.API_URL}/usersdetails`, userController.getAllUsersDetails);
 // router.get(`/${process.env.API_URL}/userdetails/:id`, userController.getOneUserDetails);
 // router.get(`/${process.env.API_URL}/userdetail/:id`, userController.getOneUserDetail);
-// router.patch(`/${process.env.API_URL}/user/:id`, userController.updateUser);
+router.patch(`/user/:id`, userController.updateUser);
 // router.delete(`/${process.env.API_URL}/user/:id`, userController.deleteUser);
 
 
