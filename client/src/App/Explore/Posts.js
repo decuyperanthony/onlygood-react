@@ -233,7 +233,24 @@ const Posts = () => {
   if (posts) {
     postsJSX = posts.map((p) => {
       console.log('hello post');
-
+      //! === COLOR LIKE
+      let colorLike = '';
+      p.post_liked_by.forEach((l) => {
+        console.log('liké par', l);
+        if (l.id === userId) colorLike = '#EB5757';
+      });
+      //! === COLOR SAVE
+      let colorSave = '';
+      p.post_saved_by.forEach((s) => {
+        console.log('sauvé par', s);
+        if (s.id === userId) colorSave = '#2D9CDB';
+      });
+      //! === COLOR RETWEET
+      let colorRetweet = '';
+      p.post_retweeted_by.forEach((r) => {
+        console.log('retweet par', r);
+        if (r.id === userId) colorRetweet = '#27AE60';
+      });
       // const [inputValue, setInputValue] = useState({
       //   [p.id]: [p.id],
       // });
@@ -300,8 +317,9 @@ const Posts = () => {
                 <div
                   className={classes.impression}
                   onClick={() => handleRetweet(p.id)}
+                  style={{ color: colorRetweet }}
                 >
-                  <RepeatIcon style={{ marginRight: '0.5em' }} />
+                  <RepeatIcon style={{ marginRight: '0.5em', color: colorRetweet }} />
                   Retweet (
                   {p.post_retweeted_by.length}
                   )
@@ -309,8 +327,9 @@ const Posts = () => {
                 <div
                   onClick={() => handleLike(p.id)}
                   className={classes.impression}
+                  style={{ color: colorLike }}
                 >
-                  <FavoriteBorderIcon style={{ marginRight: '0.5em' }} />
+                  <FavoriteBorderIcon style={{ marginRight: '0.5em', color: colorLike }} />
                   Like (
                   {p.post_liked_by.length}
                   )
@@ -318,8 +337,9 @@ const Posts = () => {
                 <div
                   onClick={() => handleSave(p.id)}
                   className={classes.impression}
+                  style={{ color: colorSave }}
                 >
-                  <TurnedInNotIcon style={{ marginRight: '0.5em' }} />
+                  <TurnedInNotIcon style={{ marginRight: '0.5em', color: colorSave }} />
                   Save (
                   {p.post_saved_by.length}
                   )
