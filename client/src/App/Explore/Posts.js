@@ -121,11 +121,11 @@ const Posts = () => {
       const pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
       //   }
       return (
-        <Grid item xs={9}>
+        <Grid key={p.id + 120} item xs={9}>
           <Paper className={classes.paper}>
             {/* ----- AUTHOR & PICTURE ----- */}
             <header className={classes.headerPost}>
-              <Avatar />
+              <Avatar pictureSrc={p.author.picture_road} />
               <div>
                 <div className={classes.author}>
                   {p.author.firstname}
