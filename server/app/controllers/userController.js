@@ -15,6 +15,7 @@ const userController = {
                   association: "followed",
                   include: ["user_follower"]
               },
+              "post_saved"
               // "author"
             ],
             // include: [
