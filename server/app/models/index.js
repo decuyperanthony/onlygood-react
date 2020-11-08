@@ -38,8 +38,64 @@ User.hasMany(Relationship, {
 
 
 /* ----- Associations N to N ----- */
+//! USER LIKES POST
+// un user peut liker plusieurs posts
+User.belongsToMany(Post, {
+  through: "user_likes_post",
+  foreignKey: "app_users_id",
+  otherKey: "post_id",
+  timestamps: false,
+  as: "post_liked"
+});
 
-//  Asso USER LIKES POST
+// un post peut être liké par plusieurs user
+Post.belongsToMany(User, {
+  through: "user_likes_post",
+  foreignKey: "post_id",
+  otherKey: "app_users_id",
+  timestamps: false,
+  as: "post_liked_by"
+});
+
+//! USER SAVED POST
+// un user peut liker plusieurs posts
+User.belongsToMany(Post, {
+  through: "user_saved_post",
+  foreignKey: "app_users_id",
+  otherKey: "post_id",
+  timestamps: false,
+  as: "post_saved"
+});
+
+// un post peut être liké par plusieurs user
+Post.belongsToMany(User, {
+  through: "user_saved_post",
+  foreignKey: "post_id",
+  otherKey: "app_users_id",
+  timestamps: false,
+  as: "post_saved_by"
+});
+
+//! USER RETWEET POST
+// un user peut liker plusieurs posts
+User.belongsToMany(Post, {
+  through: "user_retweet_post",
+  foreignKey: "app_users_id",
+  otherKey: "post_id",
+  timestamps: false,
+  as: "post_retweeted"
+});
+
+// un post peut être liké par plusieurs user
+Post.belongsToMany(User, {
+  through: "user_saved_post",
+  foreignKey: "post_id",
+  otherKey: "app_users_id",
+  timestamps: false,
+  as: "post_retweeted_by"
+});
+
+
 
 
 
