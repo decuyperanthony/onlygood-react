@@ -35,6 +35,10 @@ User.init({
         type: Sequelize.TEXT,
         allowNull: false
     },
+    description: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    },
     role: {
         type: Sequelize.TEXT,
         allowNull: false,
