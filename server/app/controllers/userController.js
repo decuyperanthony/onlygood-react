@@ -27,7 +27,7 @@ const userController = {
             //   "posts"
             // ],
             order: [
-                ['id', 'DESC'],
+                ['id', 'ASC'],
              ]
          });
          res.send(users);
@@ -76,24 +76,19 @@ const userController = {
   //     }
   // }
   updateUser: async (req, res) => {
+    let userId = req.params.id;
     try {
-      // on recup le user en session donc le user logué
-      let userToUpdate = req.session.user.id;
-      let user = await User.findByPk(userToUpdate);
-      console.log("user", user);
-      console.log("req.body", req.body);
-      //   if (!req.body.newRole === "" || !req.body.newRoadPicture === "") {}
-      const newRoadPicture = req.body.newRoadPicture;
-      const newRole = req.body.newRole;
-      user.role = newRole;
-      user.picture_road = newRoadPicture;
-      user.save();
-
-      res.redirect("/userPage");
+        const user = await User.findByPk(userId);
+        if (!user) {
+            return res.status(401).send('cet utilisateur n\' existe pas');
+        }
+        await user.update(req.body);
+        res.send(user);
     } catch (error) {
-      console.trace(error);
+        console.trace(error);
+        res.status(500).send(error);
     }
-  }
+},
 };
 
 module.exports = userController;
