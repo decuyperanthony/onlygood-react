@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
     },
     '& input': {
-      padding: 1,
+      padding: '0 10px',
       height: '30px',
       display: 'flex',
       alignItems: 'center',
