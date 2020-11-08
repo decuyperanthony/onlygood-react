@@ -6,10 +6,22 @@ const userController = {
          const users = await User.findAll({
             // order: [lastname, 'ASC'],
             include: [
-              "follower",
-              "followed",
-              "posts"
+              "posts",
+              {
+                  association: "follower",
+                  include: ["user_followed"]
+              },
+              {
+                  association: "followed",
+                  include: ["user_follower"]
+              },
+              // "author"
             ],
+            // include: [
+            //   "follower",
+            //   "followed",
+            //   "posts"
+            // ],
             order: [
                 ['id', 'DESC'],
              ]
@@ -25,9 +37,16 @@ const userController = {
     try {
         const user = await User.findByPk(userId, {
           include: [
-            "follower",
-            "followed",
-            "posts"
+            "posts",
+            {
+                association: "follower",
+                include: ["user_followed"]
+            },
+            {
+                association: "followed",
+                include: ["user_follower"]
+            },
+            // "author"
           ],
         });
         if (!user) {
