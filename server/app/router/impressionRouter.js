@@ -10,5 +10,13 @@ const router = express.Router();
 router.post(`/userlikespost`, impressionController.addOrRemoveLikeToPost);
 // router.delete(`/userunlikespost/:id`, userLikesPostController.removeLikeFromPost);
 
+//* ----- ROUTE DES RELATION USER SAVED POST -----
+router.post(`/usersavedpost`, impressionController.addOrRemoveSaveToPost);
+// router.delete(`/userunlikespost/:id`, userLikesPostController.removeLikeFromPost);
+
+//* ----- ROUTE DES RELATION USER RETWEET POST -----
+router.post(`/userretweetpost`, impressionController.addOrRemoveRetweetToPost);
+// router.delete(`/userunlikespost/:id`, userLikesPostController.removeLikeFromPost);
+
 
 module.exports = router;
