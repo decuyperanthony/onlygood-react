@@ -10,10 +10,15 @@ const postController = {
                 //  offset,
                 //  limit,
                  include: [
-                    "user",
+                    "author",
                     "post_liked_by",
-                    "post_saved_by"
-                    // "user_social_network"
+                    "post_saved_by",
+                    "post_retweeted_by",
+                    // "comments",
+                    {
+                        association: "comments",
+                        include: ["author"]
+                    },
                 ],
                  // order: [[title, 'ASC'], [name, 'ASC']],
                 //  order: [id, 'DESC'],
@@ -31,11 +36,15 @@ const postController = {
         try {
             const post = await Post.findByPk(postId, {
                 include: [
-                    "user",
+                    "author",
                     "post_liked_by",
                     "post_saved_by",
-                    "post_retweeted_by"
-                    // "user_social_network"
+                    "post_retweeted_by",
+                    // "comments",
+                    {
+                        association: "comments",
+                        include: ["author"]
+                    },
                 ],
             });
             if (!post) {
