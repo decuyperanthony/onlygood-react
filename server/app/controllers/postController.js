@@ -11,6 +11,8 @@ const postController = {
                 //  limit,
                  include: [
                     "user",
+                    "post_liked_by",
+                    "post_saved_by"
                     // "user_social_network"
                 ],
                  // order: [[title, 'ASC'], [name, 'ASC']],
@@ -30,6 +32,9 @@ const postController = {
             const post = await Post.findByPk(postId, {
                 include: [
                     "user",
+                    "post_liked_by",
+                    "post_saved_by",
+                    "post_retweeted_by"
                     // "user_social_network"
                 ],
             });
