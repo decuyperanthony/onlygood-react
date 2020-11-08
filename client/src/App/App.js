@@ -16,6 +16,7 @@ import {
 // === method
 import getUserData from '../utils/getUserData';
 import getAllPosts from '../utils/getAllPosts';
+import getAllUsers from '../utils/getAllUsers';
 
 // == styles
 // import './reset.css';
@@ -49,6 +50,7 @@ const Dashboard = () => {
     const myId = user.id;
     getUserData(myId);
     getAllPosts();
+    getAllUsers();
   }
 
   // == stepper
