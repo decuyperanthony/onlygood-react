@@ -6,12 +6,12 @@ const relationshipController = require('../controllers/relationshipController');
 
 const router = express.Router();
 
-//* ----- ROUTE DES USERS -----
+//* ----- ROUTE DES RELATION FOLLOWER FOLLOWED -----
 router.get(`/relationships`, relationshipController.getAllRelationships);
-// router.get(`/relationship/:id`, postController.getOnePost);
-// router.post(`/relationship`, postController.addPost);
+router.get(`/relationship/:id`, relationshipController.getOneRelationship);
+router.post(`/relationship`, relationshipController.addRelationship);
 // router.patch(`/relationship/:id`, postController.updatePost);
-// router.delete(`/relationship/:id`, postController.removePost);
+router.delete(`/relationship/:id`, relationshipController.removeRelationship);
 
 
 module.exports = router;
