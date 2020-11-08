@@ -5,3 +5,4 @@ firstmigra 2020-11-01T13:26:59Z decuyperanthony <decuyperanthony@gmail.com> # pr
 updateTableMessage 2020-11-07T16:36:37Z decuyperanthony <decuyperanthony@gmail.com> # modif
 updateAndAddAllTable 2020-11-08T11:48:48Z decuyperanthony <decuyperanthony@gmail.com> # modif
 fakeData 2020-11-08T12:15:28Z decuyperanthony <decuyperanthony@gmail.com> # modif
+newFieldUser 2020-11-08T17:03:19Z decuyperanthony <decuyperanthony@gmail.com> # ajout d un nouveau champ dans la table user pour les description
