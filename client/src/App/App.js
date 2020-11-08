@@ -162,7 +162,6 @@ const App = () => {
       <Paper style={{ minHeight: '100vh' }}>
         <div className="App">
           <Loader />
-          {/* <AppBar /> */}
           <Switch>
             <Route exact path="/login">
               <Login />
