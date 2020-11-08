@@ -24,6 +24,10 @@ Post.init({
     type: Sequelize.TEXT,
     allowNull: true
   },
+  status: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
 }, {
   sequelize: dbConnection,
   tableName: "post",
