@@ -5,6 +5,11 @@ const userController = {
     try {
          const users = await User.findAll({
             // order: [lastname, 'ASC'],
+            include: [
+              "follower",
+              "followed",
+              "posts"
+            ],
             order: [
                 ['id', 'DESC'],
              ]
@@ -18,7 +23,13 @@ const userController = {
   getOneUser: async (req, res) => {
     let userId = req.params.id;
     try {
-        const user = await User.findByPk(userId);
+        const user = await User.findByPk(userId, {
+          include: [
+            "follower",
+            "followed",
+            "posts"
+          ],
+        });
         if (!user) {
             return res.status(401).send('cet utilisateur n\' existe pas')
         }
