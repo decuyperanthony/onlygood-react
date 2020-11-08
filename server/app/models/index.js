@@ -22,19 +22,26 @@ User.hasMany(Post, {
 Relationship.belongsTo(User, {
   foreignKey: "follower_id",
   as: "user_follower"
-})
+});
 Relationship.belongsTo(User, {
   foreignKey: "followed_id",
   as: "user_followed"
-})
+});
 User.hasMany(Relationship, {
   foreignKey: "follower_id",
   as: "follower"
-})
+});
 User.hasMany(Relationship, {
   foreignKey: "followed_id",
   as: "followed"
-})
+});
+
+
+/* ----- Associations N to N ----- */
+
+//  Asso USER LIKES POST
+
+
 
 
 
