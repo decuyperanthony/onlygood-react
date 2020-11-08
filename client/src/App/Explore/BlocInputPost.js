@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  useDispatch,
-  // useSelector,
+// useDispatch,
+// useSelector,
 } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
@@ -28,6 +28,7 @@ import ImageAvatars from './Avatar';
 import getAllPosts from '../../utils/getAllPosts';
 
 // == style
+// eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
   headerInputPost: {
     color: '#4F4F4F',
@@ -70,7 +71,7 @@ const BlocPost = () => {
   const { register, handleSubmit, errors } = useForm();
   const userId = JSON.parse(localStorage.getItem('userId'));
   // const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
   const onSubmit = (data) => {
     console.log('data', data);

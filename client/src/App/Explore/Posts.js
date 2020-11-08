@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  useDispatch,
+  // useDispatch,
   useSelector,
 } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -128,9 +128,9 @@ const Posts = () => {
               <Avatar />
               <div>
                 <div className={classes.author}>
-                  {p.user.firstname}
+                  {p.author.firstname}
                   {' '}
-                  {p.user.lastname}
+                  {p.author.lastname}
                 </div>
                 <span className={classes.date}>
                   <Moment fromNow>{p.created_at}</Moment>
