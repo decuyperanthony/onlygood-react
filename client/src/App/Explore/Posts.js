@@ -1,8 +1,14 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+
 import {
   // useDispatch,
   useSelector,
 } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -17,11 +23,15 @@ import RepeatIcon from '@material-ui/icons/Repeat';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';
+import { API_URL } from '../../utils/constante';
 
 import Avatar from './Avatar';
 // === fake picture
 import picture from '../../image/exemple.jpg';
 // === icon
+
+// === method
+import getAllPosts from '../../utils/getAllPosts';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,8 +91,9 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     },
   },
-  containerComments: {
+  containerInputComments: {
     display: 'flex',
+    borderBottom: '1px solid #F2F2F2',
   },
   inputComment: {
     marginTop: '1em',
@@ -106,20 +117,155 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     },
   },
+  containerComments: {
 
+    marginTop: '1em',
+  },
+  containerComment: {
+    display: 'flex',
+    marginBottom: '0.5em',
+  },
+  nameDateComment: {
+    backgroundColor: '#FAFAFA',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  commentAuthor: {
+    fontFamily: 'Popins, sans-serif',
+    fontWeight: '500',
+    fontSize: '14px',
+    color: 'black',
+    paddingRight: '1em',
+  },
+  commentDate: {
+    fontFamily: 'Noto Sans, sans-serif',
+    fontWeight: '500',
+    fontSize: '12px',
+    color: '#BDBDBD',
+  },
+  comment: {
+    fontFamily: 'Noto Sans, sans-serif',
+    fontWeight: '400',
+    fontSize: '16px',
+    color: '#4F4F4F',
+  },
 }));
 
 const Posts = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { register, handleSubmit, errors } = useForm();
   const classes = useStyles();
   const { posts } = useSelector((state) => state.post);
+  const { userData } = useSelector((state) => state.auth);
+  const userId = JSON.parse(localStorage.getItem('userId'));
+  // const [inputValue, setInputValue] = useState('');
+  //! traitement des impressions
+  //! traitement des likes
+  const handleLike = (postId) => {
+    console.log('postId', postId);
+    axios
+      .post(`${API_URL}/userlikespost`, {
+        app_users_id: userId,
+        post_id: postId,
+      })
+      .then((res) => {
+        console.log(res);
+        getAllPosts();
+      })
+      .catch((err) => console.trace(err));
+  };
+  //! traitement des retweet
+  const handleRetweet = (postId) => {
+    console.log('postId', postId);
+    axios
+      .post(`${API_URL}/userretweetedpost`, {
+        app_users_id: userId,
+        post_id: postId,
+      })
+      .then((res) => {
+        console.log(res);
+        getAllPosts();
+      })
+      .catch((err) => console.trace(err));
+  };
+  //! traitement des saved
+  const handleSave = (postId) => {
+    console.log('postId', postId);
+    axios
+      .post(`${API_URL}/usersavedpost`, {
+        app_users_id: userId,
+        post_id: postId,
+      })
+      .then((res) => {
+        console.log(res);
+        getAllPosts();
+      })
+      .catch((err) => console.trace(err));
+  };
+  //! == traitement de l'input commentaire
+  const onSubmit = (data) => {
+    console.log('data', data);
+    // axios
+    //   .post(`${API_URL}/post`, {
+    //     content: data.post,
+    //     app_users_id: userId,
+    //   }, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     // setInputValue('');
+    //     console.log('res', res);
+    //     // getAllPosts();
+    //     // setValue('');
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // dispatch(login({
+    //   history,
+    //   data,
+    // }));
+  };
+  //! === POST MAP
   let postsJSX;
   if (posts) {
     postsJSX = posts.map((p) => {
-      console.log('hello');
+      console.log('hello post');
+
+      // const [inputValue, setInputValue] = useState({
+      //   [p.id]: [p.id],
+      // });
+      //! === PICTURES
       //   let pictureJSX;
       //   if (p.picture) {
       const pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
       //   }
+      //! === COMMENTAIRES
+      const commentsJSX = p.comments.map((c) => {
+        console.log('hello comment');
+        return (
+          <div key={c.id + 100000} className={classes.containerComment}>
+            <Avatar pictureSrc={c.author.picture_road} />
+            <div className={classes.nameDateComment}>
+              <div>
+                <span className={classes.commentAuthor}>
+                  {c.author.firstname}
+                  {' '}
+                  {c.author.lastnme}
+                </span>
+                <span className={classes.commentDate}>
+                  <Moment fromNow>{c.created_at}</Moment>
+                </span>
+              </div>
+              <div className={classes.comment}>
+                {c.content}
+              </div>
+            </div>
+          </div>
+        );
+      });
       return (
         <Grid key={p.id + 120} item xs={9}>
           <Paper className={classes.paper}>
@@ -147,45 +293,79 @@ const Posts = () => {
               <div className={classes.containerImpression}>
                 <div className={classes.impression}>
                   <ChatBubbleOutlineIcon style={{ marginRight: '0.5em' }} />
-                  Comment
+                  Comment (
+                  {p.comments.length}
+                  )
                 </div>
-                <div className={classes.impression}>
+                <div
+                  className={classes.impression}
+                  onClick={() => handleRetweet(p.id)}
+                >
                   <RepeatIcon style={{ marginRight: '0.5em' }} />
-                  Retweet
+                  Retweet (
+                  {p.post_retweeted_by.length}
+                  )
                 </div>
-                <div className={classes.impression}>
+                <div
+                  onClick={() => handleLike(p.id)}
+                  className={classes.impression}
+                >
                   <FavoriteBorderIcon style={{ marginRight: '0.5em' }} />
-                  Like
+                  Like (
+                  {p.post_liked_by.length}
+                  )
                 </div>
-                <div className={classes.impression}>
+                <div
+                  onClick={() => handleSave(p.id)}
+                  className={classes.impression}
+                >
                   <TurnedInNotIcon style={{ marginRight: '0.5em' }} />
-                  Save
+                  Save (
+                  {p.post_saved_by.length}
+                  )
                 </div>
               </div>
             </main>
+            {/* ----- INPUT FOR COMMENTS ----- */}
+            <main className={classes.containerInputComments}>
+              <Avatar pictureSrc={userData.picture_road} />
+              <form onSubmit={handleSubmit(onSubmit)} style={{ width: '92%' }}>
+                <TextField
+                  className={classes.inputComment}
+                  variant="outlined"
+                  placeholder="Tweet your reply"
+                  // error={!!errors.{`comment${p.id}`}}
+                  name={`comment${p.id}`}
+                  type="text"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment
+                        position="end"
+                        className={classes.inputAdornment}
+                      >
+                        <CropOriginalIcon color="action" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  inputRef={
+                    register({
+                      required: 'Comment can not be empty',
+                      // pattern: {
+                      //   value: /^\S+@\S+$/i,
+                      //   message: 'Wrong format',
+                      // },
+                    })
+                  }
+                />
+                {/* <button type="submit">submit</button> */}
+              </form>
+            </main>
             {/* ----- COMMENTS ----- */}
-            <footer className={classes.containerComments}>
-              <Avatar />
-              <TextField
-                className={classes.inputComment}
-                variant="outlined"
-                placeholder="Tweet your reply"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment
-                      position="end"
-                      className={classes.inputAdornment}
-                    // position="end"
-                    // aria-label="toggle password visibility"
-                    // onClick={handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
-                    >
-                      <CropOriginalIcon color="action" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </footer>
+            <main className={classes.containerComments}>
+              {/* <Avatar pictureSrc={p.comments.author.picture_road} />
+              Hello */}
+              {commentsJSX}
+            </main>
           </Paper>
         </Grid>
       );

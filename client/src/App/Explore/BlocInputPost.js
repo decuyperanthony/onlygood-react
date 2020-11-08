@@ -119,7 +119,6 @@ const BlocPost = () => {
                 //   message: 'Wrong format',
                 // },
               })
-
             }
             value={inputValue}
             onChange={handleInputChange}
