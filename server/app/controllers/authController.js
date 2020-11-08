@@ -109,10 +109,10 @@ const authController = {
     }
   },
 
-  // afficher le formulaire d'inscription
-  signupPage: (req, res) => {
-    res.render("signup");
-  },
+  // // afficher le formulaire d'inscription
+  // signupPage: (req, res) => {
+  //   res.render("signup");
+  // },
 
   // traiter le formulaire d'inscription => enregistrer un nouveau User
   signupAction: async (req, res) => {
