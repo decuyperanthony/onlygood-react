@@ -6,7 +6,7 @@ const postController = require('../controllers/postController');
 
 const router = express.Router();
 
-//* ----- ROUTE DES USERS -----
+//* ----- ROUTE DES POST -----
 router.get(`/posts`, postController.getAllPosts);
 router.get(`/post/:id`, postController.getOnePost);
 router.post(`/post`, postController.addPost);
