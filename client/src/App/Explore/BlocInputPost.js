@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {
 // useDispatch,
-// useSelector,
+  useSelector,
 } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
@@ -70,6 +70,8 @@ const BlocPost = () => {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
   const userId = JSON.parse(localStorage.getItem('userId'));
+  // const user = JSON.parse(localStorage.getItem('user'));
+  const { userData } = useSelector((state) => state.auth);
   // const history = useHistory();
   // const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
@@ -105,7 +107,7 @@ const BlocPost = () => {
       <div className={classes.root}>
         <div className={classes.headerInputPost}>Tweet something</div>
         <div className={classes.inputContainer}>
-          <ImageAvatars />
+          <ImageAvatars pictureSrc={userData.picture_road} />
           <TextField
             variant="outlined"
             error={!!errors.post}
