@@ -236,19 +236,16 @@ const Posts = () => {
       //! === COLOR LIKE
       let colorLike = '';
       p.post_liked_by.forEach((l) => {
-        console.log('liké par', l);
         if (l.id === userId) colorLike = '#EB5757';
       });
       //! === COLOR SAVE
       let colorSave = '';
       p.post_saved_by.forEach((s) => {
-        console.log('sauvé par', s);
         if (s.id === userId) colorSave = '#2D9CDB';
       });
       //! === COLOR RETWEET
       let colorRetweet = '';
       p.post_retweeted_by.forEach((r) => {
-        console.log('retweet par', r);
         if (r.id === userId) colorRetweet = '#27AE60';
       });
       // const [inputValue, setInputValue] = useState({
