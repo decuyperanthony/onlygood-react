@@ -11,7 +11,7 @@ const User_saved_post = require('./user_saved_post');
 //  Asso user <-> post
 Post.belongsTo(User, {
   foreignKey: "app_users_id",
-  as: "user"
+  as: "author"
 });
 User.hasMany(Post, {
   foreignKey: "app_users_id",
@@ -35,6 +35,28 @@ User.hasMany(Relationship, {
   foreignKey: "followed_id",
   as: "followed"
 });
+
+//! relation between post and comment
+User_comments_post.belongsTo(Post, {
+  foreignKey: "post_id",
+  as: "posts"
+})
+//un post peut avoir plusieurs commentaires
+Post.hasMany(User_comments_post, {
+  foreignKey: "post_id",
+  as: "comments"
+})
+
+//! relation between comment and author
+User_comments_post.belongsTo(User, {
+  foreignKey: "post_id",
+  as: "author"
+})
+//un post peut avoir plusieurs commentaires
+User.hasMany(User_comments_post, {
+  foreignKey: "post_id",
+  as: "comments"
+})
 
 
 /* ----- Associations N to N ----- */
@@ -94,6 +116,27 @@ Post.belongsToMany(User, {
   timestamps: false,
   as: "post_retweeted_by"
 });
+
+//! USER COMMENT POST
+// un user peut liker plusieurs posts
+User.belongsToMany(Post, {
+  through: "user_comments_post",
+  foreignKey: "app_users_id",
+  otherKey: "post_id",
+  timestamps: false,
+  as: "post_commented"
+});
+
+// un post peut être liké par plusieurs user
+Post.belongsToMany(User, {
+  through: "user_comments_post",
+  foreignKey: "post_id",
+  otherKey: "app_users_id",
+  timestamps: false,
+  as: "post_commented_by"
+});
+
+
 
 
 
