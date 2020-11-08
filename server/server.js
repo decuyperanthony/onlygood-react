@@ -13,6 +13,7 @@ const sanitiser = require("./app/middleware/sanitise");
 const userRouter = require('./app/router/userRouter');
 const postRouter = require('./app/router/postRouter');
 const relationshipRouter = require('./app/router/relationshipRouter');
+const impressionRouter = require('./app/router/impressionRouter');
 const authRouter = require('./app/router/authRouter');
 
 const router = require("./app/router/router");
@@ -112,6 +113,7 @@ app.use(authRouter);
 app.use(userRouter);
 app.use(postRouter);
 app.use(relationshipRouter);
+app.use(impressionRouter);
 app.use(router);
 
 app.listen(PORT, () => {
