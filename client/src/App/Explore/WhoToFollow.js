@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable array-callback-return */
 import React from 'react';
+import axios from 'axios';
 
 import {
 // useDispatch,
@@ -20,9 +23,12 @@ import {
 
 // == icon
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-
+// import RemoveIcon from '@material-ui/icons/Remove';
+import { API_URL } from '../../utils/constante';
 // == component
 import ImageAvatars from './Avatar';
+
+import getAllUsers from '../../utils/getAllUsers';
 
 // == style
 // eslint-disable-next-line no-unused-vars
@@ -77,12 +83,44 @@ const useStyles = makeStyles((theme) => ({
 const WhoToFollow = () => {
   const classes = useStyles();
   const { users } = useSelector((state) => state.user);
+  const userId = JSON.parse(localStorage.getItem('userId'));
   console.log('users', users);
+  const handleFollow = (followedId) => {
+    console.log('followedId', followedId);
+    axios
+      .post(`${API_URL}/relationship`, {
+        follower_id: userId,
+        followed_id: followedId,
+      })
+      .then((res) => {
+        console.log(res);
+        getAllUsers();
+        // getAllPosts();
+      })
+      .catch((err) => console.trace(err));
+  };
   let usersJSX;
   if (users) {
     // eslint-disable-next-line consistent-return
     usersJSX = users.map((u, index) => {
-      console.log('index', index);
+      console.log('personne', u);
+      let buttonFollowers = (
+        <>
+          <PersonAddIcon style={{ marginRight: '0.2em' }} />
+          follow
+        </>
+      );
+      u.followed.forEach((fwd) => {
+        console.log('fwd', fwd);
+        if (fwd.follower_id === userId) {
+          buttonFollowers = (
+            <>
+              {/* <RemoveIcon style={{ marginRight: '0.2em' }} /> */}
+              following
+            </>
+          );
+        }
+      });
       while (index < 4) {
         return (
           <div key={u.id + 70} className={classes.containerUserInformation}>
@@ -101,9 +139,13 @@ const WhoToFollow = () => {
                 </div>
               </div>
             </div>
-            <div className={classes.button}>
-              <PersonAddIcon style={{ marginRight: '0.2em' }} />
-              Follow
+            <div
+              onClick={() => handleFollow(u.id)}
+              className={classes.button}
+            >
+              {buttonFollowers}
+              {/* <PersonAddIcon style={{ marginRight: '0.2em' }} /> */}
+
             </div>
           </div>
         );
