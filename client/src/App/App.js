@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   // useDispatch,
@@ -32,6 +33,7 @@ import Home from './Home';
 import Explore from './Explore';
 import Bookmarks from './Bookmarks';
 import Profile from './Profile';
+import ProfileOthers from './ProfileOthers';
 
 import Loader from './LoaderBackDrop';
 
@@ -42,16 +44,17 @@ const Dashboard = () => {
   // const dispatch = useDispatch();
   // const classes = useStyles();
   const { path } = useRouteMatch();
+  console.log('path', path);
+  const { users } = useSelector((state) => state.user);
   const user = JSON.parse(localStorage.getItem('user'));
   const userToken = JSON.parse(localStorage.getItem('userToken'));
+  console.log('users in dashboard', users);
+  //  // == auto connect
+  //  if (userToken) {
+  //   const myId = user.id;
+  //   getUserData(myId);
 
-  // == auto connect
-  if (userToken) {
-    const myId = user.id;
-    getUserData(myId);
-    getAllPosts();
-    getAllUsers();
-  }
+  // }
 
   // == stepper
 
@@ -68,7 +71,7 @@ const Dashboard = () => {
               return <Redirect to="/login" />;
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
-            return <Home {...props} />;
+            return <Profile data={user} />;
           }}
         />
         <Route
@@ -101,30 +104,30 @@ const Dashboard = () => {
               return <Redirect to="/login" />;
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
-            return <Profile {...props} />;
+            return <Profile data={user} />;
           }}
         />
         {/* {ArticleRouterJSX} */}
 
-        {/* {articles.map((article) => (
+        {users.map((user) => (
           <Route
-            key={article.id}
+            key={user.id + 12323}
             exact
-            path={`${path}/${article.id}`}
+            path={`${path}/${user.id}`}
             render={(props) => {
               if (!userToken) {
                 return <Redirect to="/login" />;
               }
-              if (!userDetails || !userSocialNetwork || !userPhone) {
-                return <Redirect to={`${path}/registerstepper/`} />;
+              // if (!userDetails || !userSocialNetwork || !userPhone) {
+              //   return <Redirect to={`${path}/registerstepper/`} />;
+              // }
+              if (user) {
+                return <ProfileOthers data={user} />;
               }
-              if (article) {
-                return <Article article={article} />;
-              }
-              return <Article {...props} />;
+              return <ProfileOthers data={user} />;
             }}
           />
-        ))} */}
+        ))}
         {/* <Route><QuatreDashboard /></Route> */}
       </Switch>
     </>
@@ -140,10 +143,13 @@ const App = () => {
   if (userToken) {
     const myId = user.id;
     getUserData(myId);
+    getAllPosts();
+    getAllUsers();
     // getUserDataDetailsInterests(myId);
     // getOrdersByUserId(myId);
     // getUserInstagramData(myId);
   }
+
   //! manque la redirection apres le logout
   //! vers la page login
 
