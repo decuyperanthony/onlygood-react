@@ -129,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#FAFAFA',
     width: '100%',
     display: 'flex',
+    padding: '0 0.5em',
     flexDirection: 'column',
     justifyContent: 'center',
   },
@@ -267,7 +268,7 @@ const Posts = () => {
                 <span className={classes.commentAuthor}>
                   {c.author.firstname}
                   {' '}
-                  {c.author.lastnme}
+                  {c.author.lastname}
                 </span>
                 <span className={classes.commentDate}>
                   <Moment fromNow>{c.created_at}</Moment>
@@ -346,13 +347,13 @@ const Posts = () => {
             {/* ----- INPUT FOR COMMENTS ----- */}
             <main className={classes.containerInputComments}>
               <Avatar pictureSrc={userData.picture_road} />
-              <form onSubmit={handleSubmit(onSubmit)} style={{ width: '92%' }}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                   className={classes.inputComment}
                   variant="outlined"
                   placeholder="Tweet your reply"
                   // error={!!errors.{`comment${p.id}`}}
-                  name={`comment${p.id}`}
+                  name={`comment-${p.id}`}
                   type="text"
                   InputProps={{
                     endAdornment: (
