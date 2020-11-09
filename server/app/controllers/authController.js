@@ -129,7 +129,23 @@ const authController = {
       const user = await User.findOne({
         where: {
             email
-        }
+        },
+        include: [
+          "posts",
+          {
+              association: "follower",
+              include: ["user_followed"]
+          },
+          {
+              association: "followed",
+              include: ["user_follower"]
+          },
+          "post_saved",
+          "post_liked",
+          "post_commented",
+          "post_retweeted"
+          // "author"
+        ],
       });
        // on se prépare une liste d'erreur
        let errorsList = [];
