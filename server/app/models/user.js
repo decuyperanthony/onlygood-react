@@ -48,6 +48,11 @@ User.init({
         type: Sequelize.TEXT,
         allowNull: true,
         defaultValue: "avatar.png"
+    },
+    picture_header: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        defaultValue: "avatar_header.png"
     }
 }, {
     sequelize: dbConnection,
