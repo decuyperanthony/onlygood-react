@@ -109,11 +109,11 @@ const Dashboard = () => {
         />
         {/* {ArticleRouterJSX} */}
 
-        {users.map((user) => (
+        {users.map((userD) => (
           <Route
-            key={user.id + 12323}
+            key={userD.id + 12323}
             exact
-            path={`${path}/${user.id}`}
+            path={`${path}/${userD.id}`}
             render={(props) => {
               if (!userToken) {
                 return <Redirect to="/login" />;
@@ -121,10 +121,10 @@ const Dashboard = () => {
               // if (!userDetails || !userSocialNetwork || !userPhone) {
               //   return <Redirect to={`${path}/registerstepper/`} />;
               // }
-              if (user) {
-                return <ProfileOthers data={user} />;
+              if (userD) {
+                return <ProfileOthers data={userD} />;
               }
-              return <ProfileOthers data={user} />;
+              return <ProfileOthers data={userD} />;
             }}
           />
         ))}
