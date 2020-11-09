@@ -1,10 +1,18 @@
 import React from 'react';
 
-const Profile = () => {
-  console.log('Profile');
+const Profile = ({ data }) => {
+  console.log('data in profile', data);
+
   return (
     <>
-      <div>Profile</div>
+      <div>
+        {data.firstname}
+        {' '}
+        {data.lastname}
+      </div>
+      <div>
+        {data.email}
+      </div>
     </>
   );
 };
