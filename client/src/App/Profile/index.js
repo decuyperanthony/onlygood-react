@@ -167,9 +167,9 @@ const Profile = () => {
             </Paper>
           </Grid>
           <Grid item xs={9}>
-            <Paper className={classes.paper}>
-              <PostProfile />
-            </Paper>
+            {/* <Paper className={classes.paper}> */}
+            <PostProfile />
+            {/* </Paper> */}
           </Grid>
         </Grid>
 
