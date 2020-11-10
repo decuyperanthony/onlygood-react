@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import {
-  // useDispatch,
+  useDispatch,
   useSelector,
 } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css';
@@ -13,6 +13,7 @@ import {
   Redirect,
   useRouteMatch,
 } from 'react-router-dom';
+import { setWhichTweet } from '../store/action/post';
 
 // === method
 import getUserData from '../utils/getUserData';
@@ -45,11 +46,11 @@ const Dashboard = () => {
   // const dispatch = useDispatch();
   // const classes = useStyles();
   const { path } = useRouteMatch();
-  console.log('path', path);
+  // console.log('path', path);
   const { users } = useSelector((state) => state.user);
   const user = JSON.parse(localStorage.getItem('user'));
   const userToken = JSON.parse(localStorage.getItem('userToken'));
-  console.log('users in dashboard', users);
+  // console.log('users in dashboard', users);
   //  // == auto connect
   if (userToken) {
     const myId = user.id;
@@ -136,6 +137,7 @@ const Dashboard = () => {
 };
 
 const App = () => {
+  const dispatch = useDispatch();
   // const [darkmode, setDarkmode] = useState(false);
   const { darkmodeBoolean } = useSelector((state) => state.theme);
   const user = JSON.parse(localStorage.getItem('user'));
@@ -147,6 +149,7 @@ const App = () => {
     getUserById(myId);
     getAllPosts();
     getAllUsers();
+    dispatch(setWhichTweet('tweetpostuser'));
     // getUserDataDetailsInterests(myId);
     // getOrdersByUserId(myId);
     // getUserInstagramData(myId);
