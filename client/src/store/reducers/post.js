@@ -1,11 +1,23 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-case-declarations */
+import axios from 'axios';
 import {
   SET_ALL_POSTS,
   SET_WHICH_TWEET,
+  setTweet,
+  SET_TWEET,
 } from '../action/post';
+import { API_URL } from '../../utils/constante';
+import store from '../index';
 
 export const initialState = {
   posts: [],
-  filteredProfilePosts: 'Tweet',
+  filteredProfilePosts: [
+    {
+      id: 1,
+      content: 'hello',
+    },
+  ],
 };
 
 const post = (state = initialState, action = {}) => {
@@ -18,8 +30,18 @@ const post = (state = initialState, action = {}) => {
       };
 
     case SET_WHICH_TWEET:
-      console.log('SET_WHICH_TWEET');
-      console.log('action.payload', action.payload);
+      const userId = JSON.parse(localStorage.getItem('userId'));
+      axios.get(`${API_URL}/${action.payload}/${userId}`)
+        .then((res) => {
+          store.dispatch(setTweet(res.data));
+        })
+        .catch((err) => console.trace(err));
+      return {
+        ...state,
+      };
+
+    case SET_TWEET:
+      // const userId = JSON.parse(localStorage.getItem('userId'));
       return {
         ...state,
         filteredProfilePosts: action.payload,
