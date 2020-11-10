@@ -13,12 +13,9 @@ import clsx from 'clsx';
 // === action
 import { setWhichTweet } from '../../store/action/post';
 
+// eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
   containerMenuItem: {
-    // padding: '14px',
-    // '&:hover': {
-    //   cursor: 'pointer',
-    // },
   },
   menuItem: {
     padding: '0.8em',
@@ -38,22 +35,23 @@ const menuItem = [
   {
     id: 1,
     name: 'Tweets',
-    composant: 'tweet',
+    request: 'tweetpostuser',
   },
   {
     id: 2,
     name: 'Tweets & replies',
-    composant: 'Tweets & replies',
+    request: 'commentedpostuser',
   },
-  {
-    id: 3,
-    name: 'Medias',
-    composant: 'Medias',
-  },
+  // {
+  //   id: 3,
+  //   name: 'Medias',
+  //   composant: 'medias',
+  // },
   {
     id: 4,
     name: 'Likes',
-    composant: 'Likes',
+    composant: 'likes',
+    request: 'likedpostuser',
   },
 ];
 
@@ -62,10 +60,10 @@ const VerticalTabs = () => {
   const [activeClassId, setActiveClassId] = useState(1);
   //   const [border, setBorder] = useState('');
   const classes = useStyles();
-  const handleActiveClass = (menuId, composant) => {
+  const handleActiveClass = (menuId, request) => {
     setActiveClassId(menuId);
-    dispatch(setWhichTweet(composant));
-    console.log('composant', composant);
+    dispatch(setWhichTweet(request));
+    // console.log('composant', composant);
   };
   const verticalJSX = menuItem.map((m) => {
     let classNameMenuItem = '';
@@ -76,15 +74,13 @@ const VerticalTabs = () => {
       <div
         id="menu-item"
         key={m.id + 2343}
-        onClick={() => handleActiveClass(m.id, m.composant)}
-        // className={}
+        onClick={() => handleActiveClass(m.id, m.request)}
         className={clsx(classNameMenuItem, classes.menuItem)}
       >
         {m.name}
       </div>
     );
   });
-  console.log('hello');
   return (
     <div className={classes.containerMenuItem}>
       {verticalJSX}
