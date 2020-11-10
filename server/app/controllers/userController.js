@@ -41,7 +41,20 @@ const userController = {
     try {
         const user = await User.findByPk(userId, {
           include: [
-            "posts",
+            // "posts",
+            {
+                association: "posts",
+                include: [
+                    "author",
+                    "post_liked_by",
+                    "post_saved_by",
+                    "post_retweeted_by",
+                {
+                    association: "comments",
+                    include: ["author"]
+                },
+                ],
+            },
             {
                 association: "follower",
                 include: ["user_followed"]
@@ -50,7 +63,21 @@ const userController = {
                 association: "followed",
                 include: ["user_follower"]
             },
+            // {
+            //     association: "post_saved",
+            //     include: ["author",
+            //     "post_liked_by",
+            //     "post_saved_by",
+            //     "post_retweeted_by"]
+            // },
             "post_saved",
+            // {
+            //     association: "post_liked",
+            //     include: ["author",
+            //     "post_liked_by",
+            //     "post_saved_by",
+            //     "post_retweeted_by"]
+            // },
             "post_liked",
             "post_commented",
             "post_retweeted"
