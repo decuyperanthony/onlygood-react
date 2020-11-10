@@ -17,5 +17,9 @@ router.patch(`/post/:id`, postController.updatePost);
 router.delete(`/post/:id`, postController.removePost);
 // router.delete(`/${process.env.API_URL}/user/:id`, userController.deleteUser);
 
+router.get('/tweetpostuser/:id', postController.getUserPost);
+router.get('/savedpostuser/:id', postController.getUserSavedPost);
+router.get('/likedpostuser/:id', postController.getUserLikedPost);
+router.get('/commentedpostuser/:id', postController.getUserCommentedPost);
 
 module.exports = router;
