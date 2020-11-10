@@ -1,4 +1,4 @@
-const { Post } = require('../models/');
+const { Post, User } = require('../models/');
 
 const postController = {
     getAllPosts: async (req, res) => {
@@ -25,6 +25,165 @@ const postController = {
                  // order: [name, 'ASC'],
              });
              res.send(posts);
+        } catch (error) {
+            console.trace(error);
+            res.status(500).send(error);
+        }
+    },
+    getUserSavedPost: async (req, res) => {
+        let userId = req.params.id;
+
+        try {
+            let postSavedData= [];
+            const user = await User.findByPk(userId, {
+                include:[
+                    "post_saved",
+                ]
+            });
+            // console.log('user.dataValues', user.dataValues.post_saved);
+            const postSaved = await user.dataValues.post_saved;
+            for (p of postSaved) {
+                console.log('p.dataValues.id', p.dataValues.id);
+                await Post.findByPk(p.dataValues.id, {
+                        include: [
+                            "author",
+                            "post_liked_by",
+                            "post_saved_by",
+                            "post_retweeted_by",
+                            // "comments",
+                            {
+                                association: "comments",
+                                include: ["author"]
+                            },
+                        ],
+                        })
+                            .then((res) => {
+                                postSavedData.push(res.dataValues)
+                                console.log('res', res)
+                            })
+                            .catch((err) => console.trace(err))
+            }
+
+            await res.send(postSavedData);
+        } catch (error) {
+            console.trace(error);
+            res.status(500).send(error);
+        }
+    },
+    getUserPost: async (req, res) => {
+        let userId = req.params.id;
+        try {
+            let postData= [];
+            const user = await User.findByPk(userId, {
+                include:[
+                    "posts",
+                ]
+            });
+            console.log('user.dataValues.posts', user.dataValues.posts)
+            const postUser = await user.dataValues.posts;
+            for (p of postUser) {
+                await Post.findByPk(p.dataValues.id, {
+                    include: [
+                        "author",
+                        "post_liked_by",
+                        "post_saved_by",
+                        "post_retweeted_by",
+                        // "comments",
+                        {
+                            association: "comments",
+                            include: ["author"]
+                        },
+                    ],
+                    })
+                        .then((res) => {
+                            postData.push(res.dataValues)
+                            console.log('res', res)
+                        })
+                        .catch((err) => console.trace(err))
+            }
+            res.send(postData)
+        } catch (error) {
+            console.trace(error);
+            res.status(500).send(error);
+        }
+    },
+
+    getUserLikedPost: async (req, res) => {
+        let userId = req.params.id;
+        try {
+            let postLikedData= [];
+            const user = await User.findByPk(userId, {
+                include:[
+                    "post_liked",
+                ]
+            });
+            // console.log('user.dataValues', user.dataValues.post_saved);
+            const postLiked = await user.dataValues.post_liked;
+            for (p of postLiked) {
+                console.log('p.dataValues.id', p.dataValues.id);
+                await Post.findByPk(p.dataValues.id, {
+                        include: [
+                            "author",
+                            "post_liked_by",
+                            "post_saved_by",
+                            "post_retweeted_by",
+                            // "comments",
+                            {
+                                association: "comments",
+                                include: ["author"]
+                            },
+                        ],
+                        })
+                            .then((res) => {
+                                postLikedData.push(res.dataValues)
+                                console.log('res', res)
+                            })
+                            .catch((err) => console.trace(err))
+            }
+
+            await res.send(postLikedData);
+            // await res.send(postSavedData);
+        } catch (error) {
+            console.trace(error);
+            res.status(500).send(error);
+        }
+    },
+    //! à refaire
+    getUserCommentedPost: async (req, res) => {
+        let userId = req.params.id;
+        try {
+            let postCommentedData = [];
+            const user = await User.findByPk(userId, {
+                include:[
+                    "post_commented",
+                ]
+            });
+            console.log('user.dataValues', user.dataValues.post_commented);
+            const postLiked = await user.dataValues.post_commented;
+            for (p of postLiked) {
+                console.log('p.dataValues.id', p.dataValues.id);
+                await Post.findByPk(p.dataValues.id, {
+                        include: [
+                            "author",
+                            "post_liked_by",
+                            "post_saved_by",
+                            "post_retweeted_by",
+                            // "comments",
+                            {
+                                association: "comments",
+                                include: ["author"]
+                            },
+                        ],
+                        })
+                            .then((res) => {
+                                postCommentedData.push(res.dataValues)
+                                console.log('res', res)
+                            })
+                            .catch((err) => console.trace(err))
+            }
+
+            await res.send(postCommentedData);
+            // await res.send(postSavedData);
         } catch (error) {
             console.trace(error);
             res.status(500).send(error);
