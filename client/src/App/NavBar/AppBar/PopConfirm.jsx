@@ -33,7 +33,7 @@ export default function PopConfirm() {
 
   const handleLogout = () => {
     dispatch(disconnect());
-    history.push('/login');
+    history.push('/');
 
     // dispatch({ type: RESET });
     // dispatch({ type: DISCONNECT });
