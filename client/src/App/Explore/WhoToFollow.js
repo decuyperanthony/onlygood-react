@@ -84,9 +84,9 @@ const WhoToFollow = () => {
   const classes = useStyles();
   const { users } = useSelector((state) => state.user);
   const userId = JSON.parse(localStorage.getItem('userId'));
-  console.log('users', users);
+  // console.log('users', users);
   const handleFollow = (followedId) => {
-    console.log('followedId', followedId);
+    // console.log('followedId', followedId);
     axios
       .post(`${API_URL}/relationship`, {
         follower_id: userId,
@@ -103,7 +103,7 @@ const WhoToFollow = () => {
   if (users) {
     // eslint-disable-next-line consistent-return
     usersJSX = users.map((u, index) => {
-      console.log('personne', u);
+      // console.log('personne', u);
       let buttonFollowers = (
         <>
           <PersonAddIcon style={{ marginRight: '0.2em' }} />
@@ -111,7 +111,7 @@ const WhoToFollow = () => {
         </>
       );
       u.followed.forEach((fwd) => {
-        console.log('fwd', fwd);
+        // console.log('fwd', fwd);
         if (fwd.follower_id === userId) {
           buttonFollowers = (
             <>
