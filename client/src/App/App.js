@@ -18,6 +18,7 @@ import {
 import getUserData from '../utils/getUserData';
 import getAllPosts from '../utils/getAllPosts';
 import getAllUsers from '../utils/getAllUsers';
+import getUserById from '../utils/getUserById';
 
 // == styles
 // import './reset.css';
@@ -50,11 +51,11 @@ const Dashboard = () => {
   const userToken = JSON.parse(localStorage.getItem('userToken'));
   console.log('users in dashboard', users);
   //  // == auto connect
-  //  if (userToken) {
-  //   const myId = user.id;
-  //   getUserData(myId);
-
-  // }
+  if (userToken) {
+    const myId = user.id;
+    getUserData(myId);
+    // getUserById(myId);
+  }
 
   // == stepper
 
@@ -143,6 +144,7 @@ const App = () => {
   if (userToken) {
     const myId = user.id;
     getUserData(myId);
+    getUserById(myId);
     getAllPosts();
     getAllUsers();
     // getUserDataDetailsInterests(myId);
