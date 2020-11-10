@@ -21,3 +21,10 @@ export const setWhichTweet = (payload) => ({
   type: SET_WHICH_TWEET,
   payload,
 });
+
+export const SET_TWEET = 'SET_TWEET';
+
+export const setTweet = (payload) => ({
+  type: SET_TWEET,
+  payload,
+});
