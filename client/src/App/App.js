@@ -70,7 +70,7 @@ const Dashboard = () => {
           path={`${path}/`}
           render={(props) => {
             if (!userToken) {
-              return <Redirect to="/login" />;
+              return <Redirect to="/" />;
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
             return <Profile data={user} />;
@@ -81,7 +81,7 @@ const Dashboard = () => {
           path={`${path}/explore`}
           render={(props) => {
             if (!userToken) {
-              return <Redirect to="/login" />;
+              return <Redirect to="/" />;
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
             return <Explore {...props} />;
@@ -92,7 +92,7 @@ const Dashboard = () => {
           path={`${path}/bookmarks`}
           render={(props) => {
             if (!userToken) {
-              return <Redirect to="/login" />;
+              return <Redirect to="/" />;
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
             return <Bookmarks {...props} />;
@@ -103,7 +103,7 @@ const Dashboard = () => {
           path={`${path}/profile`}
           render={(props) => {
             if (!userToken) {
-              return <Redirect to="/login" />;
+              return <Redirect to="/" />;
             }
             // eslint-disable-next-line react/jsx-props-no-spreading
             return <Profile data={user} />;
@@ -118,7 +118,7 @@ const Dashboard = () => {
             path={`${path}/${userD.id}`}
             render={(props) => {
               if (!userToken) {
-                return <Redirect to="/login" />;
+                return <Redirect to="/" />;
               }
               // if (!userDetails || !userSocialNetwork || !userPhone) {
               //   return <Redirect to={`${path}/registerstepper/`} />;
@@ -176,7 +176,7 @@ const App = () => {
         <div className="App">
           <Loader />
           <Switch>
-            <Route exact path="/login">
+            <Route exact path="/">
               <Login />
             </Route>
             <Route exact path="/signup">
