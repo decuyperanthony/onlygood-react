@@ -17,6 +17,7 @@ router.patch(`/post/:id`, postController.updatePost);
 router.delete(`/post/:id`, postController.removePost);
 // router.delete(`/${process.env.API_URL}/user/:id`, userController.deleteUser);
 
+//* ROUTE POUR AVOIR LES TWEET DUN USERID EN FONCTION DE SES LIKES, SAVED RETWEET ETC...
 router.get('/tweetpostuser/:id', postController.getUserPost);
 router.get('/savedpostuser/:id', postController.getUserSavedPost);
 router.get('/likedpostuser/:id', postController.getUserLikedPost);
