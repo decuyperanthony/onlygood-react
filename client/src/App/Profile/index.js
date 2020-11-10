@@ -5,7 +5,7 @@ import {
   useSelector,
 } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -15,6 +15,9 @@ import {
 } from '@material-ui/core';
 import getUserById from '../../utils/getUserById';
 import { API_URL } from '../../utils/constante';
+// === composant
+import VerticalTabs from './VerticalTabs';
+import PostProfile from './Post';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+
     // textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -40,13 +44,61 @@ const useStyles = makeStyles((theme) => ({
 
   // },
   avatar: {
-    height: '5em',
-    width: '5em',
+    height: '8em',
+    width: '8em',
     border: '2px solid white',
-    marginBottom: '-2em',
+    marginBottom: '-5em',
     marginLeft: '2em',
   },
-
+  userInformation: {
+    display: 'flex',
+    // marginLeft: '8em',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  typoName: {
+    color: '#333333',
+    fontFamily: 'popins, sans-serif',
+    fontWeight: '600',
+    fontSize: '24px',
+    marginRight: '1em',
+  },
+  typoFollow: {
+    fontFamily: 'popins, sans-serif',
+    fontWeight: '500',
+    fontSize: '12px',
+    marginRight: '1em',
+  },
+  typoNumberOfFollow: {
+    fontFamily: 'popins, sans-serif',
+    fontWeight: '600',
+    fontSize: '12px',
+    marginRight: '1em',
+  },
+  button: {
+    color: 'white',
+    borderRadius: '4px',
+    fontFamily: 'Noto Sans, sans-serif',
+    backgroundColor: '#2F80ED',
+    padding: '0.5em 1.5em',
+    margin: '1em 0',
+    border: 'none',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  userDescription: {
+    // display: 'flex',
+    color: '#828282',
+    // marginLeft: '8em',
+    fontFamily: 'Noto Sans, sans-serif',
+    fontWeight: '500',
+    fontSize: '18px',
+    // marginRight: '1em',
+  },
+  paperVerticalTabs: {
+    padding: 0,
+  },
 }));
 
 const Profile = () => {
@@ -56,12 +108,11 @@ const Profile = () => {
     getUserById(userId);
   }, [userId]);
   const { user } = useSelector((state) => state.user);
-  console.log('user', user);
-  console.log('user', user.follower);
-  console.log('user', user.followed);
 
   let profileJSX;
-  if (user) {
+  if (user.id === userId) {
+    const numberOfFollowers = user.follower.length;
+    const numberOfFollows = user.followed.length;
     profileJSX = (
       <div className={classes.root}>
         {/* PICTURE HEADER */}
@@ -81,29 +132,43 @@ const Profile = () => {
           />
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <span>
-                {user.firstname}
-                {' '}
-                {user.lastname}
-              </span>
-              <span>
-                {/* <span>{user.followed.length}</span> */}
-                Following
-              </span>
-              <span>
-                {/* <span>{user.follower.length}</span> */}
-                Followers
-              </span>
+              <div style={{ marginLeft: '12em' }}>
+                <div className={classes.userInformation}>
+                  <div>
+                    <span className={classes.typoName}>
+                      {user.firstname}
+                      {' '}
+                      {user.lastname}
+                    </span>
+                    <span className={classes.typoFollow}>
+                      {/* <span>{user.followed.length}</span> */}
+                      {numberOfFollowers}
+                      {' '}
+                      <span className={classes.typoNumberOfFollow}>
+                        Following
+                      </span>
+                    </span>
+                    <span className={classes.typoFollow}>
+                      {/* <span>{user.follower.length}</span> */}
+                      {numberOfFollows}
+                      {' '}
+                      <span className={classes.typoNumberOfFollow}> Followers</span>
+                    </span>
+                  </div>
+                  <div className={classes.button}>Edit your profile</div>
+                </div>
+                <div className={classes.userDescription}>{user.description}</div>
+              </div>
             </Paper>
           </Grid>
           <Grid item xs={3}>
-            <Paper className={classes.paper}>
-              hello
+            <Paper className={classes.paperVerticalTabs}>
+              <VerticalTabs />
             </Paper>
           </Grid>
           <Grid item xs={9}>
             <Paper className={classes.paper}>
-              Aurevoir
+              <PostProfile />
             </Paper>
           </Grid>
         </Grid>
@@ -120,6 +185,7 @@ const Profile = () => {
 };
 
 export default Profile;
+// { lessonsFiltered.length > 0 ? (<>{lessonsJSX}</>) : <Loading />; }
 
 // Profile.propTypes = {
 //   data: PropTypes.shape(
