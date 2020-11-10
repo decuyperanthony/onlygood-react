@@ -165,7 +165,7 @@ const Posts = () => {
   //! traitement des impressions
   //! traitement des likes
   const handleLike = (postId) => {
-    console.log('postId', postId);
+    // console.log('postId', postId);
     axios
       .post(`${API_URL}/userlikespost`, {
         app_users_id: userId,
@@ -179,7 +179,7 @@ const Posts = () => {
   };
   //! traitement des retweet
   const handleRetweet = (postId) => {
-    console.log('postId', postId);
+    // console.log('postId', postId);
     axios
       .post(`${API_URL}/userretweetedpost`, {
         app_users_id: userId,
@@ -193,7 +193,7 @@ const Posts = () => {
   };
   //! traitement des saved
   const handleSave = (postId) => {
-    console.log('postId', postId);
+    // console.log('postId', postId);
     axios
       .post(`${API_URL}/usersavedpost`, {
         app_users_id: userId,
@@ -233,7 +233,7 @@ const Posts = () => {
   let postsJSX;
   if (posts) {
     postsJSX = posts.map((p) => {
-      console.log('hello post');
+      // console.log('hello post');
       //! === COLOR LIKE
       let colorLike = '';
       p.post_liked_by.forEach((l) => {
@@ -258,29 +258,26 @@ const Posts = () => {
       const pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
       //   }
       //! === COMMENTAIRES
-      const commentsJSX = p.comments.map((c) => {
-        console.log('hello comment');
-        return (
-          <div key={c.id + 100000} className={classes.containerComment}>
-            <Avatar pictureSrc={c.author.picture_road} />
-            <div className={classes.nameDateComment}>
-              <div>
-                <span className={classes.commentAuthor}>
-                  {c.author.firstname}
-                  {' '}
-                  {c.author.lastname}
-                </span>
-                <span className={classes.commentDate}>
-                  <Moment fromNow>{c.created_at}</Moment>
-                </span>
-              </div>
-              <div className={classes.comment}>
-                {c.content}
-              </div>
+      const commentsJSX = p.comments.map((c) => (
+        <div key={c.id + 100000} className={classes.containerComment}>
+          <Avatar pictureSrc={c.author.picture_road} />
+          <div className={classes.nameDateComment}>
+            <div>
+              <span className={classes.commentAuthor}>
+                {c.author.firstname}
+                {' '}
+                {c.author.lastname}
+              </span>
+              <span className={classes.commentDate}>
+                <Moment fromNow>{c.created_at}</Moment>
+              </span>
+            </div>
+            <div className={classes.comment}>
+              {c.content}
             </div>
           </div>
-        );
-      });
+        </div>
+      ));
       return (
         <Grid key={p.id + 120} item xs={9}>
           <Paper className={classes.paper}>
