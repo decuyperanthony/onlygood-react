@@ -12,7 +12,7 @@ const getAllUsers = (url = `${API_URL}/users`) => {
     url,
   );
   promise.then((res) => {
-    console.log('res.data', res.data);
+    // console.log('res.data', res.data);
     const users = res.data;
     store.dispatch({ type: SET_ALL_USERS, payload: users });
   });
