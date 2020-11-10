@@ -18,6 +18,6 @@ router.post(`/userretweetedpost`, impressionController.addOrRemoveRetweetToPost)
 //* ----- ROUTE DES RELATION USER comment POST -----
 router.get(`/comments`, impressionController.getAllComments)
 router.get(`/commentbypostid`, impressionController.getCommentByPostId);
-router.post('/usercommentspost', impressionController.addOrRemoveCommentToPost)
+router.post('/usercommentspost', impressionController.addCommentToPost)
 
 module.exports = router;
