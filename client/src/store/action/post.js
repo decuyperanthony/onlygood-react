@@ -13,3 +13,11 @@ export const addPost = (payload) => ({
   type: ADD_POST,
   payload,
 });
+
+// ===  ADD_POST
+export const SET_WHICH_TWEET = 'SET_WHICH_TWEET';
+
+export const setWhichTweet = (payload) => ({
+  type: SET_WHICH_TWEET,
+  payload,
+});
