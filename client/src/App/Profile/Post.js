@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
@@ -152,6 +152,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PostProfile = () => {
   const { register, handleSubmit, errors } = useForm();
+  console.log('errors', errors);
   const classes = useStyles();
   const dispatch = useDispatch();
   // === redux
