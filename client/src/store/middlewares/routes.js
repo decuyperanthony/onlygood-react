@@ -5,7 +5,7 @@ export default (store) => (next) => (action) => {
   switch (action.type) {
     case ENTER_LOGIN_PAGE: {
       console.log('ENTER_LOGIN_PAGE');
-      action.history.push('/login');
+      action.history.push('/');
       return;
     }
     case ENTER_HOME_PAGE: {
