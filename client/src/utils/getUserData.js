@@ -6,7 +6,7 @@ import { API_URL } from './constante';
 import { setUser } from '../store/action/auth';
 
 const getUserData = (userId) => {
-  console.log('on set le user data');
+  // console.log('on set le user data');
   axios
     .get(`${API_URL}/user/${userId}`)
     .then((res) => {
