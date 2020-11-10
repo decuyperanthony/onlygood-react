@@ -132,11 +132,11 @@ const impressionController = {
         }
     },
 
-    addOrRemoveCommentToPost: async (req, res) => {
+    addCommentToPost: async (req, res) => {
         // console.log('add like');
         try {
-            // console.log('req.body', req.body);
-            // const app_users_id = req.body.app_users_id;
+            console.log('req.body', req.body);
+            const app_users_id = req.body.app_users_id;
             //! on check si la relation existe
             const comment = await User_comments_post.findOne({
                 where: {
@@ -152,7 +152,7 @@ const impressionController = {
                 res.status(200).send('commentaire sur le post supprimée');
             } else {
                 // si elle n'existe pas on la crée
-                // console.log('il a jamais liké ce post alors on ajoute la ligne');
+                console.log('il a jamais liké ce post alors on ajoute la ligne');
                 const newComment = new User_comments_post(req.body);
                 const savedComment = await newComment.save();
                 res.status(200).send(savedComment);
