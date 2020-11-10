@@ -154,6 +154,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+let i = 0;
+
 const Posts = () => {
   // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, errors } = useForm();
@@ -206,8 +208,8 @@ const Posts = () => {
       .catch((err) => console.trace(err));
   };
   //! == traitement de l'input commentaire
-  const onSubmit = (data) => {
-    console.log('data', data);
+  // const onSubmit = (data) => {
+  //   console.log('data', data);
     // axios
     //   .post(`${API_URL}/post`, {
     //     content: data.post,
@@ -228,8 +230,97 @@ const Posts = () => {
     //   history,
     //   data,
     // }));
+  // };
+  //! je crée un objet pour mon state
+  //! ac autant de propriété vide
+  //! que de posts
+  // const useStateObject = {};
+  // if (posts) {
+  //   posts.map((p, i) => {
+  //     // console.log('p', p);
+  //     // console.log('i', i);
+  //     useStateObject[`postId-${p.id}`] = '';
+  //     // useStateObject[`value${i}`] = '';
+  //   });
+  // }
+  // console.log('useStateObject', useStateObject)
+  //! je crée mon usestate pour récuperer les valeurs
+  const [inputValue, setInputValue] = React.useState();
+  // const [inputValue, setInputValue] = React.useState(useStateObject);
+  //!
+  const handleChange = (evt) => {
+    const { value } = evt.target;
+    console.log('value', value);
+    setInputValue({
+      ...inputValue,
+      [evt.target.name]: value,
+    });
+  };
+  console.log('inputValue', inputValue);
+
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    //! il faut que je remove la method en back qui delete au second comment sur le meme post
+    console.log('inputValue ----------------', inputValue);
+    // console.log(Object.keys(inputValue));
+    const postId = Object.keys(inputValue);
+    console.log('postId ============', postId)
+    console.log('postId.length', postId.length)
+    console.log('postId[postId.length - 1].substring(7) -------', postId[postId.length - 1].substring(7));
+    // console.log('postId[0].substring(7) -------', postId[0].substring(7));
+    const post_id = postId[postId.length - 1].substring(7);
+    // const post_id = postId[0].substring(7);
+    console.log('post_id -----------', post_id);
+    console.log('content =  inputValue.[postId]', inputValue.[postId]);
+    const content = inputValue.[postId];
+    console.log('content', content)
+    //! on ajoute le commentaire en base
+    axios
+    .post(`${API_URL}/usercommentspost`, {
+      content,
+      app_users_id: userId,
+      post_id
+    }, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      // setInputValue('');
+      console.log('res', res);
+       getAllPosts();
+      //  setInputValue(useStateObject)
+      // useStateObject = {}
+      // posts.map((p, i) => {
+      //   console.log('p', p);
+      //   console.log('i', i);
+      //   useStateObject[`postId-${p.id}`] = '';
+      //   // useStateObject[`value${i}`] = '';
+      // });
+      //  console.log('inputValue ========== AFTER REQYEST', inputValue);
+      //  setInputValue(useStateObject);
+      //  setInputValue({
+      //   ...inputValue,
+      //   [postId]: '',
+      // })
+      // setValue('');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    // setInputValue();
+    //! et on vide l'input
+    // for (let prop in useStateObject) {
+    //   delete useStateObject[prop];
+    // }
+    // posts.map((p, i) => {
+    //   // console.log('p', p);
+    //   // console.log('i', i);
+    //   useStateObject[`postId-${p.id}`] = '';
+    //   // useStateObject[`value${i}`] = '';
+    // });
+    // setInputValue(useStateObject);
   };
   //! === POST MAP
+
   let postsJSX;
   if (posts) {
     postsJSX = posts.map((p) => {
@@ -344,25 +435,26 @@ const Posts = () => {
             {/* ----- INPUT FOR COMMENTS ----- */}
             <main className={classes.containerInputComments}>
               <Avatar pictureSrc={userData.picture_road} />
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
-                  className={classes.inputComment}
-                  variant="outlined"
-                  placeholder="Tweet your reply"
+              {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+              <TextField
+                onChange={handleChange}
+                className={classes.inputComment}
+                variant="outlined"
+                placeholder="Tweet your reply"
                   // error={!!errors.{`comment${p.id}`}}
-                  name={`comment-${p.id}`}
-                  type="text"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment
-                        position="end"
-                        className={classes.inputAdornment}
-                      >
-                        <CropOriginalIcon color="action" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  inputRef={
+                name={`postId-${p.id}`}
+                type="text"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      position="end"
+                      className={classes.inputAdornment}
+                    >
+                      <CropOriginalIcon color="action" />
+                    </InputAdornment>
+                  ),
+                }}
+                inputRef={
                     register({
                       required: 'Comment can not be empty',
                       // pattern: {
@@ -371,9 +463,10 @@ const Posts = () => {
                       // },
                     })
                   }
-                />
-                {/* <button type="submit">submit</button> */}
-              </form>
+              />
+              <input type="submit" style={{display: 'none'}}/>
+              {/* <button type="submit">submit</button> */}
+              {/* </form> */}
             </main>
             {/* ----- COMMENTS ----- */}
             <main className={classes.containerComments}>
@@ -388,7 +481,12 @@ const Posts = () => {
   }
   return (
     <>
-      {postsJSX}
+      <form
+      style={{width: '100%'}}
+      onSubmit={handleCommentSubmit}
+      >
+        {postsJSX}
+      </form>
     </>
   );
 };
