@@ -12,7 +12,7 @@ const getAllPosts = (url = `${API_URL}/posts`) => {
     url,
   );
   promise.then((res) => {
-    console.log('res.data', res.data);
+    // console.log('res.data', res.data);
     const posts = res.data;
     store.dispatch({ type: SET_ALL_POSTS, payload: posts });
   });
