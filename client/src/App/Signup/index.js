@@ -271,7 +271,7 @@ const Signup = () => {
       <Card className={classes.cardStyle} style={{ textAlign: 'center' }}>
         Already sign up ?
         {' '}
-        <Link href="#" style={{ color: '#2F80ED' }} onClick={() => history.push('/login')}>Log-in</Link>
+        <Link href="#" style={{ color: '#2F80ED' }} onClick={() => history.push('/')}>Log-in</Link>
       </Card>
     </div>
   );
