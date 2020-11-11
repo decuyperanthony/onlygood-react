@@ -63,6 +63,7 @@ const Explore = () => {
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <WhoToFollow />
+            {/* hello */}
           </Paper>
         </Grid>
       </Grid>
