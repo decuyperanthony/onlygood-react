@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Mail } from '@material-ui/icons/';
 import { Alert } from '@material-ui/lab';
-
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {
   TextField,
   Link,
@@ -55,6 +55,11 @@ const useStyles = makeStyles({
     // marginBottom: '2em',
     // height: '40px',
   },
+  iconEye: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
   // buttonForgetPwd: {
   //   marginTop: '-6em',
   //   paddingLeft: '0em',
@@ -71,7 +76,7 @@ const Login = () => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const [togglePassword, setTogglePassword] = React.useState(false);
   const { register, handleSubmit, errors } = useForm();
   // == traitement erreur auth
   let errorAuthJSX;
@@ -87,6 +92,9 @@ const Login = () => {
       </Alert>
     );
   }
+  const handleToggleShowingPassword = () => {
+    setTogglePassword(!togglePassword);
+  };
   const onSubmit = (data) => {
     console.log('data', data);
     dispatch(login({
@@ -145,13 +153,17 @@ const Login = () => {
                   }
                   helperText={errors.password ? errors.password.message : null}
                   name="password"
-                  type="password"
+                  type={togglePassword ? 'text' : 'password'}
                   // id="input-with-icon-textfield"
                   label="password"
                   InputProps={{
                     endAdornment: (
-                      <InputAdornment position="end">
-                        <Mail color="action" />
+                      <InputAdornment
+                        onClick={handleToggleShowingPassword}
+                        className={classes.iconEye}
+                        position="end"
+                      >
+                        <VisibilityIcon color="action" />
                       </InputAdornment>
                     ),
                   }}
