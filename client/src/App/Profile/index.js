@@ -18,6 +18,7 @@ import { API_URL } from '../../utils/constante';
 // === composant
 import VerticalTabs from './VerticalTabs';
 import PostProfile from './Post';
+import ModalUpdateProfil from './ModalUpdateProfil';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -155,7 +156,8 @@ const Profile = () => {
                       <span className={classes.typoNumberOfFollow}> Followers</span>
                     </span>
                   </div>
-                  <div className={classes.button}>Edit your profile</div>
+                  <ModalUpdateProfil />
+                  {/* <div className={classes.button}>Edit your profile</div> */}
                 </div>
                 <div className={classes.userDescription}>{user.description}</div>
               </div>
