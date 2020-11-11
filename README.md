@@ -6,13 +6,14 @@ We can follow each other
 We can Post comment with pictures
 ![demo site](tweeter1.png
 )
-We have profile page
-In which we can see favorites or saved tweet etc...
-![Demo site](tweeter2.png
-)
+
 We can comment picture
 We can like, saved, retweet picture
 ![Demo site](tweeter3.png
+)
+We have profile page
+In which we can see favorites or saved tweet etc...
+![Demo site](tweeter2.png
 )
 
 ## USER STORIES
