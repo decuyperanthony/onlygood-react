@@ -108,11 +108,17 @@ const userController = {
   // }
   updateUser: async (req, res) => {
     let userId = req.params.id;
+    console.log('updateUser --------------------------')
     try {
         const user = await User.findByPk(userId);
         if (!user) {
             return res.status(401).send('cet utilisateur n\' existe pas');
         }
+        if (req.file) {
+            console.log('req.file.path.substring(14).replace(/\s/g, '-')', req.file.path.substring(14).replace(/\s/g, '-'))
+            req.body.picture_road = req.file.path.substring(11).replace(/\s/g, '-');
+        }
+
         await user.update(req.body);
         res.send(user);
     } catch (error) {
