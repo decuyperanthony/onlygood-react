@@ -137,27 +137,29 @@ const impressionController = {
         try {
             console.log('req.body', req.body);
             const app_users_id = req.body.app_users_id;
-            //! on check si la relation existe
-            const comment = await User_comments_post.findOne({
-                where: {
-                    app_users_id: req.body.app_users_id,
-                    post_id: req.body.post_id
-                }
-            });
+            // //! on check si la relation existe
+            // const comment = await User_comments_post.findOne({
+            //     where: {
+            //         app_users_id: req.body.app_users_id,
+            //         post_id: req.body.post_id
+            //     }
+            // });
 
-            if (comment) {
-                //si la relation existe on supprime
-                // console.log('ok il a deja like il faut supprimer');
-                comment.destroy();
-                res.status(200).send('commentaire sur le post supprimée');
-            } else {
-                // si elle n'existe pas on la crée
-                console.log('il a jamais liké ce post alors on ajoute la ligne');
-                const newComment = new User_comments_post(req.body);
-                const savedComment = await newComment.save();
-                res.status(200).send(savedComment);
-            }
-
+            // if (comment) {
+            //     //si la relation existe on supprime
+            //     // console.log('ok il a deja like il faut supprimer');
+            //     comment.destroy();
+            //     res.status(200).send('commentaire sur le post supprimée');
+            // } else {
+            //     // si elle n'existe pas on la crée
+            //     console.log('il a jamais liké ce post alors on ajoute la ligne');
+            //     const newComment = new User_comments_post(req.body);
+            //     const savedComment = await newComment.save();
+            //     res.status(200).send(savedComment);
+            // }
+            const newComment = new User_comments_post(req.body);
+            const savedComment = await newComment.save();
+            res.status(200).send(savedComment);
         } catch (error) {
             console.trace(error);
             res.status(500).send(error);
