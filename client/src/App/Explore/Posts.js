@@ -154,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let i = 0;
+// let i = 0;
 
 const Posts = () => {
   // eslint-disable-next-line no-unused-vars
@@ -275,49 +275,22 @@ const Posts = () => {
     const content = inputValue.[postId];
     console.log('content', content)
     //! on ajoute le commentaire en base
-    axios
-    .post(`${API_URL}/usercommentspost`, {
-      content,
-      app_users_id: userId,
-      post_id
-    }, {
-      withCredentials: true,
-    })
-    .then((res) => {
-      // setInputValue('');
-      console.log('res', res);
-       getAllPosts();
-      //  setInputValue(useStateObject)
-      // useStateObject = {}
-      // posts.map((p, i) => {
-      //   console.log('p', p);
-      //   console.log('i', i);
-      //   useStateObject[`postId-${p.id}`] = '';
-      //   // useStateObject[`value${i}`] = '';
-      // });
-      //  console.log('inputValue ========== AFTER REQYEST', inputValue);
-      //  setInputValue(useStateObject);
-      //  setInputValue({
-      //   ...inputValue,
-      //   [postId]: '',
-      // })
-      // setValue('');
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-    // setInputValue();
-    //! et on vide l'input
-    // for (let prop in useStateObject) {
-    //   delete useStateObject[prop];
-    // }
-    // posts.map((p, i) => {
-    //   // console.log('p', p);
-    //   // console.log('i', i);
-    //   useStateObject[`postId-${p.id}`] = '';
-    //   // useStateObject[`value${i}`] = '';
+    // axios
+    // .post(`${API_URL}/usercommentspost`, {
+    //   content,
+    //   app_users_id: userId,
+    //   post_id
+    // }, {
+    //   withCredentials: true,
+    // })
+    // .then((res) => {
+    //   // setInputValue('');
+    //   console.log('res', res);
+    //    getAllPosts();
+    // })
+    // .catch((err) => {
+    //   console.log(err);
     // });
-    // setInputValue(useStateObject);
   };
   //! === POST MAP
 
