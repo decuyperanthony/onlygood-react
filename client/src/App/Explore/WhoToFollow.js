@@ -121,34 +121,36 @@ const WhoToFollow = () => {
           );
         }
       });
-      while (index < 4) {
-        return (
-          <div key={u.id + 70} className={classes.containerUserInformation}>
-            <div style={{ display: 'flex' }}>
-              <ImageAvatars pictureSrc={u.picture_road} />
-              <div className={classes.userNameAndFollowers}>
-                <div className={classes.userName}>
-                  {u.firstname}
-                  {' '}
-                  {u.lastname}
-                </div>
-                <div className={classes.followers}>
-                  {u.followed.length}
-                  {' '}
-                  followers
+      if (u.id !== userId) {
+        while (index < 4) {
+          return (
+            <div key={u.id + 70} className={classes.containerUserInformation}>
+              <div style={{ display: 'flex' }}>
+                <ImageAvatars pictureSrc={u.picture_road} />
+                <div className={classes.userNameAndFollowers}>
+                  <div className={classes.userName}>
+                    {u.firstname}
+                    {' '}
+                    {u.lastname}
+                  </div>
+                  <div className={classes.followers}>
+                    {u.followed.length}
+                    {' '}
+                    followers
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              onClick={() => handleFollow(u.id)}
-              className={classes.button}
-            >
-              {buttonFollowers}
-              {/* <PersonAddIcon style={{ marginRight: '0.2em' }} /> */}
+              <div
+                onClick={() => handleFollow(u.id)}
+                className={classes.button}
+              >
+                {buttonFollowers}
+                {/* <PersonAddIcon style={{ marginRight: '0.2em' }} /> */}
 
+              </div>
             </div>
-          </div>
-        );
+          );
+        }
       }
     });
   }
