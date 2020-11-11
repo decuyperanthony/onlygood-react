@@ -170,6 +170,13 @@ const App = () => {
     },
   });
 
+  // const theme1 = createMuiTheme({
+  //   palette: {
+  //     primary: '#116466',
+  //     secondary: '#D9B08C',
+  //   },
+  // });
+
   return (
     <ThemeProvider theme={theme}>
       <Paper style={{ minHeight: '100vh' }}>
