@@ -166,6 +166,12 @@ const PostProfile = () => {
   let postsJSX;
   // === variable contenant les objets des posts choisis
   //   let postProfileChoice;
+  //! == === === === === === traitement de l'input commentaire
+  //! je crée mon usestate pour récuperer les valeurs
+  const [state, setState] = React.useState();
+  // const [inputValue, setInputValue] = React.useState(useStateObject);
+  //!
+
   if (user.id === userId) {
     //! traitement des impressions
     //! traitement des likes
@@ -213,29 +219,16 @@ const PostProfile = () => {
         .catch((err) => console.trace(err));
     };
     //! == traitement de l'input commentaire
-    const onSubmit = (data) => {
-      console.log('data', data);
-    // axios
-    //   .post(`${API_URL}/post`, {
-    //     content: data.post,
-    //     app_users_id: userId,
-    //   }, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     // setInputValue('');
-    //     console.log('res', res);
-    //     // getAllPosts();
-    //     // setValue('');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // dispatch(login({
-    //   history,
-    //   data,
-    // }));
+    const handleChange = (evt) => {
+      const { value } = evt.target;
+      console.log('value', value);
+      setState({
+        ...state,
+        [evt.target.name]: value,
+      });
     };
+    console.log('state', state);
+
     if (filteredProfilePosts) {
       postsJSX = filteredProfilePosts.map((p) => {
         // console.log('hello post');
@@ -263,28 +256,26 @@ const PostProfile = () => {
         const pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
         //   }
         //! === COMMENTAIRES
-        const commentsJSX = p.comments.map((c) =>
-        //   console.log('hello comment');
-          (
-            <div key={c.id + 100000} className={classes.containerComment}>
-              <Avatar pictureSrc={c.author.picture_road} />
-              <div className={classes.nameDateComment}>
-                <div>
-                  <span className={classes.commentAuthor}>
-                    {c.author.firstname}
-                    {' '}
-                    {c.author.lastname}
-                  </span>
-                  <span className={classes.commentDate}>
-                    <Moment fromNow>{c.created_at}</Moment>
-                  </span>
-                </div>
-                <div className={classes.comment}>
-                  {c.content}
-                </div>
+        const commentsJSX = p.comments.map((c) => (
+          <div key={c.id + 100000} className={classes.containerComment}>
+            <Avatar pictureSrc={c.author.picture_road} />
+            <div className={classes.nameDateComment}>
+              <div>
+                <span className={classes.commentAuthor}>
+                  {c.author.firstname}
+                  {' '}
+                  {c.author.lastname}
+                </span>
+                <span className={classes.commentDate}>
+                  <Moment fromNow>{c.created_at}</Moment>
+                </span>
+              </div>
+              <div className={classes.comment}>
+                {c.content}
               </div>
             </div>
-          ));
+          </div>
+        ));
         return (
           <Grid key={p.id + 120} item xs={9} style={{ maxWidth: '100%', marginBottom: '0.5em' }}>
             <Paper className={classes.paper}>
@@ -351,25 +342,27 @@ const PostProfile = () => {
               {/* ----- INPUT FOR COMMENTS ----- */}
               <main className={classes.containerInputComments}>
                 <Avatar pictureSrc={userData.picture_road} />
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <TextField
-                    className={classes.inputComment}
-                    variant="outlined"
-                    placeholder="Tweet your reply"
+
+                <TextField
+                  onChange={handleChange}
+                  className={classes.inputComment}
+                  variant="outlined"
+                  placeholder="Tweet your reply"
                         // error={!!errors.{`comment${p.id}`}}
-                    name={`comment-${p.id}`}
-                    type="text"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment
-                          position="end"
-                          className={classes.inputAdornment}
-                        >
-                          <CropOriginalIcon color="action" />
-                        </InputAdornment>
-                      ),
-                    }}
-                    inputRef={
+                  name={`postId-${p.id}`}
+                  id={`postId-${p.id}`}
+                  type="text"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment
+                        position="end"
+                        className={classes.inputAdornment}
+                      >
+                        <CropOriginalIcon color="action" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  inputRef={
                           register({
                             required: 'Comment can not be empty',
                             // pattern: {
@@ -378,9 +371,9 @@ const PostProfile = () => {
                             // },
                           })
                         }
-                  />
-                  {/* <button type="submit">submit</button> */}
-                </form>
+                />
+                {/* <button type="submit">submit</button> */}
+
               </main>
               {/* ----- COMMENTS ----- */}
               <main className={classes.containerComments}>
@@ -394,8 +387,46 @@ const PostProfile = () => {
       });
     }
   }
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    const tableKeyInpuId = Object.keys(state);
+    const myKeyObject = tableKeyInpuId[tableKeyInpuId.length - 1];
+    //! on cherche le content
+
+    const content = state[`${myKeyObject}`];
+    console.log('content', content);
+    const postId = myKeyObject.substring(7);
+    //! on a le post id tout le temps
+    console.log('postId', postId);
+    //! on ajoute le commentaire en base
+    axios
+      .post(`${API_URL}/usercommentspost`, {
+        content,
+        app_users_id: userId,
+        post_id: postId,
+      }, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log('res', res);
+        getAllPosts();
+        const myInput = document.getElementById(`postId-${postId}`);
+        console.log('myInput', myInput);
+        myInput.value = '';
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
-    <div>{postsJSX}</div>
+    <>
+      <form
+        style={{ width: '100%' }}
+        onSubmit={handleCommentSubmit}
+      >
+        {postsJSX}
+      </form>
+    </>
   );
 };
 
