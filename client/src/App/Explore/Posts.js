@@ -281,7 +281,7 @@ const Posts = () => {
       //! === PICTURES
       //   let pictureJSX;
       //   if (p.picture) {
-      const pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
+      const pictureJSX = <img className={classes.picture} src={`${API_URL}/img/guatemala.jpg`} alt="post" />;
       //   }
       //! === COMMENTAIRES
       const commentsJSX = p.comments.map((c) => (

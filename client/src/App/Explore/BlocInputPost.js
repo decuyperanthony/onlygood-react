@@ -50,6 +50,19 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     border: 'none',
   },
+  inputFile: {
+    width: '0.1px',
+    height: '0.1px',
+    opacity: 0,
+    overflow: 'hidden',
+    position: 'absolute',
+    zIndex: -1,
+  },
+  inputLabel: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
   footerInputPost: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -135,12 +148,20 @@ const BlocPost = () => {
         <div className={classes.footerInputPost}>
           <div>
             <IconButton>
-              <CropOriginalIcon style={{ color: '#2F80ED' }} />
-              {/* <input
+              <input
+                className={classes.inputFile}
                 type="file"
                 placeholder="image"
                 name="image"
-              /> */}
+                id="picture-comment"
+              />
+              <label
+                className={classes.inputLabel}
+                htmlFor="picture-comment"
+              >
+                <CropOriginalIcon style={{ color: '#2F80ED' }} />
+
+              </label>
             </IconButton>
             <IconButton>
               <PublicIcon style={{ color: '#2F80ED' }} />
