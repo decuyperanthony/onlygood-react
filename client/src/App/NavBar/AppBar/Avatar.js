@@ -2,8 +2,12 @@ import React from 'react';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-
-import avatarPicture from '../../../image/avatar.jpg';
+import {
+  // useDispatch,
+  useSelector,
+} from 'react-redux';
+// import avatarPicture from '../../../image/avatar.jpg';
+import { API_URL } from '../../../utils/constante';
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -56,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BadgeAvatars() {
   const classes = useStyles();
-
+  const { userData } = useSelector((state) => state.auth);
   return (
     <div className={classes.root}>
       <StyledBadge
@@ -67,7 +71,7 @@ export default function BadgeAvatars() {
         }}
         variant="dot"
       >
-        <Avatar alt="Remy Sharp" src={avatarPicture} />
+        <Avatar alt="Remy Sharp" src={`${API_URL}/img/${userData.picture_road}`} />
       </StyledBadge>
     </div>
   );
