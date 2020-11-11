@@ -1,10 +1,11 @@
 // == Require express
 const express = require('express');
-
-// == controller
 const impressionController = require('../controllers/impressionController');
-
 const router = express.Router();
+// multer
+const upload = require('../middleware/multer');
+
+
 
 //* ----- ROUTE DES RELATION USER LIKES POST -----
 router.post(`/userlikespost`, impressionController.addOrRemoveLikeToPost);
@@ -16,7 +17,7 @@ router.post(`/usersavedpost`, impressionController.addOrRemoveSaveToPost);
 router.post(`/userretweetedpost`, impressionController.addOrRemoveRetweetToPost);
 
 //* ----- ROUTE DES RELATION USER comment POST -----
-router.get(`/comments`, impressionController.getAllComments)
+router.get(`/comments`, upload.single("image"), impressionController.getAllComments)
 router.get(`/commentbypostid`, impressionController.getCommentByPostId);
 router.post('/usercommentspost', impressionController.addCommentToPost)
 
