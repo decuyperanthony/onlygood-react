@@ -245,52 +245,61 @@ const Posts = () => {
   // }
   // console.log('useStateObject', useStateObject)
   //! je crée mon usestate pour récuperer les valeurs
-  const [inputValue, setInputValue] = React.useState();
+  const [state, setState] = React.useState();
   // const [inputValue, setInputValue] = React.useState(useStateObject);
   //!
   const handleChange = (evt) => {
     const { value } = evt.target;
     console.log('value', value);
-    setInputValue({
-      ...inputValue,
+    setState({
+      ...state,
       [evt.target.name]: value,
     });
   };
-  console.log('inputValue', inputValue);
+  console.log('state', state);
 
   const handleCommentSubmit = (event) => {
     event.preventDefault();
+    console.log('userId', userId);
     //! il faut que je remove la method en back qui delete au second comment sur le meme post
-    console.log('inputValue ----------------', inputValue);
+    console.log('state ----------------', state);
     // console.log(Object.keys(inputValue));
-    const postId = Object.keys(inputValue);
-    console.log('postId ============', postId)
-    console.log('postId.length', postId.length)
-    console.log('postId[postId.length - 1].substring(7) -------', postId[postId.length - 1].substring(7));
-    // console.log('postId[0].substring(7) -------', postId[0].substring(7));
-    const post_id = postId[postId.length - 1].substring(7);
-    // const post_id = postId[0].substring(7);
-    console.log('post_id -----------', post_id);
-    console.log('content =  inputValue.[postId]', inputValue.[postId]);
-    const content = inputValue.[postId];
-    console.log('content', content)
+    const tableKeyInpuId = Object.keys(state);
+    // console.log('tableKeyInpuId[0]============', tableKeyInpuId[0]);
+    // console.log('tableKeyInpuId[1]============', tableKeyInpuId[1]);
+    // console.log('tableKeyInpuId[length]============', tableKeyInpuId[tableKeyInpuId.length - 1]);
+
+    // console.log('tableKeyInpuId.length ===========', tableKeyInpuId.length);
+    const myKeyObject = tableKeyInpuId[tableKeyInpuId.length - 1];
+    //! on cherche le content
+
+    console.log('myKeyObject', myKeyObject);
+    const content = state[`${myKeyObject}`];
+    console.log('content', content);
+    const postId = myKeyObject.substring(7);
+    //! on a le post id tout le temps
+    console.log('postId', postId);
     //! on ajoute le commentaire en base
-    // axios
-    // .post(`${API_URL}/usercommentspost`, {
-    //   content,
-    //   app_users_id: userId,
-    //   post_id
-    // }, {
-    //   withCredentials: true,
-    // })
-    // .then((res) => {
-    //   // setInputValue('');
-    //   console.log('res', res);
-    //    getAllPosts();
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    axios
+      .post(`${API_URL}/usercommentspost`, {
+        content,
+        app_users_id: userId,
+        post_id: postId,
+      }, {
+        withCredentials: true,
+      })
+      .then((res) => {
+      // setInputValue('');
+        console.log('res', res);
+        getAllPosts();
+        // setState({
+        //   ...state,
+        //   [evt.target.name]: value,
+        // });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   //! === POST MAP
 
@@ -437,7 +446,7 @@ const Posts = () => {
                     })
                   }
               />
-              <input type="submit" style={{display: 'none'}}/>
+              <input type="submit" style={{ display: 'none' }} />
               {/* <button type="submit">submit</button> */}
               {/* </form> */}
             </main>
@@ -455,8 +464,8 @@ const Posts = () => {
   return (
     <>
       <form
-      style={{width: '100%'}}
-      onSubmit={handleCommentSubmit}
+        style={{ width: '100%' }}
+        onSubmit={handleCommentSubmit}
       >
         {postsJSX}
       </form>
