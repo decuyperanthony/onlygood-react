@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
@@ -196,7 +197,7 @@ const BlocPost = () => {
           <div>
             <IconButton>
               <input
-                // className={classes.inputFile}
+                className={classes.inputFile}
                 type="file"
                 placeholder="image"
                 name="image"
@@ -206,13 +207,13 @@ const BlocPost = () => {
                   // pattern: /^\S+@\S+$/i,
                 })}
               />
-              {/* <label
+              <label
                 className={classes.inputLabel}
-                htmlFor="picture-comment"
+                htmlFor="image"
               >
                 <CropOriginalIcon style={{ color: '#2F80ED' }} />
 
-              </label> */}
+              </label>
             </IconButton>
             <IconButton>
               <PublicIcon style={{ color: '#2F80ED' }} />
