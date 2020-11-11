@@ -30,6 +30,9 @@ import getAllPosts from '../../utils/getAllPosts';
 // == style
 // eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
+  container: {
+    // marginBottom: '1em',
+  },
   headerInputPost: {
     color: '#4F4F4F',
     fontFamily: 'popins, sans-serif',
@@ -104,7 +107,7 @@ const BlocPost = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={classes.root}>
+      <div className={classes.container}>
         <div className={classes.headerInputPost}>Tweet something</div>
         <div className={classes.inputContainer}>
           <ImageAvatars pictureSrc={userData.picture_road} />
@@ -133,6 +136,11 @@ const BlocPost = () => {
           <div>
             <IconButton>
               <CropOriginalIcon style={{ color: '#2F80ED' }} />
+              {/* <input
+                type="file"
+                placeholder="image"
+                name="image"
+              /> */}
             </IconButton>
             <IconButton>
               <PublicIcon style={{ color: '#2F80ED' }} />

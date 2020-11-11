@@ -305,93 +305,93 @@ const Posts = () => {
         </div>
       ));
       return (
-        <Grid key={p.id + 120} item xs={9}>
-          <Paper className={classes.paper}>
-            {/* ----- AUTHOR & PICTURE ----- */}
-            <header className={classes.headerPost}>
-              <Avatar pictureSrc={p.author.picture_road} />
-              <div>
-                <div className={classes.author}>
-                  {p.author.firstname}
-                  {' '}
-                  {p.author.lastname}
-                </div>
-                <span className={classes.date}>
-                  <Moment fromNow>{p.created_at}</Moment>
-                </span>
+      // <Grid key={p.id + 120} item xs={9}>
+        <Paper className={classes.paper}>
+          {/* ----- AUTHOR & PICTURE ----- */}
+          <header className={classes.headerPost}>
+            <Avatar pictureSrc={p.author.picture_road} />
+            <div>
+              <div className={classes.author}>
+                {p.author.firstname}
+                {' '}
+                {p.author.lastname}
               </div>
-            </header>
-            {/* ----- CONTENT & PICTURE ----- */}
-            <main>
-              <p className={classes.textContent}>{p.content}</p>
-              {pictureJSX}
-            </main>
-            {/* ----- IMPRESSIONS ----- */}
-            <main>
-              <div className={classes.containerImpression}>
-                <div className={classes.impression}>
-                  <ChatBubbleOutlineIcon style={{ marginRight: '0.5em' }} />
-                  Comment (
-                  {p.comments.length}
-                  )
-                </div>
-                <div
-                  className={classes.impression}
-                  onClick={() => handleRetweet(p.id)}
-                  style={{ color: colorRetweet }}
-                >
-                  <RepeatIcon style={{ marginRight: '0.5em', color: colorRetweet }} />
-                  Retweet (
-                  {p.post_retweeted_by.length}
-                  )
-                </div>
-                <div
-                  onClick={() => handleLike(p.id)}
-                  className={classes.impression}
-                  style={{ color: colorLike }}
-                >
-                  <FavoriteBorderIcon style={{ marginRight: '0.5em', color: colorLike }} />
-                  Like (
-                  {p.post_liked_by.length}
-                  )
-                </div>
-                <div
-                  onClick={() => handleSave(p.id)}
-                  className={classes.impression}
-                  style={{ color: colorSave }}
-                >
-                  <TurnedInNotIcon style={{ marginRight: '0.5em', color: colorSave }} />
-                  Save (
-                  {p.post_saved_by.length}
-                  )
-                </div>
+              <span className={classes.date}>
+                <Moment fromNow>{p.created_at}</Moment>
+              </span>
+            </div>
+          </header>
+          {/* ----- CONTENT & PICTURE ----- */}
+          <main>
+            <p className={classes.textContent}>{p.content}</p>
+            {pictureJSX}
+          </main>
+          {/* ----- IMPRESSIONS ----- */}
+          <main>
+            <div className={classes.containerImpression}>
+              <div className={classes.impression}>
+                <ChatBubbleOutlineIcon style={{ marginRight: '0.5em' }} />
+                Comment (
+                {p.comments.length}
+                )
               </div>
-            </main>
-            {/* ----- INPUT FOR COMMENTS ----- */}
-            <main className={classes.containerInputComments}>
-              <Avatar pictureSrc={userData.picture_road} />
-              {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-              <TextField
-                onChange={handleChange}
-                className={classes.inputComment}
-                variant="outlined"
-                placeholder="Tweet your reply"
+              <div
+                className={classes.impression}
+                onClick={() => handleRetweet(p.id)}
+                style={{ color: colorRetweet }}
+              >
+                <RepeatIcon style={{ marginRight: '0.5em', color: colorRetweet }} />
+                Retweet (
+                {p.post_retweeted_by.length}
+                )
+              </div>
+              <div
+                onClick={() => handleLike(p.id)}
+                className={classes.impression}
+                style={{ color: colorLike }}
+              >
+                <FavoriteBorderIcon style={{ marginRight: '0.5em', color: colorLike }} />
+                Like (
+                {p.post_liked_by.length}
+                )
+              </div>
+              <div
+                onClick={() => handleSave(p.id)}
+                className={classes.impression}
+                style={{ color: colorSave }}
+              >
+                <TurnedInNotIcon style={{ marginRight: '0.5em', color: colorSave }} />
+                Save (
+                {p.post_saved_by.length}
+                )
+              </div>
+            </div>
+          </main>
+          {/* ----- INPUT FOR COMMENTS ----- */}
+          <main className={classes.containerInputComments}>
+            <Avatar pictureSrc={userData.picture_road} />
+            {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+            <TextField
+              onChange={handleChange}
+              className={classes.inputComment}
+              variant="outlined"
+              placeholder="Tweet your reply"
                   // error={!!errors.{`comment${p.id}`}}
-                name={`postId-${p.id}`}
-                id={`postId-${p.id}`}
+              name={`postId-${p.id}`}
+              id={`postId-${p.id}`}
                 // value={state.[`postId-${p.id}`]}
-                type="text"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment
-                      position="end"
-                      className={classes.inputAdornment}
-                    >
-                      <CropOriginalIcon color="action" />
-                    </InputAdornment>
-                  ),
-                }}
-                inputRef={
+              type="text"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment
+                    position="end"
+                    className={classes.inputAdornment}
+                  >
+                    <CropOriginalIcon color="action" />
+                  </InputAdornment>
+                ),
+              }}
+              inputRef={
                     register({
                       required: 'Comment can not be empty',
                       // pattern: {
@@ -400,26 +400,30 @@ const Posts = () => {
                       // },
                     })
                   }
-              />
-              <input type="submit" style={{ display: 'none' }} />
-              {/* <button type="submit">submit</button> */}
-              {/* </form> */}
-            </main>
-            {/* ----- COMMENTS ----- */}
-            <main className={classes.containerComments}>
-              {/* <Avatar pictureSrc={p.comments.author.picture_road} />
+            />
+            <input type="submit" style={{ display: 'none' }} />
+            {/* <button type="submit">submit</button> */}
+            {/* </form> */}
+          </main>
+          {/* ----- COMMENTS ----- */}
+          <main className={classes.containerComments}>
+            {/* <Avatar pictureSrc={p.comments.author.picture_road} />
               Hello */}
-              {commentsJSX}
-            </main>
-          </Paper>
-        </Grid>
+            {commentsJSX}
+          </main>
+        </Paper>
+      // </Grid>
       );
     });
   }
   return (
     <>
       <form
-        style={{ width: '100%' }}
+        style={{
+          marginTop: '0.5em',
+          // width: '100%',
+          // padding: '12px',
+        }}
         onSubmit={handleCommentSubmit}
       >
         {postsJSX}

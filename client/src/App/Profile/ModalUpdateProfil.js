@@ -41,7 +41,7 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
 });
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   containerModal: {
     // padding: '60px',
     minWidth: '500px',

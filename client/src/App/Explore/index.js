@@ -58,13 +58,13 @@ const Explore = () => {
           <Paper className={classes.paper}>
             <BlocPost />
           </Paper>
+          <Posts />
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <WhoToFollow />
           </Paper>
         </Grid>
-        <Posts />
       </Grid>
     </div>
 
