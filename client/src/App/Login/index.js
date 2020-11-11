@@ -120,7 +120,6 @@ const Login = () => {
                   }
                 helperText={errors.email ? errors.email.message : null}
                 type="text"
-                id="standard-adornment-password"
                   // id="input-with-icon-textfield"
                 label="email"
                 name="email"
@@ -145,7 +144,6 @@ const Login = () => {
                   })
                   }
                   helperText={errors.password ? errors.password.message : null}
-                  id="standard-adornment-password"
                   name="password"
                   type="password"
                   // id="input-with-icon-textfield"
