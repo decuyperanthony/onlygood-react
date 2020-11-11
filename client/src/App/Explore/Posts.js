@@ -207,43 +207,8 @@ const Posts = () => {
       })
       .catch((err) => console.trace(err));
   };
-  //! == traitement de l'input commentaire
-  // const onSubmit = (data) => {
-  //   console.log('data', data);
-    // axios
-    //   .post(`${API_URL}/post`, {
-    //     content: data.post,
-    //     app_users_id: userId,
-    //   }, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     // setInputValue('');
-    //     console.log('res', res);
-    //     // getAllPosts();
-    //     // setValue('');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // dispatch(login({
-    //   history,
-    //   data,
-    // }));
-  // };
-  //! je crée un objet pour mon state
-  //! ac autant de propriété vide
-  //! que de posts
-  // const useStateObject = {};
-  // if (posts) {
-  //   posts.map((p, i) => {
-  //     // console.log('p', p);
-  //     // console.log('i', i);
-  //     useStateObject[`postId-${p.id}`] = '';
-  //     // useStateObject[`value${i}`] = '';
-  //   });
-  // }
-  // console.log('useStateObject', useStateObject)
+
+  //! == === === === === === traitement de l'input commentaire
   //! je crée mon usestate pour récuperer les valeurs
   const [state, setState] = React.useState();
   // const [inputValue, setInputValue] = React.useState(useStateObject);
@@ -260,25 +225,15 @@ const Posts = () => {
 
   const handleCommentSubmit = (event) => {
     event.preventDefault();
-    console.log('userId', userId);
-    //! il faut que je remove la method en back qui delete au second comment sur le meme post
-    console.log('state ----------------', state);
-    // console.log(Object.keys(inputValue));
     const tableKeyInpuId = Object.keys(state);
-    // console.log('tableKeyInpuId[0]============', tableKeyInpuId[0]);
-    // console.log('tableKeyInpuId[1]============', tableKeyInpuId[1]);
-    // console.log('tableKeyInpuId[length]============', tableKeyInpuId[tableKeyInpuId.length - 1]);
-
-    // console.log('tableKeyInpuId.length ===========', tableKeyInpuId.length);
     const myKeyObject = tableKeyInpuId[tableKeyInpuId.length - 1];
     //! on cherche le content
 
-    console.log('myKeyObject', myKeyObject);
     const content = state[`${myKeyObject}`];
-    console.log('content', content);
+    // console.log('content', content);
     const postId = myKeyObject.substring(7);
     //! on a le post id tout le temps
-    console.log('postId', postId);
+    // console.log('postId', postId);
     //! on ajoute le commentaire en base
     axios
       .post(`${API_URL}/usercommentspost`, {
@@ -289,13 +244,11 @@ const Posts = () => {
         withCredentials: true,
       })
       .then((res) => {
-      // setInputValue('');
         console.log('res', res);
         getAllPosts();
-        // setState({
-        //   ...state,
-        //   [evt.target.name]: value,
-        // });
+        const myInput = document.getElementById(`postId-${postId}`);
+        console.log('myInput', myInput);
+        myInput.value = '';
       })
       .catch((err) => {
         console.log(err);
@@ -425,6 +378,8 @@ const Posts = () => {
                 placeholder="Tweet your reply"
                   // error={!!errors.{`comment${p.id}`}}
                 name={`postId-${p.id}`}
+                id={`postId-${p.id}`}
+                // value={state.[`postId-${p.id}`]}
                 type="text"
                 InputProps={{
                   endAdornment: (
