@@ -5,10 +5,14 @@ const postController = {
         try {
              // possibilité de gerer le offset limit en envoyant un param dans l'url
              let offset = 0;
-             let limit = 30;
+             let limit = 10;
              const posts = await Post.findAll({
+                order: [
+                    ['id', 'DESC'],
+                 ],
                 //  offset,
-                //  limit,
+                //  order: ['DESC', 'content'],
+                 limit,
                  include: [
                     "author",
                     "post_liked_by",
@@ -220,6 +224,12 @@ const postController = {
         console.log('add post')
         try {
             console.log('req.body', req.body);
+            console.log('req.file', req.file);
+            if (req.file) {
+                console.log('req.file.path', req.file.path)
+                console.log('req.file.path.substring(14).replace(/\s/g, '-')', req.file.path.substring(14).replace(/\s/g, '-'))
+                req.body.picture = req.file.path.substring(11).replace(/\s/g, '-');
+            }
             // const { title } = req.body;
             // const findBrand = await Brand.findOne({
             //     where: {
@@ -232,6 +242,7 @@ const postController = {
                 const newPost = new Post(req.body);
                 const savedPost = await newPost.save();
                 res.status(200).send(savedPost);
+                // res.send('ok')
             // }
 
         } catch (error) {
