@@ -234,54 +234,64 @@ const PostProfile = () => {
         // console.log('hello post');
         //! === COLOR LIKE
         let colorLike = '';
-        p.post_liked_by.forEach((l) => {
-          if (l.id === userId) colorLike = '#EB5757';
-        });
-        //! === COLOR SAVE
         let colorSave = '';
-        p.post_saved_by.forEach((s) => {
-          if (s.id === userId) colorSave = '#2D9CDB';
-        });
-        //! === COLOR RETWEET
         let colorRetweet = '';
-        p.post_retweeted_by.forEach((r) => {
-          if (r.id === userId) colorRetweet = '#27AE60';
-        });
+        if (p.post_liked_by) {
+          p.post_liked_by.forEach((l) => {
+            if (l.id === userId) colorLike = '#EB5757';
+          });
+          //! === COLOR SAVE
+
+          p.post_saved_by.forEach((s) => {
+            if (s.id === userId) colorSave = '#2D9CDB';
+          });
+          //! === COLOR RETWEET
+
+          p.post_retweeted_by.forEach((r) => {
+            if (r.id === userId) colorRetweet = '#27AE60';
+          });
+        }
+
         // const [inputValue, setInputValue] = useState({
         //   [p.id]: [p.id],
         // });
         //! === PICTURES
-        //   let pictureJSX;
-        //   if (p.picture) {
-        const pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
-        //   }
+        let pictureJSX;
+        if (p.picture) {
+          pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
+        }
         //! === COMMENTAIRES
-        const commentsJSX = p.comments.map((c) => (
-          <div key={c.id + 100000} className={classes.containerComment}>
-            <Avatar pictureSrc={c.author.picture_road} />
-            <div className={classes.nameDateComment}>
-              <div>
-                <span className={classes.commentAuthor}>
-                  {c.author.firstname}
-                  {' '}
-                  {c.author.lastname}
-                </span>
-                <span className={classes.commentDate}>
-                  <Moment fromNow>{c.created_at}</Moment>
-                </span>
-              </div>
-              <div className={classes.comment}>
-                {c.content}
+        let commentsJSX;
+        if (p.comments) {
+          commentsJSX = p.comments.map((c) => (
+            <div key={c.id + 100000} className={classes.containerComment}>
+              <Avatar pictureSrc={c.author.picture_road} />
+              <div className={classes.nameDateComment}>
+                <div>
+                  <span className={classes.commentAuthor}>
+                    {c.author.firstname}
+                    {' '}
+                    {c.author.lastname}
+                  </span>
+                  <span className={classes.commentDate}>
+                    <Moment fromNow>{c.created_at}</Moment>
+                  </span>
+                </div>
+                <div className={classes.comment}>
+                  {c.content}
+                </div>
               </div>
             </div>
-          </div>
-        ));
+          ));
+        }
+
         return (
           <Grid key={p.id + 120} item xs={9} style={{ maxWidth: '100%', marginBottom: '0.5em' }}>
             <Paper className={classes.paper}>
               {/* ----- AUTHOR & PICTURE ----- */}
               <header className={classes.headerPost}>
-                <Avatar pictureSrc={p.author.picture_road} />
+                {p.author ? (<Avatar pictureSrc={p.author.picture_road} />) : null}
+                {/* <Avatar pictureSrc={p.author.picture_road} /> */}
                 <div>
                   <div className={classes.author}>
                     {p.author.firstname}
