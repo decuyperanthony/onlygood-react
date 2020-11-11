@@ -129,8 +129,6 @@ const Signup = () => {
                   }
                 helperText={errors.firstname ? errors.firstname.message : null}
                 type="text"
-                // id="standard-adornment-firstname"
-                  // id="input-with-icon-textfield"
                 label="Firstname"
                 name="firstname"
                 // InputProps={{
@@ -185,8 +183,6 @@ const Signup = () => {
                   }
                 helperText={errors.email ? errors.email.message : null}
                 type="text"
-                id="standard-adornment-password"
-                  // id="input-with-icon-textfield"
                 label="email"
                 name="email"
                 // InputProps={{
@@ -212,7 +208,6 @@ const Signup = () => {
                   })
                   }
                 helperText={errors.password ? errors.password.message : null}
-                id="standard-adornment-password"
                 name="password"
                 type="password"
                   // id="input-with-icon-textfield"
@@ -239,7 +234,6 @@ const Signup = () => {
                   })
                   }
                 helperText={errors.confirmPassword ? errors.confirmPassword.message : null}
-                id="standard-adornment-password"
                 name="confirmPassword"
                 type="password"
                   // id="input-with-icon-textfield"
