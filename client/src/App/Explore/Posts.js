@@ -11,7 +11,7 @@ import {
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Grid,
+  // Grid,
   Paper,
   TextField,
   InputAdornment,
@@ -27,7 +27,7 @@ import { API_URL } from '../../utils/constante';
 
 import Avatar from './Avatar';
 // === fake picture
-import picture from '../../image/exemple.jpg';
+// import picture from '../../image/exemple.jpg';
 // === icon
 
 // === method
