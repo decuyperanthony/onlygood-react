@@ -93,6 +93,52 @@ const BlocPost = () => {
   const [inputValue, setInputValue] = useState('');
   const onSubmit = (data) => {
     console.log('data', data);
+    const formdata = new FormData();
+    formdata.append('content', data.post);
+    formdata.append('image', data.image[0]);
+    formdata.append('app_users_id', userId);
+    for (const value of formdata.values()) {
+      console.log('value', value);
+    }
+
+    // fetch(`${API_URL}/post`, {
+    //   method: 'POST',
+    //   body: formdata,
+    // }).then((res) => {
+    //   console.log('res', res);
+    //   // console.log('res', res);
+    //   setInputValue('');
+    //   getAllPosts();
+    //   // getUserData(userId);
+    //   // getUserById(userId);
+    //   // getAllPosts();
+    //   // handleClose();
+    // }).catch((error) => console.trace(error));
+    //* autre test
+    // axios.post('upload_file', formData, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //   },
+    // });
+    //! --- ---- --- ça marchait
+    axios
+      .post(`${API_URL}/post`, {
+        formdata,
+      }, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((res) => {
+        setInputValue('');
+        console.log('res', res);
+        getAllPosts();
+        // setValue('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    //! --- ---- --- ça marchait
     axios
       .post(`${API_URL}/post`, {
         content: data.post,
@@ -109,6 +155,7 @@ const BlocPost = () => {
       .catch((err) => {
         console.log(err);
       });
+    //! fin -------------------
     // dispatch(login({
     //   history,
     //   data,
@@ -149,19 +196,23 @@ const BlocPost = () => {
           <div>
             <IconButton>
               <input
-                className={classes.inputFile}
+                // className={classes.inputFile}
                 type="file"
                 placeholder="image"
                 name="image"
-                id="picture-comment"
+                // id="image"
+                ref={register({
+                  required: false,
+                  // pattern: /^\S+@\S+$/i,
+                })}
               />
-              <label
+              {/* <label
                 className={classes.inputLabel}
                 htmlFor="picture-comment"
               >
                 <CropOriginalIcon style={{ color: '#2F80ED' }} />
 
-              </label>
+              </label> */}
             </IconButton>
             <IconButton>
               <PublicIcon style={{ color: '#2F80ED' }} />
