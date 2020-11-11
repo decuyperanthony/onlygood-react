@@ -2,11 +2,12 @@
 Clone du réseau social twitter
 
 ## Demo
+### Home page
 We can follow each other
 We can Post comment with pictures
 ![demo site](tweeter1.png
 )
-
+### Explore page
 We can comment picture
 We can like, saved, retweet picture
 ![Demo site](tweeter3.png
