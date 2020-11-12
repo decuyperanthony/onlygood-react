@@ -21,11 +21,6 @@ const userController = {
             //   "post_retweeted"
               // "author"
             ],
-            // include: [
-            //   "follower",
-            //   "followed",
-            //   "posts"
-            // ],
             order: [
                 ['id', 'ASC'],
              ]
