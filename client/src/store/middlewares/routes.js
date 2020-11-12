@@ -9,7 +9,7 @@ export default (store) => (next) => (action) => {
       return;
     }
     case ENTER_HOME_PAGE: {
-      action.history.push('/dashboard');
+      action.history.push('/dashboard/explore');
       return;
     }
     case ENTER_ADMIN_PAGE: {
