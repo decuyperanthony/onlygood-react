@@ -152,6 +152,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     color: '#4F4F4F',
   },
+  displayNoneDownXS: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
 }));
 
 // let i = 0;
@@ -322,7 +327,7 @@ const Posts = () => {
             </div>
           </header>
           {/* ----- CONTENT & PICTURE ----- */}
-          <main>
+          <main style={{ marginBottom: '1em' }}>
             <p className={classes.textContent}>{p.content}</p>
             {pictureJSX}
           </main>
@@ -331,7 +336,10 @@ const Posts = () => {
             <div className={classes.containerImpression}>
               <div className={classes.impression}>
                 <ChatBubbleOutlineIcon style={{ marginRight: '0.5em' }} />
-                Comment (
+                <span className={classes.displayNoneDownXS}>
+                  Comment
+                </span>
+                (
                 {p.comments.length}
                 )
               </div>
@@ -341,7 +349,10 @@ const Posts = () => {
                 style={{ color: colorRetweet }}
               >
                 <RepeatIcon style={{ marginRight: '0.5em', color: colorRetweet }} />
-                Retweet (
+                <span className={classes.displayNoneDownXS}>
+                  Retweet
+                </span>
+                (
                 {p.post_retweeted_by.length}
                 )
               </div>
@@ -351,7 +362,10 @@ const Posts = () => {
                 style={{ color: colorLike }}
               >
                 <FavoriteBorderIcon style={{ marginRight: '0.5em', color: colorLike }} />
-                Like (
+                <span className={classes.displayNoneDownXS}>
+                  Like
+                </span>
+                (
                 {p.post_liked_by.length}
                 )
               </div>
@@ -361,7 +375,10 @@ const Posts = () => {
                 style={{ color: colorSave }}
               >
                 <TurnedInNotIcon style={{ marginRight: '0.5em', color: colorSave }} />
-                Save (
+                <span className={classes.displayNoneDownXS}>
+                  Save
+                </span>
+                (
                 {p.post_saved_by.length}
                 )
               </div>
