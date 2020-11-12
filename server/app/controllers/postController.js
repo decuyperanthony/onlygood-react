@@ -49,7 +49,7 @@ const postController = {
             // console.log('user.dataValues', user.dataValues.post_saved);
             const postSaved = await user.dataValues.post_saved;
             for (p of postSaved) {
-                console.log('p.dataValues.id', p.dataValues.id);
+                // console.log('p.dataValues.id', p.dataValues.id);
                 await Post.findByPk(p.dataValues.id, {
                         include: [
                             "author",
@@ -65,7 +65,7 @@ const postController = {
                         })
                             .then((res) => {
                                 postSavedData.push(res.dataValues)
-                                console.log('res', res)
+                                // console.log('res', res)
                             })
                             .catch((err) => console.trace(err))
             }
@@ -85,7 +85,7 @@ const postController = {
                     "posts",
                 ]
             });
-            console.log('user.dataValues.posts', user.dataValues.posts)
+            // console.log('user.dataValues.posts', user.dataValues.posts)
             const postUser = await user.dataValues.posts;
             for (p of postUser) {
                 await Post.findByPk(p.dataValues.id, {
@@ -224,14 +224,21 @@ const postController = {
 
     addPost: async (req, res) => {
         console.log('add post')
+        // let userId = req.params.userId;
         try {
             console.log('req.body', req.body);
             console.log('req.file', req.file);
+            const user = await User.findByPk(req.body.app_users_id);
+            if (!user) {
+                console.log('ici')
+                return res.status(401).send('cet utilisateur n\' existe pas');
+            }
             if (req.file) {
                 console.log('req.file.path', req.file.path)
                 console.log('req.file.path.substring(14).replace(/\s/g, '-')', req.file.path.substring(14).replace(/\s/g, '-'))
                 req.body.picture = req.file.path.substring(11).replace(/\s/g, '-');
             }
+
             // const { title } = req.body;
             // const findBrand = await Brand.findOne({
             //     where: {
@@ -241,6 +248,7 @@ const postController = {
             // if (findBrand) {
             //     res.send('cet marque existe déja');
             // } else {
+                // req.body.app_users_id = userId
                 const newPost = new Post(req.body);
                 const savedPost = await newPost.save();
                 res.status(200).send(savedPost);
