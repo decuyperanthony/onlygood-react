@@ -148,10 +148,19 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     color: '#4F4F4F',
   },
+  displayNoneDownXS: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
 }));
 
 const PostProfile = () => {
-  const { register, handleSubmit, errors } = useForm();
+  const {
+    register,
+    // handleSubmit,
+    errors,
+  } = useForm();
   console.log('errors', errors);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -294,9 +303,10 @@ const PostProfile = () => {
                 {/* <Avatar pictureSrc={p.author.picture_road} /> */}
                 <div>
                   <div className={classes.author}>
-                    {p.author.firstname}
+                    {p.author ? p.author.firstname : null}
                     {' '}
-                    {p.author.lastname}
+                    {p.author ? p.author.lastname : null}
+                    {/* {p.author.lastname} */}
                   </div>
                   <span className={classes.date}>
                     <Moment fromNow>{p.created_at}</Moment>
@@ -304,7 +314,7 @@ const PostProfile = () => {
                 </div>
               </header>
               {/* ----- CONTENT & PICTURE ----- */}
-              <main>
+              <main style={{ marginBottom: '1em' }}>
                 <p className={classes.textContent}>{p.content}</p>
                 {pictureJSX}
               </main>
@@ -313,8 +323,12 @@ const PostProfile = () => {
                 <div className={classes.containerImpression}>
                   <div className={classes.impression}>
                     <ChatBubbleOutlineIcon style={{ marginRight: '0.5em' }} />
-                    Comment (
-                    {p.comments.length}
+
+                    <span className={classes.displayNoneDownXS}>
+                      Comment
+                    </span>
+                    (
+                    {p.comment ? p.comments.length : 0}
                     )
                   </div>
                   <div
@@ -323,8 +337,12 @@ const PostProfile = () => {
                     style={{ color: colorRetweet }}
                   >
                     <RepeatIcon style={{ marginRight: '0.5em', color: colorRetweet }} />
-                    Retweet (
-                    {p.post_retweeted_by.length}
+                    <span className={classes.displayNoneDownXS}>
+                      Retweet
+                    </span>
+                    (
+                    {p.post_retweeted_by ? p.post_retweeted_by.length : 0}
+                    {/* {p.post_retweeted_by.length} */}
                     )
                   </div>
                   <div
@@ -333,8 +351,12 @@ const PostProfile = () => {
                     style={{ color: colorLike }}
                   >
                     <FavoriteBorderIcon style={{ marginRight: '0.5em', color: colorLike }} />
-                    Like (
-                    {p.post_liked_by.length}
+                    <span className={classes.displayNoneDownXS}>
+                      Likes
+                    </span>
+                    (
+                    {p.post_liked_by ? p.post_liked_by.length : 0}
+                    {/* {p.post_liked_by.length} */}
                     )
                   </div>
                   <div
@@ -343,8 +365,12 @@ const PostProfile = () => {
                     style={{ color: colorSave }}
                   >
                     <TurnedInNotIcon style={{ marginRight: '0.5em', color: colorSave }} />
-                    Save (
-                    {p.post_saved_by.length}
+                    <span className={classes.displayNoneDownXS}>
+                      Save
+                    </span>
+                    (
+                    {p.post_saved_by ? p.post_saved_by.length : 0}
+                    {/* {p.post_saved_by.length} */}
                     )
                   </div>
                 </div>
