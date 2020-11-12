@@ -10,7 +10,9 @@ const postController = {
                 order: [
                     ['id', 'DESC'],
                  ],
-                //  offset,
+                 limit,
+                 offset,
+                // limit,
                 //  order: ['DESC', 'content'],
                  limit,
                  include: [
