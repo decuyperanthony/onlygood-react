@@ -27,6 +27,7 @@ import './App.css';
 
 // == component
 import AppBar from './NavBar/AppBar';
+import AppBarBottom from './AppBarBottom/AppBarBottom';
 // import NavBar from './NavBar';
 import Login from './Login';
 import Signup from './Signup';
@@ -52,11 +53,11 @@ const Dashboard = () => {
   const userToken = JSON.parse(localStorage.getItem('userToken'));
   // console.log('users in dashboard', users);
   //  // == auto connect
-  if (userToken) {
-    const myId = user.id;
-    getUserData(myId);
-    // getUserById(myId);
-  }
+  // if (userToken) {
+  //   const myId = user.id;
+  //   getUserData(myId);
+  //   // getUserById(myId);
+  // }
 
   // == stepper
 
@@ -64,6 +65,7 @@ const Dashboard = () => {
     <>
       <Loader />
       <AppBar />
+      <AppBarBottom />
       <Switch>
         <Route
           exact
