@@ -4,6 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
+import ExploreIcon from '@material-ui/icons/Explore';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -51,10 +53,10 @@ export default function BottomAppBar() {
           </IconButton>
           <div className={classes.grow} />
           <IconButton color="inherit">
-            <HomeIcon />
+            <ExploreIcon />
           </IconButton>
           <IconButton edge="end" color="inherit">
-            <HomeIcon />
+            <BookmarkIcon />
           </IconButton>
           {/* <div>
             <div>home</div>
