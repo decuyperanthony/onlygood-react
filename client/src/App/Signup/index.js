@@ -13,8 +13,12 @@ import {
   Link,
   Button,
   Card,
-  // InputAdornment,
+  InputAdornment,
 } from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Mail from '@material-ui/icons/Mail';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+
 import { Alert } from '@material-ui/lab';
 import { signup } from '../../store/action/signup';
 // import './styles.css';
@@ -45,6 +49,11 @@ const useStyles = makeStyles({
     paddingBottom: '1em',
     // height: '40px',
   },
+  iconEye: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
   buttonLogin: {
     backgroundColor: '#2F80ED',
     color: 'white',
@@ -71,7 +80,12 @@ const Signup = () => {
   const { register, handleSubmit, errors } = useForm();
   // === traitement erreur signup
   const [errorSignup, setErrorSignup] = useState('');
+  const [togglePassword, setTogglePassword] = React.useState(false);
+
   const { errorAuth } = useSelector((state) => state.auth);
+  const handleToggleShowingPassword = () => {
+    setTogglePassword(!togglePassword);
+  };
   // == si on a une erreur du back
   let errorRespBackendJSX;
   if (errorAuth) {
@@ -131,13 +145,13 @@ const Signup = () => {
                 type="text"
                 label="Firstname"
                 name="firstname"
-                // InputProps={{
-                //   endAdornment: (
-                //     <InputAdornment position="end">
-                //       <Mail color="action" />
-                //     </InputAdornment>
-                //   ),
-                // }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <AccountBoxIcon color="action" />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
             <div>
@@ -155,13 +169,13 @@ const Signup = () => {
                 type="text"
                 label="Lastname"
                 name="lastname"
-                // InputProps={{
-                //   endAdornment: (
-                //     <InputAdornment position="end">
-                //       <Mail color="action" />
-                //     </InputAdornment>
-                //   ),
-                // }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <AccountBoxIcon color="action" />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
 
@@ -185,13 +199,13 @@ const Signup = () => {
                 type="text"
                 label="email"
                 name="email"
-                // InputProps={{
-                //   endAdornment: (
-                //     <InputAdornment position="end">
-                //       <Mail color="action" />
-                //     </InputAdornment>
-                //   ),
-                // }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Mail color="action" />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
 
@@ -209,16 +223,20 @@ const Signup = () => {
                   }
                 helperText={errors.password ? errors.password.message : null}
                 name="password"
-                type="password"
+                type={togglePassword ? 'text' : 'password'}
                   // id="input-with-icon-textfield"
                 label="password"
-                // InputProps={{
-                //   endAdornment: (
-                //     <InputAdornment position="end">
-                //       <Mail color="action" />
-                //     </InputAdornment>
-                //   ),
-                // }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      onClick={handleToggleShowingPassword}
+                      className={classes.iconEye}
+                      position="end"
+                    >
+                      <VisibilityIcon color="action" />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
             <div>
@@ -235,16 +253,20 @@ const Signup = () => {
                   }
                 helperText={errors.confirmPassword ? errors.confirmPassword.message : null}
                 name="confirmPassword"
-                type="password"
+                type={togglePassword ? 'text' : 'password'}
                   // id="input-with-icon-textfield"
                 label="Confirm your password"
-                // InputProps={{
-                //   endAdornment: (
-                //     <InputAdornment position="end">
-                //       <Mail color="action" />
-                //     </InputAdornment>
-                //   ),
-                // }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      onClick={handleToggleShowingPassword}
+                      className={classes.iconEye}
+                      position="end"
+                    >
+                      <VisibilityIcon color="action" />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
 
