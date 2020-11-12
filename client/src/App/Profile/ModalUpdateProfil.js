@@ -41,7 +41,7 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
 });
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   containerModal: {
     // padding: '60px',
     minWidth: '500px',
@@ -64,7 +64,7 @@ const useStyles = makeStyles(() => ({
   inputUploadFile: {
 
   },
-  button: {
+  buttonDesktop: {
     color: 'white',
     borderRadius: '4px',
     fontFamily: 'Noto Sans, sans-serif',
@@ -74,6 +74,9 @@ const useStyles = makeStyles(() => ({
     border: 'none',
     '&:hover': {
       cursor: 'pointer',
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
 
@@ -161,7 +164,7 @@ export default function ModalUpdateProfil() {
   return (
     <div>
       <div
-        className={classes.button}
+        className={classes.buttonDesktop}
         onClick={handleClickOpen}
       >
         Edit your profile
