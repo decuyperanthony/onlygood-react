@@ -135,7 +135,7 @@ const impressionController = {
     addCommentToPost: async (req, res) => {
         // console.log('add like');
         try {
-            console.log('req.body', req.body);
+            // console.log('req.body', req.body);
             const app_users_id = req.body.app_users_id;
             if (req.file) {
                 console.log('req.file.path.substring(14).replace(/\s/g, '-')', req.file.path.substring(14).replace(/\s/g, '-'))
