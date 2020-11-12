@@ -124,7 +124,7 @@ const authController = {
         firstname,
         lastname,
       } = req.body;
-      console.log('email', email)
+      // console.log('email', email)
       // on verif que l'user n'existe pas avec son mail
       const user = await User.findOne({
         where: {
