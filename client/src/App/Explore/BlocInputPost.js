@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -9,14 +10,8 @@ import { useForm } from 'react-hook-form';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  // Grid,
-  // Paper,
   TextField,
   IconButton,
-  // Link,
-  // Button,
-  // Card,
-  // InputAdornment,
 } from '@material-ui/core';
 
 // == icon
@@ -102,10 +97,20 @@ const BlocPost = () => {
       console.log('value', value);
     }
 
+    // fetch(`${API_URL}/post/${userId}`, {
+    //   method: 'POST',
+    //   body: formdata,
+    // }).then((res) => {
+    //   console.log('res', res);
+    //   setInputValue('');
+    //   getAllPosts();
+    // }).catch((error) => console.trace(error));
+
     // fetch(`${API_URL}/post`, {
     //   method: 'POST',
     //   body: formdata,
     // }).then((res) => {
+    //   console.log('res du post comment form');
     //   console.log('res', res);
     //   // console.log('res', res);
     //   setInputValue('');
@@ -124,7 +129,7 @@ const BlocPost = () => {
     //! --- ---- --- ça marchait
     axios
       .post(`${API_URL}/post`, {
-        formdata,
+        formData: formdata,
       }, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -140,22 +145,22 @@ const BlocPost = () => {
         console.log(err);
       });
     //! --- ---- --- ça marchait
-    axios
-      .post(`${API_URL}/post`, {
-        content: data.post,
-        app_users_id: userId,
-      }, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setInputValue('');
-        console.log('res', res);
-        getAllPosts();
-        // setValue('');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .post(`${API_URL}/post`, {
+    //     content: data.post,
+    //     app_users_id: userId,
+    //   }, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     setInputValue('');
+    //     console.log('res', res);
+    //     getAllPosts();
+    //     // setValue('');
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     //! fin -------------------
     // dispatch(login({
     //   history,
@@ -201,7 +206,7 @@ const BlocPost = () => {
                 type="file"
                 placeholder="image"
                 name="image"
-                // id="image"
+                id="image"
                 ref={register({
                   required: false,
                   // pattern: /^\S+@\S+$/i,
@@ -212,7 +217,6 @@ const BlocPost = () => {
                 htmlFor="image"
               >
                 <CropOriginalIcon style={{ color: '#2F80ED' }} />
-
               </label>
             </IconButton>
             <IconButton>
