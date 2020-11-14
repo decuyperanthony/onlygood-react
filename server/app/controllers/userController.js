@@ -1,5 +1,6 @@
 const User = require("../models/user");
-
+const fs = require('fs');
+const path = require('path');
 const userController = {
   getAllUsers: async (req, res) => {
     try {
@@ -112,6 +113,13 @@ const userController = {
         if (req.file) {
             console.log('req.file.path.substring(14).replace(/\s/g, '-')', req.file.path.substring(14).replace(/\s/g, '-'))
             req.body.picture_road = req.file.path.substring(11).replace(/\s/g, '-');
+            //! maintenant on supprimer l'ancienne photo si il y en avait une
+            if (user.dataValues.picture_road) {
+                console.log('user.dataValues.picture_road', user.dataValues.picture_road);
+                fs.unlink(`${path.join(__dirname, '../../../server/public/img/') + user.dataValues.picture_road}`, error => {
+                    console.log('error in fs unlink', error)
+                });
+            }
         }
 
         await user.update(req.body);
