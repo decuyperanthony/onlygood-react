@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     // padding: '1em',
     // textAlign: 'center',
     color: theme.palette.text.secondary,
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: '0.5em',
+    },
   },
   headerPost: {
     display: 'flex',
