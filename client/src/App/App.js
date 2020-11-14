@@ -186,7 +186,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ minHeight: '100vh', marginBottom: '3.5em', marginTop: '4em' }}>
+      <Paper style={{ minHeight: '100vh', marginBottom: '3em', marginTop: '4em' }}>
         <div className="App">
           <Loader />
           <Switch>
