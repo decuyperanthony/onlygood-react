@@ -22,7 +22,7 @@ import { API_URL } from '../../utils/constante';
 import ImageAvatars from './Avatar';
 
 import getAllPosts from '../../utils/getAllPosts';
-
+import getPostByUserId from '../../utils/getPostByUserId';
 // == style
 // eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
@@ -104,6 +104,7 @@ const BlocPost = () => {
       console.log('res', res);
       setInputValue('');
       getAllPosts();
+      getPostByUserId(userId);
     }).catch((error) => console.trace(error));
   };
 
