@@ -30,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
     // textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  containerExplore: {
+    [theme.breakpoints.down('xs')]: {
+      // margin: 0,
+      '& > .MuiGrid-item': {
+        padding: 4,
+      },
+    },
+  },
   blocHomepage: {
 
   },
@@ -53,7 +61,7 @@ const Explore = () => {
   return (
 
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid className={classes.containerExplore} container spacing={3}>
         <Grid item xs={12} md={9}>
           <Paper className={classes.paper}>
             <BlocPost />
