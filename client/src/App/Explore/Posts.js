@@ -311,7 +311,7 @@ const Posts = () => {
       ));
       return (
       // <Grid key={p.id + 120} item xs={9}>
-        <Paper className={classes.paper}>
+        <Paper key={p.id + 120} className={classes.paper}>
           {/* ----- AUTHOR & PICTURE ----- */}
           <header className={classes.headerPost}>
             <Avatar pictureSrc={p.author.picture_road} />
