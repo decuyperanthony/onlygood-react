@@ -44,7 +44,7 @@ const styles = (theme) => ({
 const useStyles = makeStyles((theme) => ({
   containerModal: {
     // padding: '60px',
-    minWidth: '300px',
+    minWidth: '250px',
     minHeight: '300px',
   },
   containerUpdatePicture: {
