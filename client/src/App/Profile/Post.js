@@ -23,7 +23,7 @@ import { API_URL } from '../../utils/constante';
 
 import Avatar from '../Explore/Avatar';
 // === fake picture
-import picture from '../../image/exemple.jpg';
+// import picture from '../../image/exemple.jpg';
 import getAllPosts from '../../utils/getAllPosts';
 
 import { setWhichTweet } from '../../store/action/post';
@@ -267,7 +267,7 @@ const PostProfile = () => {
         //! === PICTURES
         let pictureJSX;
         if (p.picture) {
-          pictureJSX = <img className={classes.picture} src={picture} alt="post" />;
+          pictureJSX = <img className={classes.picture} src={`${API_URL}/img/${p.picture}`} alt="post" />;
         }
         //! === COMMENTAIRES
         let commentsJSX;
