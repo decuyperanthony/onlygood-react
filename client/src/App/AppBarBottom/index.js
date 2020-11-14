@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -88,7 +88,7 @@ const menuItem = [
 ];
 
 export default function BottomAppBar() {
-  const history = useHistory();
+  // const history = useHistory();
   const classes = useStyles();
   // const [itemId, setItemId] = React.useState(124);
   // const handleClick = (id, path) => {
