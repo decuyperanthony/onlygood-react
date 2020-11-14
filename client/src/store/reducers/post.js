@@ -30,8 +30,9 @@ const post = (state = initialState, action = {}) => {
       };
 
     case SET_WHICH_TWEET:
-      const userId = JSON.parse(localStorage.getItem('userId'));
-      axios.get(`${API_URL}/${action.payload}/${userId}`)
+      // const userId = JSON.parse(localStorage.getItem('userId'));
+      console.log('action.user', action.userId);
+      axios.get(`${API_URL}/${action.payload}/${action.userId}`)
         .then((res) => {
           store.dispatch(setTweet(res.data));
         })

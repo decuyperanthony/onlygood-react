@@ -182,8 +182,8 @@ const Profile = () => {
 
   let profileJSX;
   if (userData.id === userId) {
-    const numberOfFollowers = userData.follower.length;
-    const numberOfFollows = userData.followed.length;
+    const numberOfFollowers = userData.follower ? userData.follower.length : null;
+    const numberOfFollows = userData.followed ? userData.followed.length : null;
     profileJSX = (
       <div className={classes.root}>
         {/* PICTURE HEADER */}

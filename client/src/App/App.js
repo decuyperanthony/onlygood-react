@@ -156,7 +156,8 @@ const App = () => {
     getUserById(myId);
     getAllPosts();
     getAllUsers();
-    dispatch(setWhichTweet('userpost'));
+
+    dispatch(setWhichTweet('userpost', myId));
     // getUserDataDetailsInterests(myId);
     // getOrdersByUserId(myId);
     // getUserInstagramData(myId);

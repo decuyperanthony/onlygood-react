@@ -56,13 +56,16 @@ const menuItem = [
 ];
 
 const VerticalTabs = () => {
+  const userId = JSON.parse(localStorage.getItem('userId'));
+
   const dispatch = useDispatch();
   const [activeClassId, setActiveClassId] = useState(1);
   //   const [border, setBorder] = useState('');
   const classes = useStyles();
   const handleActiveClass = (menuId, request) => {
     setActiveClassId(menuId);
-    dispatch(setWhichTweet(request));
+    // const userId = 2;
+    dispatch(setWhichTweet(request, userId));
     // console.log('composant', composant);
   };
   const verticalJSX = menuItem.map((m) => {
