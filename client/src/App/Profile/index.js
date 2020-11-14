@@ -20,6 +20,7 @@ import VerticalTabs from './VerticalTabs';
 import PostProfile from './Post';
 import ModalUpdateProfil from './ModalUpdateProfil';
 import ModalUpdateProfilMobile from './ModalUpdateProfilMobile';
+import ModalUpdatePictureHeader from './ModalUpdataPictureHeader';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -177,6 +178,7 @@ const Profile = () => {
     getUserById(userId);
   }, [userId]);
   const { user } = useSelector((state) => state.user);
+  const { userData } = useSelector((state) => state.auth);
 
   let profileJSX;
   if (user.id === userId) {
@@ -186,13 +188,15 @@ const Profile = () => {
       <div className={classes.root}>
         {/* PICTURE HEADER */}
         <div style={{
-          backgroundImage: `url(${`${API_URL}/img/${user.picture_header}`})`,
+          backgroundImage: `url(${`${API_URL}/img/${userData.picture_header}`})`,
           height: '15em',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           marginBottom: '-6em',
         }}
         />
+        <ModalUpdatePictureHeader />
+        {/* <CameraAltRoundedIcon style={{ color: 'red' }} /> */}
         <Grid className={classes.containerProfilePage} container spacing={3}>
           <Avatar
             variant="rounded"

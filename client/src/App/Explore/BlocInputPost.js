@@ -140,7 +140,7 @@ const BlocPost = () => {
         </div>
         <div className={classes.footerInputPost}>
           <div>
-            <IconButton>
+            <IconButton style={{ marginTop: '5px' }}>
               <input
                 className={classes.inputFile}
                 type="file"

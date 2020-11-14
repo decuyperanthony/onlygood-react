@@ -53,6 +53,13 @@ const useStyles = makeStyles((theme) => ({
     // height: '8em',
     marginBottom: '1em',
   },
+  pictureHeader: {
+    marginRight: '1em',
+    // height: '3em',
+    width: '100%',
+    border: '2px solid gray',
+    marginBottom: '0.5em',
+  },
   avatar: {
     marginRight: '1em',
     height: '5em',
@@ -145,6 +152,7 @@ export default function ModalUpdateProfilMobile() {
     console.log('data', data);
     const formdata = new FormData();
     formdata.append('image', data.image[0]);
+    // formdata.append('imageHeader', data.imageHeader[0]);
     formdata.append('firstname', data.firstname);
     formdata.append('lastname', data.lastname);
     formdata.append('description', data.description);

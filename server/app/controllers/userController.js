@@ -23,7 +23,7 @@ const userController = {
               // "author"
             ],
             order: [
-                ['id', 'ASC'],
+                ['id', 'DESC'],
              ]
          });
          res.send(users);
@@ -128,7 +128,35 @@ const userController = {
         console.trace(error);
         res.status(500).send(error);
     }
-},
+  },
+  updatePictureHeader: async (req, res) => {
+    let userId = req.params.id;
+    console.log('updatePictureHeader --------------------------')
+    try {
+        let myObject = {}
+        const user = await User.findByPk(userId);
+        if (!user) {
+            return res.status(401).send('cet utilisateur n\' existe pas');
+        }
+        if (req.file) {
+            console.log('req.file.path.substring(11).replace(/\s/g, '-')', req.file.path.substring(11).replace(/\s/g, '-'))
+            myObject.picture_header = req.file.path.substring(11).replace(/\s/g, '-');
+            //! maintenant on supprimer l'ancienne photo si il y en avait une
+            if (user.dataValues.picture_header && user.dataValues.picture_header !== 'avatar_header.png') {
+                console.log('user.dataValues.picture_header', user.dataValues.picture_header);
+                fs.unlink(`${path.join(__dirname, '../../../server/public/img/') + user.dataValues.picture_header}`, error => {
+                    console.log('error in fs unlink', error)
+                });
+            }
+        }
+
+        await user.update(myObject);
+        res.send(user);
+    } catch (error) {
+        console.trace(error);
+        res.status(500).send(error);
+    }
+  },
 };
 
 module.exports = userController;
