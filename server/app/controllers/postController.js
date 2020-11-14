@@ -1,11 +1,13 @@
 const { Post, User } = require('../models/');
+const fs = require('fs');
+const path = require('path');
 
 const postController = {
     getAllPosts: async (req, res) => {
         try {
              // possibilité de gerer le offset limit en envoyant un param dans l'url
              let offset = 0;
-             let limit = 10;
+             let limit = 5;
              const posts = await Post.findAll({
                 order: [
                     ['id', 'DESC'],
@@ -310,13 +312,7 @@ const postController = {
         try {
             console.log('req.body', req.body);
             console.log('req.file', req.file);
-            // console.log('req.body.formdata', req.body.formdata);
-            // let formData = new FormData(req.body.formdata);
-            // console.log('formData', formData)
             const user = await User.findByPk(req.body.app_users_id);
-            // let data = new FormData();
-            // data.append("data", JSON.stringify(req.body.formdata))
-            // console.log('data', data)
             if (!user) {
                 console.log('ici')
                 return res.status(401).send('cet utilisateur n\' existe pas');
@@ -326,17 +322,6 @@ const postController = {
                 console.log('req.file.path.substring(14).replace(/\s/g, '-')', req.file.path.substring(14).replace(/\s/g, '-'))
                 req.body.picture = req.file.path.substring(11).replace(/\s/g, '-');
             }
-
-            // const { title } = req.body;
-            // const findBrand = await Brand.findOne({
-            //     where: {
-            //         title
-            //     }
-            // });
-            // if (findBrand) {
-            //     res.send('cet marque existe déja');
-            // } else {
-                // req.body.app_users_id = userId
                 const newPost = new Post(req.body);
                 const savedPost = await newPost.save();
                 res.status(200).send(savedPost);
@@ -370,6 +355,11 @@ const postController = {
             let post = await Post.findByPk(postId);
             if (!post) {
                 return res.status(401).send('Ce post n\'existe pas');
+            }
+            if (post.picture) {
+                fs.unlink(`${path.join(__dirname, '../../../server/public/img/') + post.dataValues.picture}`, error => {
+                    console.log('error in fs unlink', error)
+                });
             }
             post.destroy();
             res.status(200).send('post supprimée');
