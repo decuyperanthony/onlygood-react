@@ -287,10 +287,10 @@ const Posts = () => {
       //   [p.id]: [p.id],
       // });
       //! === PICTURES
-      //   let pictureJSX;
-      //   if (p.picture) {
-      const pictureJSX = <img className={classes.picture} src={`${API_URL}/img/guatemala.jpg`} alt="post" />;
-      //   }
+      let pictureJSX;
+      if (p.picture) {
+        pictureJSX = <img className={classes.picture} src={`${API_URL}/img/${p.picture}`} alt="post" />;
+      }
       //! === COMMENTAIRES
       const commentsJSX = p.comments.map((c) => (
         <div key={c.id + 100000} className={classes.containerComment}>
