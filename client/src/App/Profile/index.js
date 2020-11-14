@@ -48,6 +48,13 @@ const useStyles = makeStyles((theme) => ({
       margin: '0',
       width: 'auto',
     },
+    [theme.breakpoints.down('xs')]: {
+      margin: 0,
+      '& > .MuiGrid-item': {
+        padding: 4,
+      },
+    },
+
   },
   dispayNoneDownXS: {
     [theme.breakpoints.down('xs')]: {
@@ -143,6 +150,12 @@ const useStyles = makeStyles((theme) => ({
       // marginLeft: 'auto',
       // marginRight: 'auto',
       marginTop: '-0.5em',
+    },
+    [theme.breakpoints.down('xs')]: {
+      // // width: '250px',
+      // marginLeft: 'auto',
+      // marginRight: 'auto',
+      // padding: '4px !important',
     },
   },
   containerFollowFollower: {
