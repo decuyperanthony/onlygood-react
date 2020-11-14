@@ -35,8 +35,8 @@ const app = express();
 app.use(bodyParser.json());
 
 // on rajoute multer pour les formulaires au format "multipart"
-const multer = require("multer");
-const userController = require("./app/controllers/userController");
+// const multer = require("multer");
+// const userController = require("./app/controllers/userController");
 // const bodyParser = multer();
 
 // on utlise .none() pour dire qu'on attends pas de fichier, uniquement des inputs "classiques" !
@@ -56,24 +56,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-// app.use(cors({credentials: true, origin: 'http://localhost:8000'}));
 
-// moteur de template // moteur de views
-// app.set("view engine", "ejs");
-// app.set("views", "views");
-
-// Pour se servir des sessions
-// app.use(
-//   session({
-//     secret: "keyboard cat",
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: {
-//       secure: false,
-//       maxAge: 1000 * 60 * 60
-//     }
-//   })
-// );
 app.use(
   session({
     secret: "I am the secret of Tribz from Bifröst",
