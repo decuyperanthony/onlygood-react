@@ -76,38 +76,120 @@ const postController = {
             res.status(500).send(error);
         }
     },
-    getUserPost: async (req, res) => {
+    // getUserPost: async (req, res) => {
+    //     let userId = req.params.id;
+    //     try {
+    //         let postData= [];
+    //         const user = await User.findByPk(userId, {
+    //             // order: [
+    //             //     ['id', 'DESC'],
+    //             //  ],
+    //             include:[
+    //                 "posts",
+    //                 // order: [
+    //                 //     ['id', 'DESC'],
+    //                 //  ],
+    //             ]
+    //         });
+    //         // console.log('user.dataValues.posts', user.dataValues.posts)
+    //         const postUser = await user.dataValues.posts;
+    //         // let i = 0;
+    //         for (p of postUser) {
+
+    //             // while (i < 4) {
+    //             //     i++;
+    //                 await Post.findByPk(p.dataValues.id, {
+    //                     include: [
+    //                         "author",
+    //                         "post_liked_by",
+    //                         "post_saved_by",
+    //                         "post_retweeted_by",
+    //                         // "comments",
+    //                         {
+    //                             association: "comments",
+    //                             include: ["author"]
+    //                         },
+    //                     ],
+    //                     })
+    //                         .then((res) => {
+    //                             postData.push(res.dataValues)
+    //                             // console.log('res', res)
+    //                         })
+    //                         .catch((err) => console.trace(err))
+    //             // }
+    //         }
+    //         res.send(postData)
+    //     } catch (error) {
+    //         console.trace(error);
+    //         res.status(500).send(error);
+    //     }
+    // },
+    getPostByUserId: async (req, res) => {
         let userId = req.params.id;
         try {
-            let postData= [];
-            const user = await User.findByPk(userId, {
-                include:[
-                    "posts",
-                ]
-            });
-            // console.log('user.dataValues.posts', user.dataValues.posts)
-            const postUser = await user.dataValues.posts;
-            for (p of postUser) {
-                await Post.findByPk(p.dataValues.id, {
-                    include: [
-                        "author",
-                        "post_liked_by",
-                        "post_saved_by",
-                        "post_retweeted_by",
-                        // "comments",
-                        {
-                            association: "comments",
-                            include: ["author"]
-                        },
-                    ],
-                    })
-                        .then((res) => {
-                            postData.push(res.dataValues)
-                            console.log('res', res)
-                        })
-                        .catch((err) => console.trace(err))
-            }
-            res.send(postData)
+            let limit = 5;
+            const posts = await Post.findAll({
+                where: {
+                    app_users_id: userId
+                },
+                order: [
+                    ['id', 'DESC'],
+                ],
+                // limit,
+                //  order: ['DESC', 'content'],
+                 limit,
+                 include: [
+                    "author",
+                    "post_liked_by",
+                    "post_saved_by",
+                    "post_retweeted_by",
+                    // "comments",
+                    {
+                        association: "comments",
+                        include: ["author"]
+                    },
+                ],
+            })
+            // let postData= [];
+            // const user = await User.findByPk(userId, {
+            //     // order: [
+            //     //     ['id', 'DESC'],
+            //     //  ],
+            //     include:[
+            //         "posts",
+            //         // order: [
+            //         //     ['id', 'DESC'],
+            //         //  ],
+            //     ]
+            // });
+            // // console.log('user.dataValues.posts', user.dataValues.posts)
+            // const postUser = await user.dataValues.posts;
+            // // let i = 0;
+            // for (p of postUser) {
+
+            //     // while (i < 4) {
+            //     //     i++;
+            //         await Post.findByPk(p.dataValues.id, {
+            //             include: [
+            //                 "author",
+            //                 "post_liked_by",
+            //                 "post_saved_by",
+            //                 "post_retweeted_by",
+            //                 // "comments",
+            //                 {
+            //                     association: "comments",
+            //                     include: ["author"]
+            //                 },
+            //             ],
+            //             })
+            //                 .then((res) => {
+            //                     postData.push(res.dataValues)
+            //                     // console.log('res', res)
+            //                 })
+            //                 .catch((err) => console.trace(err))
+            //     // }
+            // }
+            res.send(posts)
         } catch (error) {
             console.trace(error);
             res.status(500).send(error);
@@ -228,7 +310,13 @@ const postController = {
         try {
             console.log('req.body', req.body);
             console.log('req.file', req.file);
+            // console.log('req.body.formdata', req.body.formdata);
+            // let formData = new FormData(req.body.formdata);
+            // console.log('formData', formData)
             const user = await User.findByPk(req.body.app_users_id);
+            // let data = new FormData();
+            // data.append("data", JSON.stringify(req.body.formdata))
+            // console.log('data', data)
             if (!user) {
                 console.log('ici')
                 return res.status(401).send('cet utilisateur n\' existe pas');
