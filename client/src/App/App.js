@@ -27,7 +27,7 @@ import './App.css';
 
 // == component
 import AppBar from './NavBar/AppBar';
-import AppBarBottom from './AppBarBottom/AppBarBottom';
+import AppBarBottom from './AppBarBottom';
 // import NavBar from './NavBar';
 import Login from './Login';
 import Signup from './Signup';
@@ -65,6 +65,11 @@ const Dashboard = () => {
     <>
       <Loader />
       <AppBar />
+      <div
+        style={{
+          marginBottom: '3.5em',
+        }}
+      />
       <AppBarBottom />
       <Switch>
         <Route
@@ -181,7 +186,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ minHeight: '100vh' }}>
+      <Paper style={{ minHeight: '100vh', marginBottom: '3.5em' }}>
         <div className="App">
           <Loader />
           <Switch>
