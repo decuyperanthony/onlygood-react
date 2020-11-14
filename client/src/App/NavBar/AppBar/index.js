@@ -28,6 +28,13 @@ const useStyles = makeStyles((theme) => ({
   // root: {
   //   flexGrow: 1,
   // },
+  appBar: {
+    top: 0,
+    bottom: 'auto',
+    // [theme.breakpoints.up('sm')]: {
+    //   display: 'none',
+    // },
+  },
   blocPageAppBar: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -96,7 +103,7 @@ export default function ButtonAppBar() {
 
   return (
 
-    <AppBar position="static">
+    <AppBar position="fixed" className={classes.appBar}>
       <div className={classes.blocPageAppBar}>
         {/* ---------- START ---------- */}
         <div>
