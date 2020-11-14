@@ -44,11 +44,11 @@ const styles = (theme) => ({
 const useStyles = makeStyles((theme) => ({
   containerModal: {
     // padding: '60px',
-    minWidth: '500px',
-    minHeight: '500px',
+    minWidth: '300px',
+    minHeight: '300px',
   },
   containerUpdatePicture: {
-    display: 'flex',
+    // display: 'flex',
     // justifyContent: 'space-between',
     // height: '8em',
     marginBottom: '1em',
@@ -58,8 +58,8 @@ const useStyles = makeStyles((theme) => ({
     height: '5em',
     width: '5em',
     border: '2px solid gray',
-    // marginBottom: '-5em',
-    marginLeft: '2em',
+    marginBottom: '0.5em',
+    // marginLeft: '2em',
   },
   inputUploadFile: {
 

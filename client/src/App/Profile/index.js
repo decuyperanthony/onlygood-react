@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
       paddingBottom: 0,
+      paddingTop: '2em',
     },
 
     // textAlign: 'center',
