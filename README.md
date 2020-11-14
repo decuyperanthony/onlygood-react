@@ -17,12 +17,10 @@ In which we can see favorites or saved tweet etc...
 ![Demo site](tweeter2.png
 )
 ### Version Mobile
-We can comment picture
-We can like, saved, retweet picture
+Profile Page
 ![Demo site](mobile.png
 )
-We have profile page
-In which we can see favorites or saved tweet etc...
+Explore page
 ![Demo site](mobile2.png
 )
 
