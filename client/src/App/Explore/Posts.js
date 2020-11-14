@@ -3,6 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router';
 
 import {
   // useDispatch,
@@ -15,6 +16,7 @@ import {
   Paper,
   TextField,
   InputAdornment,
+  Link,
 } from '@material-ui/core';
 import Moment from 'react-moment';
 // === component
@@ -166,12 +168,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Posts = () => {
   // eslint-disable-next-line no-unused-vars
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const classes = useStyles();
   const { posts } = useSelector((state) => state.post);
   const { userData } = useSelector((state) => state.auth);
   const userId = JSON.parse(localStorage.getItem('userId'));
   // const [inputValue, setInputValue] = useState('');
+  //! method pour voir profil page of others users
+  const handleProfilPage = (id) => {
+    console.log('profil');
+    history.push(`/dashboard/${id}`);
+  };
+
   //! traitement des impressions
   //! traitement des likes
   const handleLike = (postId) => {
@@ -298,9 +307,11 @@ const Posts = () => {
           <div className={classes.nameDateComment}>
             <div>
               <span className={classes.commentAuthor}>
+
                 {c.author.firstname}
                 {' '}
                 {c.author.lastname}
+
               </span>
               <span className={classes.commentDate}>
                 <Moment fromNow>{c.created_at}</Moment>
@@ -320,9 +331,15 @@ const Posts = () => {
             <Avatar pictureSrc={p.author.picture_road} />
             <div>
               <div className={classes.author}>
-                {p.author.firstname}
-                {' '}
-                {p.author.lastname}
+                <Link
+                  style={{ color: '#2F80ED' }}
+                  href="#"
+                  onClick={() => handleProfilPage(p.author.id)}
+                >
+                  {p.author.firstname}
+                  {' '}
+                  {p.author.lastname}
+                </Link>
               </div>
               <span className={classes.date}>
                 <Moment fromNow>{p.created_at}</Moment>

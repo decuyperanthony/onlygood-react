@@ -20,6 +20,7 @@ import { API_URL } from '../../utils/constante';
 import getUserData from '../../utils/getUserData';
 
 // === style
+// eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
   // containerModal: {
   //   // padding: '60px',
@@ -39,38 +40,7 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid gray',
     marginBottom: '0.5em',
   },
-  // avatar: {
-  //   marginRight: '1em',
-  //   height: '5em',
-  //   width: '5em',
-  //   border: '2px solid gray',
-  //   marginBottom: '0.5em',
-  //   // marginLeft: '2em',
-  // },
-  // inputUploadFile: {
 
-  // },
-  // buttonDesktop: {
-  //   color: 'white',
-  //   borderRadius: '4px',
-  //   fontFamily: 'Noto Sans, sans-serif',
-  //   backgroundColor: '#2F80ED',
-  //   padding: '0.5em 1.5em',
-  //   margin: '1em 0',
-  //   border: 'none',
-  //   '&:hover': {
-  //     cursor: 'pointer',
-  //   },
-  //   [theme.breakpoints.up('md')]: {
-  //     display: 'none',
-  //   },
-  // },
-
-  // textField: {
-  //   paddingBottom: '1em',
-  //   // width: '60%',
-  //   // height: '40px',
-  // },
   buttonValidate: {
     backgroundColor: '#2F80ED',
     color: 'white',
@@ -81,9 +51,6 @@ const useStyles = makeStyles((theme) => ({
   buttonCancel: {
     backgroundColor: '#EB5757',
     color: 'white',
-    // marginTop: '2em',
-    // marginBottom: '2em',
-    // height: '40px',
   },
 
 }));
@@ -110,10 +77,6 @@ export default function AlertDialog() {
     console.log('data', data);
     const formdata = new FormData();
     formdata.append('image', data.imageHeader[0]);
-    // formdata.append('imageHeader', data.imageHeader[0]);
-    // formdata.append('firstname', data.firstname);
-    // formdata.append('lastname', data.lastname);
-    // formdata.append('description', data.description);
 
     fetch(`${API_URL}/user/${userId}/updatepictureheader`, {
       method: 'PATCH',
@@ -139,11 +102,9 @@ export default function AlertDialog() {
         aria-describedby="alert-dialog-description"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-
           <DialogTitle id="alert-dialog-title">Update your picture header ?</DialogTitle>
           <DialogContent>
             {/*  {PICTURE HEADER} */}
-
             <div
               className={classes.containerUpdatePicture}
             >

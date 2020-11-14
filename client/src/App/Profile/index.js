@@ -177,13 +177,13 @@ const Profile = () => {
   useEffect(() => {
     getUserById(userId);
   }, [userId]);
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
   const { userData } = useSelector((state) => state.auth);
 
   let profileJSX;
-  if (user.id === userId) {
-    const numberOfFollowers = user.follower.length;
-    const numberOfFollows = user.followed.length;
+  if (userData.id === userId) {
+    const numberOfFollowers = userData.follower.length;
+    const numberOfFollows = userData.followed.length;
     profileJSX = (
       <div className={classes.root}>
         {/* PICTURE HEADER */}
@@ -200,7 +200,7 @@ const Profile = () => {
         <Grid className={classes.containerProfilePage} container spacing={3}>
           <Avatar
             variant="rounded"
-            src={`${API_URL}/img/${user.picture_road}`}
+            src={`${API_URL}/img/${userData.picture_road}`}
             className={classes.avatar}
           />
           <Grid item xs={12} className={classes.containerInfoUser}>
@@ -209,9 +209,9 @@ const Profile = () => {
                 <div className={classes.userInformation}>
                   <div>
                     <span className={classes.typoName}>
-                      {user.firstname}
+                      {userData.firstname}
                       {' '}
-                      {user.lastname}
+                      {userData.lastname}
                     </span>
                     <div className={classes.containerFollowFollower}>
                       <span className={classes.typoFollow}>
@@ -235,7 +235,7 @@ const Profile = () => {
                   <ModalUpdateProfil />
                   {/* <div className={classes.button}>Edit your profile</div> */}
                 </div>
-                <div className={classes.userDescription}>{user.description}</div>
+                <div className={classes.userDescription}>{userData.description}</div>
                 <ModalUpdateProfilMobile />
               </div>
             </Paper>
