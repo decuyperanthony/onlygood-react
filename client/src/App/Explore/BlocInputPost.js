@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {
 // useDispatch,
   useSelector,
@@ -87,93 +87,32 @@ const BlocPost = () => {
   // const history = useHistory();
   // const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
-  const onSubmit = (data) => {
+  const onSubmitComment = (data) => {
     console.log('data', data);
-    const formdata = new FormData();
-    formdata.append('content', data.post);
-    formdata.append('image', data.image[0]);
-    formdata.append('app_users_id', userId);
-    for (const value of formdata.values()) {
+    const myFormData = new FormData();
+    myFormData.append('content', data.post);
+    myFormData.append('image', data.imagePost[0]);
+    myFormData.append('app_users_id', userId);
+    for (const value of myFormData.values()) {
       console.log('value', value);
     }
 
-    // fetch(`${API_URL}/post/${userId}`, {
-    //   method: 'POST',
-    //   body: formdata,
-    // }).then((res) => {
-    //   console.log('res', res);
-    //   setInputValue('');
-    //   getAllPosts();
-    // }).catch((error) => console.trace(error));
-
-    // fetch(`${API_URL}/post`, {
-    //   method: 'POST',
-    //   body: formdata,
-    // }).then((res) => {
-    //   console.log('res du post comment form');
-    //   console.log('res', res);
-    //   // console.log('res', res);
-    //   setInputValue('');
-    //   getAllPosts();
-    //   // getUserData(userId);
-    //   // getUserById(userId);
-    //   // getAllPosts();
-    //   // handleClose();
-    // }).catch((error) => console.trace(error));
-    //* autre test
-    // axios.post('upload_file', formData, {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //   },
-    // });
-    //! --- ---- --- ça marchait
-    axios
-      .post(`${API_URL}/post`, {
-        formData: formdata,
-      }, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => {
-        setInputValue('');
-        console.log('res', res);
-        getAllPosts();
-        // setValue('');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    //! --- ---- --- ça marchait
-    // axios
-    //   .post(`${API_URL}/post`, {
-    //     content: data.post,
-    //     app_users_id: userId,
-    //   }, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     setInputValue('');
-    //     console.log('res', res);
-    //     getAllPosts();
-    //     // setValue('');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    //! fin -------------------
-    // dispatch(login({
-    //   history,
-    //   data,
-    // }));
+    fetch(`${API_URL}/post/`, {
+      method: 'POST',
+      body: myFormData,
+    }).then((res) => {
+      console.log('res', res);
+      setInputValue('');
+      getAllPosts();
+    }).catch((error) => console.trace(error));
   };
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={classes.container}>
+    <div className={classes.container}>
+      <form onSubmit={handleSubmit(onSubmitComment)}>
         <div className={classes.headerInputPost}>Tweet something</div>
         <div className={classes.inputContainer}>
           <ImageAvatars pictureSrc={userData.picture_road} />
@@ -205,16 +144,19 @@ const BlocPost = () => {
                 className={classes.inputFile}
                 type="file"
                 placeholder="image"
-                name="image"
-                id="image"
+                name="imagePost"
+                id="imagePost"
                 ref={register({
                   required: false,
                   // pattern: /^\S+@\S+$/i,
                 })}
               />
+              {/* <div>
+                <input type="submit" name="addPost" />
+              </div> */}
               <label
                 className={classes.inputLabel}
-                htmlFor="image"
+                htmlFor="imagePost"
               >
                 <CropOriginalIcon style={{ color: '#2F80ED' }} />
               </label>
@@ -227,8 +169,8 @@ const BlocPost = () => {
             Tweet
           </button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 
