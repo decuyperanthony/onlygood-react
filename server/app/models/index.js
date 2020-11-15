@@ -35,6 +35,20 @@ User.hasMany(Relationship, {
   foreignKey: "followed_id",
   as: "followed"
 });
+//! likes
+Post.hasMany(User_likes_post, {
+  foreignKey: "post_id",
+  as: "likes"
+});
+//! saved
+Post.hasMany(User_saved_post, {
+  foreignKey: "post_id",
+  as: "saved"
+});
+Post.hasMany(User_retweet_post, {
+  foreignKey: "post_id",
+  as: "retweets"
+});
 
 //! relation between post and comment
 User_comments_post.belongsTo(Post, {
@@ -78,6 +92,8 @@ Post.belongsToMany(User, {
   timestamps: false,
   as: "post_liked_by"
 });
+
+
 
 //! USER SAVED POST
 // un user peut liker plusieurs posts
