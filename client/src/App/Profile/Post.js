@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
@@ -159,11 +159,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostProfile = () => {
+  const userId = JSON.parse(localStorage.getItem('userId'));
   const {
     register,
     // handleSubmit,
     errors,
   } = useForm();
+  useEffect(() => {
+    getPostByUserId(userId);
+  }, [userId]);
   console.log('errors', errors);
   const classes = useStyles();
   // const dispatch = useDispatch();
@@ -171,7 +175,6 @@ const PostProfile = () => {
   const { user } = useSelector((state) => state.user);
   //   const [postProfileChoice, setPostProfileChoice] = useState(user.posts);
   const { userData } = useSelector((state) => state.auth);
-  const userId = JSON.parse(localStorage.getItem('userId'));
 
   const { filteredProfilePosts } = useSelector((state) => state.post);
   // === variable du map pour les posts
