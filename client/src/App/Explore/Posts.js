@@ -1,10 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
-
 import {
   // useDispatch,
   useSelector,
@@ -16,7 +16,7 @@ import {
   Paper,
   TextField,
   InputAdornment,
-  Link,
+  // Link,
 } from '@material-ui/core';
 import Moment from 'react-moment';
 // === component
@@ -162,6 +162,15 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  unlink: {
+    color: 'black',
+  },
+  link: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    color: '#2F80ED',
+  },
 }));
 
 // let i = 0;
@@ -169,7 +178,11 @@ const useStyles = makeStyles((theme) => ({
 const Posts = () => {
   // eslint-disable-next-line no-unused-vars
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm();
+  const {
+    register,
+    // handleSubmit,
+    // errors
+  } = useForm();
   const classes = useStyles();
   const { posts } = useSelector((state) => state.post);
   const { userData } = useSelector((state) => state.auth);
@@ -178,7 +191,9 @@ const Posts = () => {
   //! method pour voir profil page of others users
   const handleProfilPage = (id) => {
     console.log('profil');
-    history.push(`/dashboard/${id}`);
+    if (userId !== id) {
+      history.push(`/dashboard/${id}`);
+    }
   };
 
   //! traitement des impressions
@@ -279,18 +294,18 @@ const Posts = () => {
       // console.log('hello post');
       //! === COLOR LIKE
       let colorLike = '';
-      p.post_liked_by.forEach((l) => {
-        if (l.id === userId) colorLike = '#EB5757';
+      p.likes.forEach((l) => {
+        if (l.app_users_id === userId) colorLike = '#EB5757';
       });
       //! === COLOR SAVE
       let colorSave = '';
-      p.post_saved_by.forEach((s) => {
-        if (s.id === userId) colorSave = '#2D9CDB';
+      p.saved.forEach((s) => {
+        if (s.app_users_id === userId) colorSave = '#2D9CDB';
       });
       //! === COLOR RETWEET
       let colorRetweet = '';
-      p.post_retweeted_by.forEach((r) => {
-        if (r.id === userId) colorRetweet = '#27AE60';
+      p.retweets.forEach((r) => {
+        if (r.app_users_id === userId) colorRetweet = '#27AE60';
       });
       // const [inputValue, setInputValue] = useState({
       //   [p.id]: [p.id],
@@ -307,11 +322,9 @@ const Posts = () => {
           <div className={classes.nameDateComment}>
             <div>
               <span className={classes.commentAuthor}>
-
                 {c.author.firstname}
                 {' '}
                 {c.author.lastname}
-
               </span>
               <span className={classes.commentDate}>
                 <Moment fromNow>{c.created_at}</Moment>
@@ -323,6 +336,8 @@ const Posts = () => {
           </div>
         </div>
       ));
+      let linkProfilUsers = classes.link;
+      if (p.author.id === userId) linkProfilUsers = classes.unlink;
       return (
       // <Grid key={p.id + 120} item xs={9}>
         <Paper key={p.id + 120} className={classes.paper}>
@@ -331,15 +346,15 @@ const Posts = () => {
             <Avatar pictureSrc={p.author.picture_road} />
             <div>
               <div className={classes.author}>
-                <Link
-                  style={{ color: '#2F80ED' }}
-                  href="#"
+                <div
+                  className={linkProfilUsers}
+                  // href="#"
                   onClick={() => handleProfilPage(p.author.id)}
                 >
                   {p.author.firstname}
                   {' '}
                   {p.author.lastname}
-                </Link>
+                </div>
               </div>
               <span className={classes.date}>
                 <Moment fromNow>{p.created_at}</Moment>
@@ -373,7 +388,7 @@ const Posts = () => {
                   Retweet
                 </span>
                 (
-                {p.post_retweeted_by.length}
+                {p.retweets.length}
                 )
               </div>
               <div
@@ -386,7 +401,7 @@ const Posts = () => {
                   Like
                 </span>
                 (
-                {p.post_liked_by.length}
+                {p.likes.length}
                 )
               </div>
               <div
@@ -399,7 +414,7 @@ const Posts = () => {
                   Save
                 </span>
                 (
-                {p.post_saved_by.length}
+                {p.saved.length}
                 )
               </div>
             </div>
