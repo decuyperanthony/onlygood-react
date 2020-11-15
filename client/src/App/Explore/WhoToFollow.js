@@ -1,8 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable array-callback-return */
 import React from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 import {
 // useDispatch,
@@ -51,7 +53,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   userName: {
-    color: 'black',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    color: '#2F80ED',
     fontFamily: 'popins, sans-serif',
     fontWeight: '500',
     fontSize: '16px',
@@ -81,10 +86,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WhoToFollow = () => {
+  const history = useHistory();
+
   const classes = useStyles();
   const { users } = useSelector((state) => state.user);
   const userId = JSON.parse(localStorage.getItem('userId'));
   // console.log('users', users);
+  //! method pour voir profil page of others users
+  const handleProfilPage = (id) => {
+    console.log('profil');
+    if (userId !== id) {
+      history.push(`/dashboard/${id}`);
+    }
+  };
   const handleFollow = (followedId) => {
     // console.log('followedId', followedId);
     axios
@@ -128,7 +142,10 @@ const WhoToFollow = () => {
               <div style={{ display: 'flex' }}>
                 <ImageAvatars pictureSrc={u.picture_road} />
                 <div className={classes.userNameAndFollowers}>
-                  <div className={classes.userName}>
+                  <div
+                    className={classes.userName}
+                    onClick={() => handleProfilPage(u.id)}
+                  >
                     {u.firstname}
                     {' '}
                     {u.lastname}
