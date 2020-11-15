@@ -13,3 +13,11 @@ export const setOneUserById = (payload) => ({
   type: SET_ONE_USER_BY_ID,
   payload,
 });
+
+// ===  SET_ONE_USER_BY_ID
+export const SET_ONE_USER_SELECTED_BY_ID = 'SET_ONE_USER_SELECTED_BY_ID';
+
+export const setOneUserSelectedById = (payload) => ({
+  type: SET_ONE_USER_SELECTED_BY_ID,
+  payload,
+});
