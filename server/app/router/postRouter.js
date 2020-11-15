@@ -26,5 +26,7 @@ router.get('/userpost/:id', postController.getPostByUserId);
 router.get('/savedpostuser/:id', postController.getUserSavedPost);
 router.get('/likedpostuser/:id', postController.getUserLikedPost);
 router.get('/commentedpostuser/:id', postController.getUserCommentedPost);
+//* get and count
+router.get('/userpostandcount/:id', postController.getPostByUserIdAndCount);
 
 module.exports = router;
