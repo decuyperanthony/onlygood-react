@@ -1,4 +1,6 @@
-const { Post, User } = require('../models/');
+const { Post, User, User_likes_post, User_comments_post } = require('../models/');
+const Sequelize = require('sequelize');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -19,9 +21,12 @@ const postController = {
                  limit,
                  include: [
                     "author",
-                    "post_liked_by",
-                    "post_saved_by",
-                    "post_retweeted_by",
+                    // "post_liked_by",
+                    // "post_saved_by",
+                    // "post_retweeted_by",
+                    "likes",
+                    "saved",
+                    "retweets",
                     // "comments",
                     {
                         association: "comments",
@@ -55,9 +60,12 @@ const postController = {
                 await Post.findByPk(p.dataValues.id, {
                         include: [
                             "author",
-                            "post_liked_by",
-                            "post_saved_by",
-                            "post_retweeted_by",
+                            // "post_liked_by",
+                            // "post_saved_by",
+                            // "post_retweeted_by",
+                            "likes",
+                            "saved",
+                            "retweets",
                             // "comments",
                             {
                                 association: "comments",
@@ -126,6 +134,7 @@ const postController = {
     //         res.status(500).send(error);
     //     }
     // },
+
     getPostByUserId: async (req, res) => {
         let userId = req.params.id;
         try {
@@ -142,9 +151,12 @@ const postController = {
                  limit,
                  include: [
                     "author",
-                    "post_liked_by",
-                    "post_saved_by",
-                    "post_retweeted_by",
+                    // "post_liked_by",
+                    // "post_saved_by",
+                    // "post_retweeted_by",
+                    "likes",
+                    "saved",
+                    "retweets",
                     // "comments",
                     {
                         association: "comments",
@@ -197,6 +209,73 @@ const postController = {
             res.status(500).send(error);
         }
     },
+    getPostByUserIdAndCount: async (req, res) => {
+        let userId = req.params.id;
+        try {
+            let limit = 5;
+            // Model.findAll({
+            //     attributes: [[sequelize.fn('COUNT', sequelize.col('hats')), 'no_hats']]
+            //   });
+
+            const posts = await Post.findAll({
+                where: {
+                    app_users_id: userId
+                },
+                order: [
+                    ['id', 'DESC'],
+                ],
+                 limit,
+                //  include: [
+                //     { model: User_likes_post}
+                //  ],
+                //  User_likes_post
+                 include: [
+                    "author",
+                    "likes",
+                    "saved",
+                    "retweets",
+                    // "post_liked_by",
+                    // "post_saved_by",
+                    // "post_retweeted_by",
+                    "comments",
+                    {
+                        association: "comments",
+                        include: ["author",]
+                    },
+                ],
+            });
+
+            // const comments = User_comments_post.findAll({
+            //     attributes: [
+            //         [Sequelize.fn('COUNT', Sequelize.col('app_users_id')), 'comments']
+            //     ]
+            // })
+
+            // User.findAll({
+            //     include: {
+            //       model: Task,
+            //       required: true
+            //     }
+            //   });
+
+            //   const posts = await Post.findAll({
+            //       include: {
+            //           model: "post"
+            //       }
+            //   })
+
+            // const numberOfLikes = await User_likes_post.findAll({
+            //     where: {
+            //         post_id: userId
+            //     }
+            // })
+
+            res.send(posts)
+        } catch (error) {
+            console.trace(error);
+            res.status(500).send(error);
+        }
+    },
 
     getUserLikedPost: async (req, res) => {
         let userId = req.params.id;
@@ -214,9 +293,12 @@ const postController = {
                 await Post.findByPk(p.dataValues.id, {
                         include: [
                             "author",
-                            "post_liked_by",
-                            "post_saved_by",
-                            "post_retweeted_by",
+                            // "post_liked_by",
+                            // "post_saved_by",
+                            // "post_retweeted_by",
+                            "likes",
+                            "saved",
+                            "retweets",
                             // "comments",
                             {
                                 association: "comments",
@@ -255,9 +337,12 @@ const postController = {
                 await Post.findByPk(p.dataValues.id, {
                         include: [
                             "author",
-                            "post_liked_by",
-                            "post_saved_by",
-                            "post_retweeted_by",
+                            // "post_liked_by",
+                            // "post_saved_by",
+                            // "post_retweeted_by",
+                            "likes",
+                            "saved",
+                            "retweets",
                             // "comments",
                             {
                                 association: "comments",
@@ -286,9 +371,12 @@ const postController = {
             const post = await Post.findByPk(postId, {
                 include: [
                     "author",
-                    "post_liked_by",
-                    "post_saved_by",
-                    "post_retweeted_by",
+                    // "post_liked_by",
+                    // "post_saved_by",
+                    // "post_retweeted_by",
+                    "likes",
+                    "saved",
+                    "retweets",
                     // "comments",
                     {
                         association: "comments",
