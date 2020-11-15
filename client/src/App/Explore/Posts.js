@@ -142,8 +142,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Popins, sans-serif',
     fontWeight: '500',
     fontSize: '14px',
-    color: 'black',
+    // color: 'black',
     paddingRight: '1em',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    color: '#2F80ED',
   },
   commentDate: {
     fontFamily: 'Noto Sans, sans-serif',
@@ -316,12 +320,16 @@ const Posts = () => {
         pictureJSX = <img className={classes.picture} src={`${API_URL}/img/${p.picture}`} alt="post" />;
       }
       //! === COMMENTAIRES
+
       const commentsJSX = p.comments.map((c) => (
         <div key={c.id + 100000} className={classes.containerComment}>
           <Avatar pictureSrc={c.author.picture_road} />
           <div className={classes.nameDateComment}>
             <div>
-              <span className={classes.commentAuthor}>
+              <span
+                onClick={() => handleProfilPage(c.author.id)}
+                className={(c.author.id === userId) ? classes.unlink : classes.link}
+              >
                 {c.author.firstname}
                 {' '}
                 {c.author.lastname}
