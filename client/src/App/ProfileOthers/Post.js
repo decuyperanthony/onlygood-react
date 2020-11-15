@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router';
 
 import {
   useSelector,
@@ -47,11 +50,33 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
-  author: {
-    fontFamily: 'Poppins, sans serif',
+  authorPostUnlink: {
+    fontFamily: 'Popins, sans-serif',
     fontWeight: '500',
     fontSize: '16px',
     color: 'black',
+    paddingRight: '1em',
+  },
+  authorPostLink: {
+    fontFamily: 'Popins, sans-serif',
+    fontWeight: '500',
+    fontSize: '16px',
+    color: '#2D9CDB',
+    paddingRight: '1em',
+  },
+  authorCommentLink: {
+    fontFamily: 'Popins, sans-serif',
+    fontWeight: '500',
+    fontSize: '14px',
+    color: '#2D9CDB',
+    paddingRight: '1em',
+  },
+  authorCommentUnlink: {
+    fontFamily: 'Popins, sans-serif',
+    fontWeight: '500',
+    fontSize: '14px',
+    color: 'black',
+    paddingRight: '1em',
   },
   date: {
     fontFamily: 'Noto Sans, sans-serif',
@@ -132,13 +157,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  commentAuthor: {
-    fontFamily: 'Popins, sans-serif',
-    fontWeight: '500',
-    fontSize: '14px',
-    color: 'black',
-    paddingRight: '1em',
-  },
+  // commentAuthor: {
+  //   fontFamily: 'Popins, sans-serif',
+  //   fontWeight: '500',
+  //   fontSize: '14px',
+  //   color: 'black',
+  //   paddingRight: '1em',
+  // },
   commentDate: {
     fontFamily: 'Noto Sans, sans-serif',
     fontWeight: '500',
@@ -156,9 +181,19 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  // unlink: {
+  //   color: 'black',
+  // },
+  // link: {
+  //   '&:hover': {
+  //     cursor: 'pointer',
+  //   },
+  //   color: '#2F80ED',
+  // },
 }));
 
 const PostProfile = () => {
+  const history = useHistory();
   const {
     register,
     // handleSubmit,
@@ -243,6 +278,12 @@ const PostProfile = () => {
       });
     };
     // console.log('state', state);
+    const handleProfilPage = (id) => {
+      console.log('profil');
+      if (userId !== id) {
+        history.push(`/dashboard/${id}`);
+      }
+    };
 
     if (filteredProfilePosts) {
       postsJSX = filteredProfilePosts.map((p) => {
@@ -285,26 +326,44 @@ const PostProfile = () => {
         //! === COMMENTAIRES
         let commentsJSX;
         if (p.comments) {
-          commentsJSX = p.comments.map((c) => (
-            <div key={c.id + 100000} className={classes.containerComment}>
-              <Avatar pictureSrc={c.author.picture_road} />
-              <div className={classes.nameDateComment}>
-                <div>
-                  <span className={classes.commentAuthor}>
-                    {c.author.firstname}
-                    {' '}
-                    {c.author.lastname}
-                  </span>
-                  <span className={classes.commentDate}>
-                    <Moment fromNow>{c.created_at}</Moment>
-                  </span>
-                </div>
-                <div className={classes.comment}>
-                  {c.content}
+          commentsJSX = p.comments.map((c) => {
+            console.log(('hello'));
+            let classAuthorComment;
+            if (c.author) {
+              (c.author.id === userId)
+                ? (classAuthorComment = classes.authorCommentUnlink)
+                : (classAuthorComment = classes.authorCommentLink);
+            }
+            return (
+              <div key={c.id + 100000} className={classes.containerComment}>
+                <Avatar pictureSrc={c.author.picture_road} />
+                <div className={classes.nameDateComment}>
+                  <div>
+                    <span
+                      onClick={() => handleProfilPage(c.author.id)}
+                      className={classAuthorComment}
+                    >
+                      {c.author.firstname}
+                      {' '}
+                      {c.author.lastname}
+                    </span>
+                    <span className={classes.commentDate}>
+                      <Moment fromNow>{c.created_at}</Moment>
+                    </span>
+                  </div>
+                  <div className={classes.comment}>
+                    {c.content}
+                  </div>
                 </div>
               </div>
-            </div>
-          ));
+            );
+          });
+        }
+        let classAuthorPost;
+        if (p.author) {
+          (p.author.id === userId)
+            ? (classAuthorPost = classes.authorPostUnlink)
+            : (classAuthorPost = classes.authorPostLink);
         }
 
         return (
@@ -315,7 +374,11 @@ const PostProfile = () => {
                 {p.author ? (<Avatar pictureSrc={p.author.picture_road} />) : null}
                 {/* <Avatar pictureSrc={p.author.picture_road} /> */}
                 <div>
-                  <div className={classes.author}>
+                  <div
+                    onClick={() => handleProfilPage(p.author.id)}
+                    // className={(p.author.id === userId) ? classes.unlink : classes.link}
+                    className={classAuthorPost}
+                  >
                     {p.author ? p.author.firstname : null}
                     {' '}
                     {p.author ? p.author.lastname : null}
