@@ -35,7 +35,7 @@ const menuItem = [
   {
     id: 1,
     name: 'Tweets',
-    request: 'userpost',
+    request: 'userpostandcount',
   },
   {
     id: 2,
