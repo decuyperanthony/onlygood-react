@@ -4,7 +4,10 @@ import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
-import { useSelector, useDispatch } from 'react-redux';
+import {
+  useSelector,
+  // useDispatch
+} from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -25,8 +28,8 @@ import Avatar from '../Explore/Avatar';
 // === fake picture
 // import picture from '../../image/exemple.jpg';
 import getAllPosts from '../../utils/getAllPosts';
-
-import { setWhichTweet } from '../../store/action/post';
+import getPostByUserId from '../../utils/getPostByUserId';
+// import { setWhichTweet } from '../../store/action/post';
 
 // === style
 const useStyles = makeStyles((theme) => ({
@@ -163,7 +166,7 @@ const PostProfile = () => {
   } = useForm();
   console.log('errors', errors);
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // === redux
   const { user } = useSelector((state) => state.user);
   //   const [postProfileChoice, setPostProfileChoice] = useState(user.posts);
@@ -193,8 +196,9 @@ const PostProfile = () => {
         })
         .then((res) => {
           console.log(res);
-          dispatch(setWhichTweet('likedpostuser'));
-          getAllPosts();
+          // dispatch(setWhichTweet('likedpostuser'));
+          getPostByUserId(userId);
+          // getAllPosts();
         })
         .catch((err) => console.trace(err));
     };
@@ -209,7 +213,8 @@ const PostProfile = () => {
         .then((res) => {
           console.log(res);
           //   dispatch(setWhichTweet('likedpostuser'));
-          getAllPosts();
+          // getAllPosts();
+          getPostByUserId(userId);
         })
         .catch((err) => console.trace(err));
     };
@@ -223,7 +228,8 @@ const PostProfile = () => {
         })
         .then((res) => {
           console.log(res);
-          getAllPosts();
+          // getAllPosts();
+          getPostByUserId(userId);
         })
         .catch((err) => console.trace(err));
     };
@@ -245,19 +251,26 @@ const PostProfile = () => {
         let colorLike = '';
         let colorSave = '';
         let colorRetweet = '';
-        if (p.post_liked_by) {
-          p.post_liked_by.forEach((l) => {
-            if (l.id === userId) colorLike = '#EB5757';
+        if (p.likes) {
+          p.likes.forEach((l) => {
+            console.log('l', l);
+            if (l.app_users_id === userId) colorLike = '#EB5757';
           });
           //! === COLOR SAVE
+        }
 
-          p.post_saved_by.forEach((s) => {
-            if (s.id === userId) colorSave = '#2D9CDB';
+        if (p.saved) {
+          p.saved.forEach((s) => {
+            console.log('s', s);
+            if (s.app_users_id === userId) colorSave = '#2D9CDB';
           });
-          //! === COLOR RETWEET
+        }
 
-          p.post_retweeted_by.forEach((r) => {
-            if (r.id === userId) colorRetweet = '#27AE60';
+        //! === COLOR RETWEET
+        if (p.retweets) {
+          p.retweets.forEach((r) => {
+            console.log('r', r);
+            if (r.app_users_id === userId) colorRetweet = '#27AE60';
           });
         }
 
@@ -341,7 +354,7 @@ const PostProfile = () => {
                       Retweet
                     </span>
                     (
-                    {p.post_retweeted_by ? p.post_retweeted_by.length : 0}
+                    {p.retweets ? p.retweets.length : 0}
                     {/* {p.post_retweeted_by.length} */}
                     )
                   </div>
@@ -355,7 +368,7 @@ const PostProfile = () => {
                       Likes
                     </span>
                     (
-                    {p.post_liked_by ? p.post_liked_by.length : 0}
+                    {p.likes ? p.likes.length : 0}
                     {/* {p.post_liked_by.length} */}
                     )
                   </div>
@@ -369,7 +382,7 @@ const PostProfile = () => {
                       Save
                     </span>
                     (
-                    {p.post_saved_by ? p.post_saved_by.length : 0}
+                    {p.saved ? p.saved.length : 0}
                     {/* {p.post_saved_by.length} */}
                     )
                   </div>
