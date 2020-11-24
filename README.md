@@ -51,6 +51,8 @@ This section should list any major frameworks that you built your project using.
 * [Node](https://nodejs.org/dist/latest-v12.x/docs/api/)
 * [React](https://fr.reactjs.org/)
 * [Redux](https://redux.js.org/)
+* [Postgres](https://www.postgresql.org/)
+* [Sqitch](https://sqitch.org/) => migration database
 * [Material UI](https://material-ui.com/)
 
 ## Features
@@ -109,23 +111,23 @@ yarn start
 ### Home page
 We can follow each other
 We can Post comment with pictures
-![demo site](tweeter1.png
+![demo site](.github/img/tweeter1.png
 )
 ### Explore page
 We can comment picture
 We can like, saved, retweet picture
-![Demo site](tweeter3.png
+![Demo site](.github/img/tweeter3.png
 )
 We have profile page
 In which we can see favorites or saved tweet etc...
-![Demo site](tweeter2.png
+![Demo site](.github/img/tweeter2.png
 )
 ### Version Mobile
 Profile Page
-![Demo site](mobile.png
+![Demo site](.github/img/mobile.png
 )
 Explore page
-![Demo site](mobile2.png
+![Demo site](.github/img/mobile2.png
 )
 
 ## USER STORIES
