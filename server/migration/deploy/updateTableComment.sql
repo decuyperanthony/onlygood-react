@@ -14,15 +14,12 @@ CREATE TABLE "user_comments_post"(
     "picture" TEXT,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP
-
-    -- PRIMARY KEY ("app_users_id", "post_id")
 );
 
 INSERT INTO "user_comments_post" ("app_users_id", "post_id", "content") VALUES
 (1, 1, 'merci pour ce post'),
 (2, 2, 'bonne nouvelle'),
 (1, 3, 'c est noté'),
-(8, 4, 'Yes!!'),
 (3, 1, 'Trop bien');
 
 
