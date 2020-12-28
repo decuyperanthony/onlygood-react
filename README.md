@@ -60,6 +60,7 @@ This section should list any major frameworks that you built your project using.
 * [React](https://fr.reactjs.org/)
 * [Redux](https://redux.js.org/)
 * [Postgres](https://www.postgresql.org/)
+* [Socket-io](https://socket.io/?EIO=3&transport=polling&t=NJ-FUkX%20not%20found)
 * [Sqitch](https://sqitch.org/) => migration database
 * [Material UI](https://material-ui.com/)
 
