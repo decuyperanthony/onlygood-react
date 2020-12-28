@@ -1,6 +1,8 @@
 // on require en premier
 require("dotenv").config();
+const https = require('https');
 const express = require("express");
+const fs = require('fs');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 // const morgan = require("morgan");
@@ -99,6 +101,31 @@ app.use(relationshipRouter);
 app.use(impressionRouter);
 app.use(router);
 
-app.listen(PORT, () => {
-  console.log("Server ready, listening on port " + PORT);
+// app.listen(PORT, () => {
+//   console.log("Server ready, listening on port " + PORT);
+// });
+
+if (process.env.NODE_ENV === 'production') {
+  console.log('prod')
+  const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/onlygood.website/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/onlygood.website/fullchain.pem'),
+  }, app);
+  let PORT = 8000;
+  httpsServer.listen(PORT, () => {
+      console.log('HTTPS Server running on port' + PORT);
 });
+} else {
+  console.log('dev')
+
+  const httpsServer = https.createServer({
+      key: fs.readFileSync('localhost.key'),
+      cert: fs.readFileSync('localhost.crt'),
+  }, app);
+
+  let PORT = 8000;
+
+  httpsServer.listen(PORT, () => {
+        console.log('HTTP Server local running on port ' + PORT);
+  });
+}
